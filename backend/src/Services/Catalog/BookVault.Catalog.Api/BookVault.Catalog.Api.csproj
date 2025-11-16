@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\aspire\BookVault.ServiceDefaults\BookVault.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\BookVault.Catalog.Application\BookVault.Catalog.Application.csproj" />
+    <ProjectReference Include="..\BookVault.Catalog.Infrastructure\BookVault.Catalog.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
