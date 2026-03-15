@@ -1,7 +1,7 @@
 ﻿using Ardalis.Result;
 using Mediator;
 
-namespace BuildingBlocks.Chassis.Application.Mediator;
+namespace BuildingBlocks.Chassis.Mediator;
 
 public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Result>
     where TCommand : ICommand { }

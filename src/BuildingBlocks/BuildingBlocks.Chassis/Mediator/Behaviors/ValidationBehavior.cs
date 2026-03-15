@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using Mediator;
 
-namespace BuildingBlocks.Chassis.Application.Mediator.Behaviors;
+namespace BuildingBlocks.Chassis.Mediator.Behaviors;
 
 // todo: could be implemented as a message pre-processor
 public class ValidationBehavior<TMessage, TResponse>(IEnumerable<IValidator<TMessage>> validators)

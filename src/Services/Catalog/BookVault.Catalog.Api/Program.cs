@@ -15,7 +15,6 @@ app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapScalarApiReference();
     app.MapOpenApi();
 }
 

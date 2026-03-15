@@ -1,3 +1,5 @@
+using Scalar.Aspire;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder
@@ -7,9 +9,14 @@ var postgres = builder
 
 var catalogDb = postgres.AddDatabase("catalogDb");
 
-builder
+var catalogApi = builder
     .AddProject<Projects.BookVault_Catalog_Api>("bookvault-catalog-api")
     .WithReference(catalogDb)
     .WaitFor(catalogDb);
+
+var scalar = builder.AddScalarApiReference();
+
+scalar
+    .WithApiReference(catalogApi);
 
 builder.Build().Run();

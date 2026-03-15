@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BuildingBlocks.Chassis.Infrastructure.EF;
+namespace BuildingBlocks.Chassis.EF;
 
 public static class DbContextExtensions
 {

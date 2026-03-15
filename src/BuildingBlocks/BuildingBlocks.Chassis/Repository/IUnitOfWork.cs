@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Chassis.Infrastructure;
+﻿namespace BuildingBlocks.Chassis.Repository;
 
 public interface IUnitOfWork
 {

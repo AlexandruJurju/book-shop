@@ -1,5 +1,5 @@
 ﻿using Mediator;
 
-namespace BuildingBlocks.Chassis.Application.Mediator;
+namespace BuildingBlocks.Chassis.Mediator;
 
 public interface IDomainEvent : INotification { }

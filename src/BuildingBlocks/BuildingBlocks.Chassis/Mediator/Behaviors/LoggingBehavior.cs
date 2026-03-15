@@ -3,7 +3,7 @@ using Mediator;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 
-namespace BuildingBlocks.Chassis.Application.Mediator.Behaviors;
+namespace BuildingBlocks.Chassis.Mediator.Behaviors;
 
 public sealed class LoggingBehavior<TMessage, TResponse>(
     ILogger<LoggingBehavior<TMessage, TResponse>> logger

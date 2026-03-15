@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Chassis.Application.Mediator;
+﻿using BuildingBlocks.Chassis.Mediator;
 
 namespace BuildingBlocks.Chassis.Domain;
 
