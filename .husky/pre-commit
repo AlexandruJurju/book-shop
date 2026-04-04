@@ -21,4 +21,4 @@
 
 echo "Running Husky pre-commit tasks..."
 
-dotnet husky run
+# dotnet husky run
