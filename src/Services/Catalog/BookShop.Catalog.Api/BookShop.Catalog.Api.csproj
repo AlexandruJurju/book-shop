@@ -1,11 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
-        <PackageReference Include="Scalar.AspNetCore"/>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\BookShop.Catalog.Application\BookShop.Catalog.Application.csproj"/>
-        <ProjectReference Include="..\BookShop.Catalog.Infrastructure\BookShop.Catalog.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.AspNetCore\BuildingBlocks.AspNetCore.csproj" />
+        <ProjectReference Include="..\BookShop.Catalog.Infrastructure\BookShop.Catalog.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <Folder Include="Books\"/>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Mediator.Abstractions"/>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Chassis\BuildingBlocks.Chassis.csproj"/>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
     </ItemGroup>
 </Project>

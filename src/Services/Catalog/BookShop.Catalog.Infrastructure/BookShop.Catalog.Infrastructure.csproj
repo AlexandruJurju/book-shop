@@ -1,8 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <PackageReference Include="Mediator.Abstractions"/>
+        <PackageReference Include="Mediator.Abstractions" Version="3.1.0-rc.1"/>
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
         <ProjectReference Include="..\BookShop.Catalog.Application\BookShop.Catalog.Application.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Database\Migrations\" />
     </ItemGroup>
 </Project>

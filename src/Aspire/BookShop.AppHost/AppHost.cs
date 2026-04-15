@@ -1,21 +1,21 @@
 using Projects;
-using Scalar.Aspire;
+using Shared.Constants.Aspire;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
+IResourceBuilder<ParameterResource> pgUser = builder.AddParameter("postgres-user", "app_user", secret: false);
+IResourceBuilder<ParameterResource> pgPass = builder.AddParameter("postgres-password", "super-secret-password", secret: true);
 IResourceBuilder<PostgresServerResource> postgres = builder
-    .AddPostgres("postgres")
+    .AddPostgres(Resources.Postgres)
     .WithLifetime(ContainerLifetime.Persistent)
-    .WithDataVolume();
+    .WithDataVolume()
+    .WithUserName(pgUser)
+    .WithPassword(pgPass);
 
-IResourceBuilder<PostgresDatabaseResource> catalogDb = postgres.AddDatabase("catalogDb");
+IResourceBuilder<PostgresDatabaseResource> catalogDb = postgres.AddDatabase(CatalogResources.Database);
 
-IResourceBuilder<ProjectResource> catalogApi = builder
-    .AddProject<BookShop_Catalog_Api>("bookshop-catalog-api")
-    .WithReference(catalogDb)
-    .WaitFor(catalogDb);
-
-builder.AddScalarApiReference()
-    .WithApiReference(catalogApi);
+builder
+    .AddProject<BookShop_WebApi>("bookshop")
+    .WithReference(catalogDb).WaitFor(catalogDb);
 
 await builder.Build().RunAsync();

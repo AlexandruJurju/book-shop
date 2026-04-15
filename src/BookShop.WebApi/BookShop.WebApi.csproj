@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.6"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.6">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Scalar.AspNetCore"  Version="2.14.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\Services\Catalog\BookShop.Catalog.Api\BookShop.Catalog.Api.csproj" />
+    </ItemGroup>
+
+</Project>

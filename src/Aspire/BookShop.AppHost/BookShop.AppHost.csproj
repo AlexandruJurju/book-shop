@@ -7,17 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost"/>
-        <PackageReference Include="Aspire.Hosting.MongoDB"/>
-        <PackageReference Include="Aspire.Hosting.PostgreSQL"/>
-        <PackageReference Include="Aspire.Hosting.RabbitMQ"/>
-        <PackageReference Include="Aspire.Hosting.Redis"/>
-        <PackageReference Include="Aspire.Hosting.Yarp"/>
-        <PackageReference Include="CommunityToolkit.Aspire.Hosting.MailPit"/>
-        <PackageReference Include="Scalar.Aspire"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="13.2.2"/>
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.2.2"/>
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.2.2"/>
+        <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.2.2"/>
+        <PackageReference Include="Aspire.Hosting.Redis" Version="13.2.2"/>
+        <PackageReference Include="Aspire.Hosting.Yarp" Version="13.2.2"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Services\Catalog\BookShop.Catalog.Api\BookShop.Catalog.Api.csproj"/>
+        <ProjectReference Include="..\..\BookShop.WebApi\BookShop.WebApi.csproj"/>
+        <ProjectReference
+                Include="..\..\BuildingBlocks\Shared.Constants\Shared.Constants.csproj"
+                IsAspireProjectResource="false"
+        />
     </ItemGroup>
 </Project>
