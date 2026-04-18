@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace BookShop.Users.Api.Endpoints.Users;
+namespace BookShop.Users.Presentation.Endpoints.Users;
 
 internal sealed class RegisterUserEndpoint : IEndpoint
 {

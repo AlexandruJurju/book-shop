@@ -1,14 +1,14 @@
-﻿using BookShop.Users.Application;
-using BookShop.Users.Infrastructure;
+﻿using BookShop.Basket.Application;
+using BookShop.Basket.Infrastructure;
 using BuildingBlocks.AspNetCore.Endpoints;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BookShop.Users.Api;
+namespace BookShop.Basket.Presentation;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddUsersModule(this IHostApplicationBuilder builder)
+    public static IServiceCollection AddBasketModule(this IHostApplicationBuilder builder)
     {
         builder.Services.AddEndpoints(typeof(DependencyInjection).Assembly);
 

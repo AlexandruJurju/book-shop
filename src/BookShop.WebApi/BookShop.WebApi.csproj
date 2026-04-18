@@ -22,9 +22,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\Modules\Basket\BookShop.Basket.Api\BookShop.Basket.Api.csproj"/>
-        <ProjectReference Include="..\Modules\Catalog\BookShop.Catalog.Api\BookShop.Catalog.Api.csproj"/>
-        <ProjectReference Include="..\Modules\Users\BookShop.Users.Api\BookShop.Users.Api.csproj"/>
+        <ProjectReference Include="..\Modules\Basket\BookShop.Basket.Presentation\BookShop.Basket.Presentation.csproj" />
+        <ProjectReference Include="..\Modules\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
+        <ProjectReference Include="..\Modules\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
+        <ProjectReference Include="..\Modules\Users\BookShop.Users.Presentation\BookShop.Users.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

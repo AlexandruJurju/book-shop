@@ -1,4 +1,4 @@
-﻿namespace BookShop.Basket.Api.Endpoints;
+﻿namespace BookShop.Basket.Presentation.Endpoints;
 
 public static class Tags
 {

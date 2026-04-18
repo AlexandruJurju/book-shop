@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace BookShop.Catalog.Api.Endpoints.Categories;
+namespace BookShop.Catalog.Endpoints.Categories;
 
 internal sealed class CreateCategoryEndpoint : IEndpoint
 {

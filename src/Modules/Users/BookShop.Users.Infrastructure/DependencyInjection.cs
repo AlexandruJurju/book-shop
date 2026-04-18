@@ -24,24 +24,17 @@ public static class DependencyInjection
         services.AddCustomPostgresDbContext<UsersDbContext>(configuration, Resources.Postgres, Services.Users);
         services.AddScoped<IUserRepository, UserRepository>();
 
-        services.AddCustomMemoryCache(configuration);
+        services.AddCustomMemoryCache(configuration, Services.Users);
 
         services.AddTimeProvider();
 
-        AddOutbox(services, configuration);
-
-        return services;
-    }
-
-    private static void AddOutbox(IServiceCollection services, IConfiguration configuration)
-    {
         services
             .AddOptionsWithValidateOnStart<OutboxJobOptions>()
-            .Bind(configuration.GetSection(OutboxJobOptions.ConfigurationSection))
+            .Bind(configuration.GetSection($"{Services.Users}:{OutboxJobOptions.ConfigurationSection}"))
             .ValidateDataAnnotations();
 
         OutboxJobOptions outboxJobOptions = configuration
-            .GetSection(OutboxJobOptions.ConfigurationSection)
+            .GetSection($"{Services.Users}:{OutboxJobOptions.ConfigurationSection}")
             .Get<OutboxJobOptions>()!;
 
         services.AddTickerQ();
@@ -49,5 +42,7 @@ public static class DependencyInjection
         services.MapTicker<OutboxJob>()
             .WithMaxConcurrency(1)
             .WithCron(outboxJobOptions.Cron);
+
+        return services;
     }
 }

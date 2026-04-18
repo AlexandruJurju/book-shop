@@ -1,6 +1,5 @@
-﻿using BookShop.Basket.Api;
-using BookShop.Catalog.Api;
-using BookShop.Users.Api;
+﻿using BookShop.Catalog;
+using BookShop.Users.Presentation;
 using BuildingBlocks.Application.CQRS.Behaviors;
 using Mediator;
 

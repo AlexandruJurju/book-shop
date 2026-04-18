@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         string connectionName,
-        string schemaName,
+        string service,
         Action<IServiceCollection>? action = null
     ) where TDbContext : DbContext, IUnitOfWork
     {
@@ -28,7 +28,7 @@ public static class ServiceCollectionExtensions
                     .UseNpgsql(
                         connectionString,
                         npgsqlOptions =>
-                            npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schemaName)
+                            npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, service)
                     )
                     .UseSnakeCaseNamingConvention();
 

@@ -17,15 +17,17 @@ namespace BookShop.Users.Infrastructure.Outbox;
 internal sealed partial class OutboxJob(
     IDbConnectionFactory dbConnectionFactory,
     IPublisher publisher,
-    IOptions<OutboxJobOptions> outboxOptions,
+    IOptionsMonitor<OutboxJobOptions> outboxOptions,
     TimeProvider timeProvider,
     ILogger<OutboxJob> logger
 ) : ITickerFunction
 {
+    private OutboxJobOptions Options => outboxOptions.Get(Services.Users);
+
     public async Task ExecuteAsync(TickerFunctionContext context, CancellationToken cancellationToken = new())
     {
         string serviceName = Services.Users;
-        LogModuleBeginningToProcessOutboxMessages(serviceName);
+        LogServiceBeginningToProcessOutboxMessages(serviceName);
 
         await using DbConnection connection = await dbConnectionFactory.OpenConnectionAsync();
         await using DbTransaction transaction = await connection.BeginTransactionAsync(cancellationToken);
@@ -57,7 +59,7 @@ internal sealed partial class OutboxJob(
 
         await transaction.CommitAsync(cancellationToken);
 
-        LogModuleCompletedProcessingOutboxMessages(serviceName);
+        LogServiceCompletedProcessingOutboxMessages(serviceName);
     }
 
     private async Task<IReadOnlyList<OutboxMessageResponse>> GetOutboxMessagesAsync(
@@ -72,7 +74,7 @@ internal sealed partial class OutboxJob(
              FROM {Services.Users}.{OutboxConstants.TableName}
              WHERE processed_on_utc IS NULL
              ORDER BY occurred_on_utc
-             LIMIT {outboxOptions.Value.BatchSize}
+             LIMIT {Options.BatchSize}
              FOR UPDATE
              """;
 
@@ -107,9 +109,9 @@ internal sealed partial class OutboxJob(
             transaction);
     }
 
-    [LoggerMessage(LogLevel.Information, "{Module} - Beginning to process outbox messages")]
-    private partial void LogModuleBeginningToProcessOutboxMessages(string module);
+    [LoggerMessage(LogLevel.Information, "{Service} - Beginning to process outbox messages")]
+    partial void LogServiceBeginningToProcessOutboxMessages(string service);
 
-    [LoggerMessage(LogLevel.Information, "{Module} - Completed processing outbox messages")]
-    private partial void LogModuleCompletedProcessingOutboxMessages(string module);
+    [LoggerMessage(LogLevel.Information, "{Service} - Completed processing outbox messages")]
+    partial void LogServiceCompletedProcessingOutboxMessages(string service);
 }

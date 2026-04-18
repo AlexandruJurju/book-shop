@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace BookShop.Basket.Api.Endpoints.Basket;
+namespace BookShop.Basket.Presentation.Endpoints.Basket;
 
 internal sealed class CreateCategoryEndpoint : IEndpoint
 {
