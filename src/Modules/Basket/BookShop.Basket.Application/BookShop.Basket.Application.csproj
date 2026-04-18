@@ -14,9 +14,9 @@
     <ItemGroup>
         <Folder Include="Basket\"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="Mediator.Abstractions" Version="3.1.0-rc.1" />
+        <PackageReference Include="Mediator.Abstractions" Version="3.1.0-rc.1"/>
     </ItemGroup>
 
 </Project>

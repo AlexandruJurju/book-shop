@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 namespace BuildingBlocks.AspNetCore.ExceptionHandler;
 
 public sealed class ValidationExceptionHandler(
-    IProblemDetailsService              problemDetailsService,
+    IProblemDetailsService problemDetailsService,
     ILogger<ValidationExceptionHandler> logger
 ) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
-        HttpContext       httpContext,
-        Exception         exception,
+        HttpContext httpContext,
+        Exception exception,
         CancellationToken cancellationToken
     )
     {
@@ -36,7 +36,7 @@ public sealed class ValidationExceptionHandler(
             ProblemDetails = new ProblemDetails
             {
                 Detail = "One or more validation errors occured",
-                Status = StatusCodes.Status400BadRequest,
+                Status = StatusCodes.Status400BadRequest
             }
         };
 
@@ -46,9 +46,9 @@ public sealed class ValidationExceptionHandler(
                 g => g.Key.ToLowerInvariant(),
                 g => g.Select(e => e.ErrorMessage).ToArray()
             );
-        
+
         context.ProblemDetails.Extensions.Add("errors", errors);
-        
+
         return await problemDetailsService.TryWriteAsync(context);
     }
 }

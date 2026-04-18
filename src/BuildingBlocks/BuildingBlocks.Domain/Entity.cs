@@ -2,6 +2,8 @@
 
 public abstract class Entity
 {
+    private readonly List<IDomainEvent> _domainEvents = new();
+
     protected Entity(Guid id)
     {
         Id = id;
@@ -12,13 +14,15 @@ public abstract class Entity
     }
 
     public Guid Id { get; init; }
-
-    private readonly List<IDomainEvent> _domainEvents = new();
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     public void ClearDomainEvents()
-        => _domainEvents.Clear();
+    {
+        _domainEvents.Clear();
+    }
 
     public void RaiseDomainEvent(IDomainEvent domainEvent)
-        => _domainEvents.Add(domainEvent);
+    {
+        _domainEvents.Add(domainEvent);
+    }
 }

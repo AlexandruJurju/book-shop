@@ -12,9 +12,9 @@ public sealed partial class LoggingBehavior<TMessage, TResponse>(
     where TResponse : Result
 {
     public async ValueTask<TResponse> Handle(
-        TMessage                                    message,
+        TMessage message,
         MessageHandlerDelegate<TMessage, TResponse> next,
-        CancellationToken                           cancellationToken
+        CancellationToken cancellationToken
     )
     {
         string requestName = message.GetType().Name;
@@ -52,5 +52,7 @@ public sealed partial class LoggingBehavior<TMessage, TResponse>(
     partial void LogFailedRequest(string requestName);
 
     private static string GetModuleName(string requestName)
-        => requestName.Split('.')[1];
+    {
+        return requestName.Split('.')[1];
+    }
 }

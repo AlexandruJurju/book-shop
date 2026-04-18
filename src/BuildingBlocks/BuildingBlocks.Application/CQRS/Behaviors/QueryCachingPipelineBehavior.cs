@@ -10,7 +10,9 @@ public sealed class QueryCachingBehavior<TMessage, TResponse>(
     where TMessage : IMessage
     where TResponse : Result
 {
-    public async ValueTask<TResponse> Handle(TMessage message, MessageHandlerDelegate<TMessage, TResponse> next, CancellationToken cancellationToken)
+    public async ValueTask<TResponse> Handle(TMessage message,
+        MessageHandlerDelegate<TMessage, TResponse> next,
+        CancellationToken cancellationToken)
     {
         if (message is not ICachedQuery cacheable)
         {
@@ -20,7 +22,7 @@ public sealed class QueryCachingBehavior<TMessage, TResponse>(
         // todo: add distributed cache expiry?
         var entryOptions = new HybridCacheEntryOptions
         {
-            LocalCacheExpiration = cacheable.Expiration,
+            LocalCacheExpiration = cacheable.Expiration
         };
 
         return await hybridCache.GetOrCreateAsync(

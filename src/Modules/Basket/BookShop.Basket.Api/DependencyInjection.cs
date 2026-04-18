@@ -13,7 +13,7 @@ public static class DependencyInjection
         builder.Services.AddEndpoints(typeof(DependencyInjection).Assembly);
 
         builder.Services.AddApplication();
-        
+
         builder.Services.AddInfrastructure(builder.Configuration);
 
         return builder.Services;

@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Basket\" />
+        <Folder Include="Basket\"/>
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using BookShop.Users.Domain.Users;
-using BuildingBlocks.Infrastructure.EF;
+using BuildingBlocks.Application.Data;
+using BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Users.Infrastructure.EntityFramework;
@@ -12,8 +13,8 @@ public sealed class UsersDbContext(
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-        
+        modelBuilder.HasDefaultSchema(Schemas.Users);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsersDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
     }
 }

@@ -17,6 +17,7 @@ namespace BookShop.Catalog.Infrastructure.EntityFramework.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("catalog")
                 .HasAnnotation("ProductVersion", "10.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -42,7 +43,7 @@ namespace BookShop.Catalog.Infrastructure.EntityFramework.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_categories_name");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("categories", "catalog");
                 });
 #pragma warning restore 612, 618
         }

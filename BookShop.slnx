@@ -1,40 +1,40 @@
 <Solution>
-  <Folder Name="/Aspire/">
-    <Project Path="BookShop.Shared/BookShop.Shared.csproj" />
-    <Project Path="src/Aspire/BookShop.AppHost/BookShop.AppHost.csproj" />
-    <Project Path="src/Aspire/BookShop.ServiceDefaults/BookShop.ServiceDefaults.csproj" />
-  </Folder>
-  <Folder Name="/BuildingBlocks/">
-    <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" />
-    <Project Path="src/BuildingBlocks/BuildingBlocks.AspNetCore/BuildingBlocks.AspNetCore.csproj" />
-    <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj" />
-    <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
-    <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/Hosts/">
-    <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
-  </Folder>
-  <Folder Name="/Modules/" />
-  <Folder Name="/Modules/Basket/">
-    <Project Path="src/Modules/Basket/BookShop.Basket.Api/BookShop.Basket.Api.csproj" />
-    <Project Path="src/Modules/Basket/BookShop.Basket.Application/BookShop.Basket.Application.csproj" />
-    <Project Path="src/Modules/Basket/BookShop.Basket.Domain/BookShop.Basket.Domain.csproj" />
-    <Project Path="src/Modules/Basket/BookShop.Basket.Infrastructure/BookShop.Basket.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/Modules/Catalog/">
-    <Project Path="src/Modules/Catalog/BookShop.Catalog.Api/BookShop.Catalog.Api.csproj" />
-    <Project Path="src/Modules/Catalog/BookShop.Catalog.Application/BookShop.Catalog.Application.csproj" />
-    <Project Path="src/Modules/Catalog/BookShop.Catalog.Domain/BookShop.Catalog.Domain.csproj" />
-    <Project Path="src/Modules/Catalog/BookShop.Catalog.Infrastructure/BookShop.Catalog.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/Modules/Users/">
-    <Project Path="src/Modules/Users/BookShop.Users.Api/BookShop.Users.Api.csproj" />
-    <Project Path="src/Modules/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
-    <Project Path="src/Modules/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
-    <Project Path="src/Modules/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/Solution Items/">
-    <File Path=".editorconfig" />
-    <File Path="Directory.Build.props" />
-  </Folder>
+    <Folder Name="/Aspire/">
+        <Project Path="BookShop.Shared/BookShop.Shared.csproj"/>
+        <Project Path="src/Aspire/BookShop.AppHost/BookShop.AppHost.csproj"/>
+        <Project Path="src/Aspire/BookShop.ServiceDefaults/BookShop.ServiceDefaults.csproj"/>
+    </Folder>
+    <Folder Name="/BuildingBlocks/">
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.AspNetCore/BuildingBlocks.AspNetCore.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj"/>
+    </Folder>
+    <Folder Name="/Hosts/">
+        <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj"/>
+    </Folder>
+    <Folder Name="/Modules/"/>
+    <Folder Name="/Modules/Basket/">
+        <Project Path="src/Modules/Basket/BookShop.Basket.Api/BookShop.Basket.Api.csproj"/>
+        <Project Path="src/Modules/Basket/BookShop.Basket.Application/BookShop.Basket.Application.csproj"/>
+        <Project Path="src/Modules/Basket/BookShop.Basket.Domain/BookShop.Basket.Domain.csproj"/>
+        <Project Path="src/Modules/Basket/BookShop.Basket.Infrastructure/BookShop.Basket.Infrastructure.csproj"/>
+    </Folder>
+    <Folder Name="/Modules/Catalog/">
+        <Project Path="src/Modules/Catalog/BookShop.Catalog.Api/BookShop.Catalog.Api.csproj"/>
+        <Project Path="src/Modules/Catalog/BookShop.Catalog.Application/BookShop.Catalog.Application.csproj"/>
+        <Project Path="src/Modules/Catalog/BookShop.Catalog.Domain/BookShop.Catalog.Domain.csproj"/>
+        <Project Path="src/Modules/Catalog/BookShop.Catalog.Infrastructure/BookShop.Catalog.Infrastructure.csproj"/>
+    </Folder>
+    <Folder Name="/Modules/Users/">
+        <Project Path="src/Modules/Users/BookShop.Users.Api/BookShop.Users.Api.csproj"/>
+        <Project Path="src/Modules/Users/BookShop.Users.Application/BookShop.Users.Application.csproj"/>
+        <Project Path="src/Modules/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj"/>
+        <Project Path="src/Modules/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj"/>
+    </Folder>
+    <Folder Name="/Solution Items/">
+        <File Path=".editorconfig"/>
+        <File Path="Directory.Build.props"/>
+    </Folder>
 </Solution>

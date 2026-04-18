@@ -10,8 +10,6 @@ internal static class DependencyInjection
 {
     public static void AddModules(this WebApplicationBuilder builder)
     {
-        builder.AddCatalogModule();
-        builder.AddBasketModule();
         builder.AddUsersModule();
     }
 

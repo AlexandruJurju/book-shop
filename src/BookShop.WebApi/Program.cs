@@ -4,12 +4,13 @@ using BookShop.WebApi.Extensions;
 using BuildingBlocks.AspNetCore.Endpoints;
 using BuildingBlocks.AspNetCore.ExceptionHandler;
 using Scalar.AspNetCore;
+using TickerQ.DependencyInjection;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Configuration.AddModuleConfiguration(["catalog", "basket", "users"]);
+builder.Configuration.AddModuleConfiguration(["users"]);
 
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
     app.ApplyMigrations();
 }
+
+app.UseTickerQ();
 
 app.UseHttpsRedirection();
 

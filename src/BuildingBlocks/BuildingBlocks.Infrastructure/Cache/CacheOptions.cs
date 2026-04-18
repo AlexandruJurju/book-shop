@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.Options;
 
 namespace BuildingBlocks.Infrastructure.Cache;
 
-[OptionsValidator]
-public sealed partial class CacheOptions : IValidateOptions<CacheOptions>
+public sealed class CacheOptions
 {
     public const string ConfigurationSection = "Caching";
 
     [Required]
-    [Range(1, int.MaxValue)]
+    // 10 MB
+    [Range(1, 10 * 1024 * 1024)]
     public int MaximumPayloadBytes { get; set; }
 
     [Required]
     [Range(1, int.MaxValue)]
     public int LocalExpirationInMinutes { get; set; }
-    
+
     [Required]
     [Range(1, int.MaxValue)]
     public int DistributedExpirationInMinutes { get; set; }

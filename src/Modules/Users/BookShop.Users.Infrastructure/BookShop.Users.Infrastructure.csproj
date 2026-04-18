@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
-      <ProjectReference Include="..\BookShop.Users.Application\BookShop.Users.Application.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj"/>
+        <ProjectReference Include="..\BookShop.Users.Application\BookShop.Users.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="EntityFramework\Migrations\" />
+        <Folder Include="EntityFramework\Migrations\"/>
     </ItemGroup>
 
 </Project>

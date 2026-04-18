@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 namespace BuildingBlocks.AspNetCore.ExceptionHandler;
 
 public sealed class GlobalExceptionHandler(
-    IProblemDetailsService          problemDetailsService,
+    IProblemDetailsService problemDetailsService,
     ILogger<GlobalExceptionHandler> logger
 ) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
-        HttpContext       httpContext,
-        Exception         exception,
+        HttpContext httpContext,
+        Exception exception,
         CancellationToken cancellationToken
     )
     {
@@ -25,7 +25,7 @@ public sealed class GlobalExceptionHandler(
         httpContext.Response.StatusCode = exception switch
         {
             ApplicationException => StatusCodes.Status400BadRequest,
-            _                    => StatusCodes.Status500InternalServerError
+            _ => StatusCodes.Status500InternalServerError
         };
 
         var problemDetailsContext = new ProblemDetailsContext
@@ -36,7 +36,7 @@ public sealed class GlobalExceptionHandler(
             {
                 Type = exception.GetType().Name,
                 Title = "An unhandled exception occured",
-                Detail = exception.Message,
+                Detail = exception.Message
             }
         };
 

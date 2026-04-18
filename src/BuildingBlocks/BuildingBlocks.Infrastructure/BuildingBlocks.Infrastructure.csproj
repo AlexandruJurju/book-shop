@@ -7,19 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BookShop.Shared\BookShop.Shared.csproj" />
-      <ProjectReference Include="..\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+        <ProjectReference Include="..\..\..\BookShop.Shared\BookShop.Shared.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Application\BuildingBlocks.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="10.5.0" />
-      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.6" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="EventBus\" />
+        <PackageReference Include="Dapper" Version="2.1.72"/>
+        <PackageReference Include="EFCore.NamingConventions" Version="10.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="10.5.0"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.6"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1"/>
+        <PackageReference Include="TickerQ" Version="10.3.0"/>
     </ItemGroup>
 
 </Project>

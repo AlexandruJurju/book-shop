@@ -2,5 +2,4 @@
 
 namespace BookShop.Basket.Application.Basket.CreateBasket;
 
-public sealed record CreateBasketCommand(
-) : ICommand<Guid>;
+public sealed record CreateBasketCommand : ICommand<Guid>;

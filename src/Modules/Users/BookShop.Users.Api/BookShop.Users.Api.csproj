@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.AspNetCore\BuildingBlocks.AspNetCore.csproj" />
-      <ProjectReference Include="..\BookShop.Users.Application\BookShop.Users.Application.csproj" />
-      <ProjectReference Include="..\BookShop.Users.Infrastructure\BookShop.Users.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.AspNetCore\BuildingBlocks.AspNetCore.csproj"/>
+        <ProjectReference Include="..\BookShop.Users.Application\BookShop.Users.Application.csproj"/>
+        <ProjectReference Include="..\BookShop.Users.Infrastructure\BookShop.Users.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,31 +1,31 @@
-﻿using BuildingBlocks.Common.Helpers;
+﻿using BookShop.Users.Domain.Users.Events;
+using BuildingBlocks.Common.Helpers;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Users.Domain.Users;
 
 public sealed class User : Entity, IAggregateRoot
 {
+    // For EF Core
     private User()
     {
     }
 
-    private User(Guid id, FirstName firstName, LastName lastName, Email email)
+    private User(Guid id, UserName userName, Email email)
         : base(id)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        UserName = userName;
         Email = email;
     }
 
-    public FirstName FirstName { get; private set; }
-
-    public LastName LastName { get; private set; }
-
+    public UserName UserName { get; private set; }
     public Email Email { get; private set; }
 
-    public static User Create(FirstName firstName, LastName lastName, Email email)
+    public static User Create(UserName userName, Email email)
     {
-        var user = new User(GuidHelper.NewGuid(), firstName, lastName, email);
+        var user = new User(GuidHelper.NewGuid(), userName, email);
+
+        user.RaiseDomainEvent(new UserRegisteredDomainEvent(user.Id));
 
         return user;
     }

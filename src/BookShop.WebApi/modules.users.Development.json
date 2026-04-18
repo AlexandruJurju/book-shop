@@ -1,3 +1,13 @@
 {
-
+  "OutboxJob": {
+    // every 5 seconds
+    "Cron": "*/5 * * * * *",
+    "BatchSize": 20
+  },
+  "Caching": {
+    // 10 MB = 10 * 1024 * 1024
+    "MaximumPayloadBytes": 1048576,
+    "LocalExpirationInMinutes": 10,
+    "DistributedExpirationInMinutes": 30
+  }
 }

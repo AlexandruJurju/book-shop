@@ -11,9 +11,9 @@ public class ValidationBehavior<TMessage, TResponse>(IEnumerable<IValidator<TMes
     where TResponse : notnull
 {
     public async ValueTask<TResponse> Handle(
-        TMessage                                    message,
+        TMessage message,
         MessageHandlerDelegate<TMessage, TResponse> next,
-        CancellationToken                           cancellationToken
+        CancellationToken cancellationToken
     )
     {
         if (!validators.Any())

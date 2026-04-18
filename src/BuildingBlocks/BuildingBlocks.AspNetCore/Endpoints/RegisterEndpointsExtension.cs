@@ -10,7 +10,7 @@ public static class RegisterEndpointsExtension
 {
     public static IServiceCollection AddEndpoints(
         this IServiceCollection services,
-        Assembly                assembly
+        Assembly assembly
     )
     {
         ServiceDescriptor[] serviceDescriptors = assembly
@@ -28,7 +28,7 @@ public static class RegisterEndpointsExtension
 
     public static IApplicationBuilder MapEndpoints(
         this WebApplication app,
-        RouteGroupBuilder?  routeGroupBuilder = null
+        RouteGroupBuilder? routeGroupBuilder = null
     )
     {
         IEnumerable<IEndpoint> endpoints = app.Services.GetRequiredService<
