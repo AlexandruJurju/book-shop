@@ -1,6 +1,6 @@
 <Solution>
     <Folder Name="/Aspire/">
-        <Project Path="BookShop.Shared/BookShop.Shared.csproj" />
+        <Project Path="src/Aspire/BookShop.Shared/BookShop.Shared.csproj" />
         <Project Path="src/Aspire/BookShop.AppHost/BookShop.AppHost.csproj" />
         <Project Path="src/Aspire/BookShop.ServiceDefaults/BookShop.ServiceDefaults.csproj" />
     </Folder>
