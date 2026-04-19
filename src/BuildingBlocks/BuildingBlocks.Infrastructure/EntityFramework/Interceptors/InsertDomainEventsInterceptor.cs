@@ -4,7 +4,7 @@ using BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BuildingBlocks.Infrastructure.Data.EntityFramework.Interceptors;
+namespace BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 
 public sealed class InsertDomainEventsInterceptor : SaveChangesInterceptor
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BuildingBlocks.Infrastructure.Data.EntityFramework.Interceptors;
+namespace BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 
 public class SoftDeleteInterceptor : SaveChangesInterceptor
 {

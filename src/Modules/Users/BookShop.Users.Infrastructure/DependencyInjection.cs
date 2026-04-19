@@ -5,7 +5,8 @@ using BookShop.Users.Infrastructure.Outbox;
 using BookShop.Users.Infrastructure.Users;
 using BuildingBlocks.Infrastructure.Cache;
 using BuildingBlocks.Infrastructure.Data;
-using BuildingBlocks.Infrastructure.Data.EntityFramework.Interceptors;
+using BuildingBlocks.Infrastructure.EntityFramework;
+using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.Outbox;
 using BuildingBlocks.Infrastructure.Time;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -20,14 +21,24 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.TryAddScoped<IInterceptor, InsertDomainEventsInterceptor>();
-        services.AddCustomPostgresDbContext<UsersDbContext>(configuration, Resources.Postgres, Services.Users);
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddTimeProvider();
 
         services.AddCustomMemoryCache(configuration, Services.Users);
 
-        services.AddTimeProvider();
+        services.AddCustomNpgsql(configuration, Resources.Postgres);
 
+        services.TryAddScoped<IInterceptor, InsertDomainEventsInterceptor>();
+        services.AddCustomPostgresDbContext<UsersDbContext>(configuration, Resources.Postgres, Services.Users);
+
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        AddOutboxProcessor(services, configuration);
+
+        return services;
+    }
+
+    private static void AddOutboxProcessor(IServiceCollection services, IConfiguration configuration)
+    {
         services
             .AddOptionsWithValidateOnStart<OutboxJobOptions>()
             .Bind(configuration.GetSection($"{Services.Users}:{OutboxJobOptions.ConfigurationSection}"))
@@ -42,7 +53,5 @@ public static class DependencyInjection
         services.MapTicker<OutboxJob>()
             .WithMaxConcurrency(1)
             .WithCron(outboxJobOptions.Cron);
-
-        return services;
     }
 }

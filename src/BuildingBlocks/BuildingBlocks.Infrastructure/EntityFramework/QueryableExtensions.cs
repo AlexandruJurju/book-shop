@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace BuildingBlocks.Infrastructure.Data.EntityFramework;
+namespace BuildingBlocks.Infrastructure.EntityFramework;
 
 public static class QueryableExtensions
 {

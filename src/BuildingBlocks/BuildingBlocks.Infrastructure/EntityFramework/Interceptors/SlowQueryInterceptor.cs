@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 
-namespace BuildingBlocks.Infrastructure.Data.EntityFramework.Interceptors;
+namespace BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 
 public sealed class SlowQueryInterceptor(
     ILogger<SlowQueryInterceptor> logger

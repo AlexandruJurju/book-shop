@@ -2,6 +2,7 @@
 using BookShop.Shared.Aspire;
 using BuildingBlocks.AspNetCore.Endpoints;
 using BuildingBlocks.Infrastructure.Data;
+using BuildingBlocks.Infrastructure.EntityFramework;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
