@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.AspNetCore\BuildingBlocks.AspNetCore.csproj"/>
-        <ProjectReference Include="..\BookShop.Basket.Infrastructure\BookShop.Basket.Infrastructure.csproj"/>
+        <ProjectReference Include="..\BookShop.Cart.Infrastructure\BookShop.Cart.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

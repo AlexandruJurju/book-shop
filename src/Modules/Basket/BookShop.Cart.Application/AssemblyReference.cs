@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace BookShop.Basket.Application;
+namespace BookShop.Cart.Application;
 
 public static class AssemblyReference
 {

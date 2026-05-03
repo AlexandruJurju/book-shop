@@ -15,15 +15,19 @@
         <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
     </Folder>
     <Folder Name="/Modules/" />
-    <Folder Name="/Modules/Basket/">
-        <Project Path="src/Modules/Basket/BookShop.Basket.Application/BookShop.Basket.Application.csproj" />
-        <Project Path="src/Modules/Basket/BookShop.Basket.Domain/BookShop.Basket.Domain.csproj" />
-        <Project Path="src/Modules/Basket/BookShop.Basket.Infrastructure/BookShop.Basket.Infrastructure.csproj" />
-        <Project Path="src/Modules/Basket/BookShop.Basket.Presentation/BookShop.Basket.Presentation.csproj" />
+    <Folder Name="/Modules/Cart/">
+        <Project Path="src/Modules/Basket/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
+        <Project Path="src/Modules/Basket/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
+        <Project Path="src/Modules/Basket/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
+        <Project Path="src/Modules/Basket/BookShop.Cart.Presentation/BookShop.Cart.Presentation.csproj" />
     </Folder>
     <Folder Name="/Modules/Catalog/">
         <Project Path="src/Modules/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
     </Folder>
+    <Folder Name="/Modules/Notification/" />
+    <Folder Name="/Modules/Pricing/" />
+    <Folder Name="/Modules/Recommendations/" />
+    <Folder Name="/Modules/Reviews/" />
     <Folder Name="/Modules/Users/">
         <Project Path="src/Modules/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
         <Project Path="src/Modules/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />

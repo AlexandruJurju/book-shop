@@ -1,4 +1,5 @@
-using BookShop.Shared.Aspire;
+using Aspire.Hosting.Azure;
+using BookShop.Shared;
 using Projects;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
@@ -32,11 +33,21 @@ IResourceBuilder<RabbitMQServerResource> rabbitMq = builder
     .WithDataVolume()
     .WithManagementPlugin();
 
+IResourceBuilder<MailPitContainerResource> mailpit = builder.AddMailPit(Resources.MilPit, httpPort: 8025, smtpPort: 1025)
+    .WithLifetime(ContainerLifetime.Persistent);
+
+IResourceBuilder<AzureStorageResource> storage = builder.AddAzureStorage(BookShop.Shared.Azure.Storage.Resource)
+    .RunAsEmulator();
+
+IResourceBuilder<AzureBlobStorageResource> blobs = storage.AddBlobs(BookShop.Shared.Azure.Storage.BlobContainer(Services.Catalog));
+
 builder.AddProject<BookShop_WebApi>("bookshop-webapi")
     .WithReference(postgres).WaitFor(postgres)
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(redis).WaitFor(redis)
     .WithReference(rabbitMq).WaitFor(rabbitMq)
+    .WithReference(mailpit).WaitFor(mailpit)
+    .WithReference(blobs).WaitFor(blobs)
     ;
 
 await builder.Build().RunAsync();

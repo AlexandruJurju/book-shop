@@ -1,8 +1,8 @@
-namespace BookShop.Shared.Aspire;
+namespace BookShop.Shared;
 
 public static class Services
 {
     public const string Catalog = "catalog";
     public const string Users = "users";
-    public const string Basket = "basket";
+    public const string Cart = "cart";
 }

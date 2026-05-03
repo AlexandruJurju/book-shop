@@ -7,13 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj"/>
-        <ProjectReference Include="..\BookShop.Basket.Domain\BookShop.Basket.Domain.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Basket\"/>
-        <Folder Include="Basket\CreateBasket\" />
+        <ProjectReference Include="..\..\..\Aspire\BookShop.Shared\BookShop.Shared.csproj"/>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj"/>
+        <ProjectReference Include="..\BookShop.Cart.Application\BookShop.Cart.Application.csproj" />
+        <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

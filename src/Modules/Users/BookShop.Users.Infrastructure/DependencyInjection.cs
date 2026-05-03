@@ -1,4 +1,4 @@
-﻿using BookShop.Shared.Aspire;
+﻿using BookShop.Shared;
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Identity;
 using BookShop.Users.Infrastructure.Authorization;

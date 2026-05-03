@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Ardalis.Result.AspNetCore" Version="10.1.0"/>
         <PackageReference Include="Ardalis.Result.FluentValidation" Version="10.1.0"/>
+        <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.2.4-preview.1.26224.4" />
         <PackageReference Include="FluentValidation" Version="12.1.1"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7"/>
         <PackageReference Include="Scalar.AspNetCore" Version="2.14.9" />

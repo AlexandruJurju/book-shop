@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace BookShop.Basket.Presentation.Endpoints.Basket;
+namespace BookShop.Cart.Presentation.Endpoints.Cart;
 
 internal sealed class CreateCategoryEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("basket", Handle)
-            .WithTags(Tags.Basket);
+        app.MapPost("cart", Handle)
+            .WithTags(Tags.Cart);
     }
 
     private static async Task<IResult> Handle()

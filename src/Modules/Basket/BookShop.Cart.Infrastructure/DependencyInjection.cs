@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace BookShop.Basket.Infrastructure;
+namespace BookShop.Cart.Infrastructure;
 
 public static class DependencyInjection
 {

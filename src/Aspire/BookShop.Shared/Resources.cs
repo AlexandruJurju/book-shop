@@ -1,4 +1,4 @@
-﻿namespace BookShop.Shared.Aspire;
+﻿namespace BookShop.Shared;
 
 public static class Resources
 {
@@ -6,4 +6,5 @@ public static class Resources
     public const string Redis = "redis";
     public const string Keycloak = "keycloak";
     public const string RabbitMq = "rabbit-mq";
+    public const string MilPit = "mail-pit";
 }

@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using BookShop.Shared.Aspire;
+using BookShop.Shared;
 using BuildingBlocks.Application.CQRS.Behaviors;
 using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.AspNetCore.OpenApi;
