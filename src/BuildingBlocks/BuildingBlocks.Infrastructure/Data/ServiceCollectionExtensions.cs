@@ -12,10 +12,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCustomNpgsql(
         this IServiceCollection services,
         IConfiguration configuration,
-        string resourceName
+        string postgresResourceName
     )
     {
-        string connectionString = configuration.GetConnectionStringOrThrow(resourceName);
+        string connectionString = configuration.GetRequiredConnectionString(postgresResourceName);
 
         NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(connectionString).Build();
         services.TryAddSingleton(npgsqlDataSource);

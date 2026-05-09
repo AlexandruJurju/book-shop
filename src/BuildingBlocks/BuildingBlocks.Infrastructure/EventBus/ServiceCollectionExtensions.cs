@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using BookShop.Shared;
+﻿using BookShop.Shared;
 using BuildingBlocks.Application.EventBus;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -26,31 +25,6 @@ public static class ServiceCollectionExtensions
                 configureConsumers(configure, instanceId);
             }
 
-            configure.SetKebabCaseEndpointNameFormatter();
-
-            configure.UsingRabbitMq((context, cfg) =>
-            {
-                string connectionString = context
-                    .GetRequiredService<IConfiguration>()
-                    .GetConnectionString(Resources.RabbitMq)!;
-
-                cfg.Host(new Uri(connectionString!));
-                cfg.ConfigureEndpoints(context);
-            });
-        });
-
-        return services;
-    }
-
-    public static IServiceCollection AddCustomMassTransit(
-        this IServiceCollection services
-    )
-    {
-        services.TryAddSingleton<IEventBus, EventBus>();
-
-        services.AddMassTransit(configure =>
-        {
-            configure.AddConsumers(Assembly.GetExecutingAssembly());
             configure.SetKebabCaseEndpointNameFormatter();
 
             configure.UsingRabbitMq((context, cfg) =>

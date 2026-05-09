@@ -15,7 +15,7 @@ public static class DependencyInjection
     {
         builder.Services.AddPresentation();
 
-        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.AddInfrastructure();
 
         return builder.Services;
     }
@@ -27,9 +27,11 @@ public static class DependencyInjection
         return services;
     }
 
-    private static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddInfrastructure(this IHostApplicationBuilder builder)
     {
-        services.AddCustomPostgresDbContext<CatalogDbContext>(configuration, Resources.Postgres, Services.Catalog);
+        IServiceCollection services = new ServiceCollection();
+
+        builder.AddCustomPostgresDbContext<CatalogDbContext>(Resources.Postgres, Services.Catalog);
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CatalogDbContext>());
 
         return services;

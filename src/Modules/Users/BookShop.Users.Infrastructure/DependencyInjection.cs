@@ -6,10 +6,13 @@ using BookShop.Users.Infrastructure.EntityFramework;
 using BookShop.Users.Infrastructure.IdentityProvider;
 using BookShop.Users.Infrastructure.Outbox;
 using BuildingBlocks.Application.Authorization;
+using BuildingBlocks.Infrastructure;
+using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using BuildingBlocks.Infrastructure.Keycloak;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using TickerQ.DependencyInjection;
 
@@ -18,11 +21,13 @@ namespace BookShop.Users.Infrastructure;
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration
+        this IHostApplicationBuilder builder
     )
     {
-        services.AddCustomPostgresDbContext<UsersDbContext>(configuration, Resources.Postgres, Services.Users);
+        IServiceCollection services = builder.Services;
+        IConfigurationManager configuration = builder.Configuration;
+
+        builder.AddCustomPostgresDbContext<UsersDbContext>(Resources.Postgres, Services.Users);
         services.AddScoped<IUsersDbContext>(provider => provider.GetRequiredService<UsersDbContext>());
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
 
@@ -30,18 +35,14 @@ public static class DependencyInjection
 
         AddOutboxProcessor(services, configuration);
 
-        AddKeycloakIdentityProvider(services, configuration);
+        AddKeycloakIdentityProvider(services);
 
         return services;
     }
 
-    private static void AddKeycloakIdentityProvider(IServiceCollection services, IConfiguration configuration)
+    private static void AddKeycloakIdentityProvider(IServiceCollection services)
     {
-        services
-            .AddOptionsWithValidateOnStart<KeycloakOptions>()
-            .Bind(configuration.GetSection(KeycloakOptions.SectionName))
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
+        services.ConfigureWithValidation<KeycloakOptions>(KeycloakOptions.SectionName);
 
         services.AddTransient<KeycloakAuthDelegatingHandler>();
 

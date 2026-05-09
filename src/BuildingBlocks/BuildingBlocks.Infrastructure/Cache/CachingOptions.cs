@@ -2,9 +2,9 @@
 
 namespace BuildingBlocks.Infrastructure.Cache;
 
-public sealed class CacheOptions
+public sealed class CachingOptions
 {
-    public const string ConfigurationSection = "Caching";
+    public const string SectionName = "Caching";
 
     [Required]
     // 10 MB

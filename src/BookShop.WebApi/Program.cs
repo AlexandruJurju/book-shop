@@ -26,7 +26,7 @@ Assembly[] moduleApplicationAssemblies =
 
 builder.Services.AddPresentation();
 builder.Services.AddApplication(moduleApplicationAssemblies);
-builder.Services.AddInfrastructure(builder.Configuration,
+builder.AddInfrastructure(
 [
 ]);
 
@@ -45,8 +45,6 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-app.UseTickerQ();
-
 app.UseHttpsRedirection();
 
 app.UseExceptionHandler();
@@ -54,6 +52,8 @@ app.UseExceptionHandler();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseTickerQ();
 
 app.MapEndpoints();
 

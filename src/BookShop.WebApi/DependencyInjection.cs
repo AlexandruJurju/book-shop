@@ -39,16 +39,19 @@ internal static class DependencyInjection
         services.AddValidatorsFromAssemblies(moduleAssemblies, includeInternalTypes: true);
     }
 
-    public static void AddInfrastructure(this IServiceCollection services,
-        IConfiguration configuration,
+    public static void AddInfrastructure(
+        this IHostApplicationBuilder builder,
         Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers
     )
     {
+        IServiceCollection services = builder.Services;
+        IConfiguration configuration = builder.Configuration;
+
         services.AddCustomAuthentication();
 
         services.AddCustomAuthorization();
 
-        services.AddCustomCache(configuration);
+        builder.AddCustomCache();
 
         services.AddCustomMassTransit(moduleConfigureConsumers);
 
