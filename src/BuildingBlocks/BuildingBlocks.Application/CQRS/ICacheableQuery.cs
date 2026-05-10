@@ -1,11 +1,11 @@
 ﻿namespace BuildingBlocks.Application.CQRS;
 
-public interface ICachedQuery
+public interface ICacheableQuery
 {
     string Key { get; }
     TimeSpan? Expiration => TimeSpan.FromMinutes(5);
 }
 
-public interface ICachedQuery<TResponse> : IQuery<TResponse>, ICachedQuery
+public interface ICacheableQuery<TResponse> : IQuery<TResponse>, ICacheableQuery
 {
 }

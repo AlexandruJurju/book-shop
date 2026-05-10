@@ -1,6 +1,5 @@
 ﻿using BookShop.Users.Infrastructure;
 using BuildingBlocks.AspNetCore.Endpoints;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

@@ -19,5 +19,6 @@ public sealed class UsersDbContext(
         modelBuilder.HasDefaultSchema(Services.Users);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsersDbContext).Assembly);
         modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
+        modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
     }
 }

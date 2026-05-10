@@ -1,15 +1,20 @@
 ﻿using BookShop.Shared;
+using BookShop.Users.Application;
 using BookShop.Users.Application.Abstractions.Data;
+using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
 using BookShop.Users.Infrastructure.Authorization;
 using BookShop.Users.Infrastructure.EntityFramework;
+using BookShop.Users.Infrastructure.Idempotency;
 using BookShop.Users.Infrastructure.IdentityProvider;
 using BookShop.Users.Infrastructure.Outbox;
 using BuildingBlocks.Application.Authorization;
+using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Infrastructure;
 using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using BuildingBlocks.Infrastructure.Keycloak;
+using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +31,8 @@ public static class DependencyInjection
     {
         IServiceCollection services = builder.Services;
         IConfigurationManager configuration = builder.Configuration;
+
+        services.AddScoped<IIdempotencyDomainEventRepository, IdempotencyDomainEventRepository>();
 
         builder.AddCustomPostgresDbContext<UsersDbContext>(Resources.Postgres, Services.Users);
         services.AddScoped<IUsersDbContext>(provider => provider.GetRequiredService<UsersDbContext>());

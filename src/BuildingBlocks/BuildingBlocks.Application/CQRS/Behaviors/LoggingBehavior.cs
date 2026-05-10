@@ -9,13 +9,11 @@ public sealed partial class LoggingBehavior<TMessage, TResponse>(
     ILogger<LoggingBehavior<TMessage, TResponse>> logger
 ) : IPipelineBehavior<TMessage, TResponse>
     where TMessage : IMessage
-    where TResponse : Result
 {
     public async ValueTask<TResponse> Handle(
         TMessage message,
         MessageHandlerDelegate<TMessage, TResponse> next,
-        CancellationToken cancellationToken
-    )
+        CancellationToken cancellationToken)
     {
         string requestName = message.GetType().Name;
         string moduleName = GetModuleName(typeof(TMessage).FullName!);
@@ -26,13 +24,16 @@ public sealed partial class LoggingBehavior<TMessage, TResponse>(
 
             TResponse result = await next(message, cancellationToken);
 
-            if (result.IsSuccess)
+            IEnumerable<string>? errors = (result as Result)?.Errors
+                ?? (result as Result<TResponse>)?.Errors;
+
+            if (errors is null || !errors.Any())
             {
                 LogCompletedRequest(requestName);
             }
             else
             {
-                using (LogContext.PushProperty("Errors", result.Errors, true))
+                using (LogContext.PushProperty("Errors", errors, true))
                 {
                     LogFailedRequest(requestName);
                 }

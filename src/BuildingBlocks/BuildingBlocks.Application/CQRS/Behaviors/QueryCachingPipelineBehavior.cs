@@ -14,7 +14,7 @@ public sealed class QueryCachingBehavior<TMessage, TResponse>(
         MessageHandlerDelegate<TMessage, TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (message is not ICachedQuery cacheable)
+        if (message is not ICacheableQuery cacheable)
         {
             return await next(message, cancellationToken);
         }
