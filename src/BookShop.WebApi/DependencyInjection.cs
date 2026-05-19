@@ -51,9 +51,9 @@ internal static class DependencyInjection
 
         services.AddCustomAuthorization();
 
-        builder.AddCustomCache();
+        builder.AddCustomInMemoryCache();
 
-        services.AddCustomMassTransit(moduleConfigureConsumers);
+        services.AddCustomMassTransitInMemory(moduleConfigureConsumers);
 
         services.AddCustomNpgsql(configuration, Resources.Postgres);
         services.AddScoped<IInterceptor, InsertOutboxMessagesInterceptor>();

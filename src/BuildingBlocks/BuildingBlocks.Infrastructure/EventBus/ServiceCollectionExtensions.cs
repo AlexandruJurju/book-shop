@@ -9,7 +9,7 @@ namespace BuildingBlocks.Infrastructure.EventBus;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCustomMassTransit(
+    public static IServiceCollection AddCustomMassTransitRabbitMq(
         this IServiceCollection services,
         Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers
     )
@@ -34,6 +34,33 @@ public static class ServiceCollectionExtensions
                     .GetConnectionString(Resources.RabbitMq)!;
 
                 cfg.Host(new Uri(connectionString!));
+                cfg.ConfigureEndpoints(context);
+            });
+        });
+
+        return services;
+    }
+
+    public static IServiceCollection AddCustomMassTransitInMemory(
+        this IServiceCollection services,
+        Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers
+    )
+    {
+        services.TryAddSingleton<IEventBus, EventBus>();
+
+        services.AddMassTransit(configure =>
+        {
+            string serviceName = "BookShop.Api";
+            string instanceId = serviceName.ToLowerInvariant().Replace('.', '-');
+            foreach (Action<IRegistrationConfigurator, string> configureConsumers in moduleConfigureConsumers)
+            {
+                configureConsumers(configure, instanceId);
+            }
+
+            configure.SetKebabCaseEndpointNameFormatter();
+
+            configure.UsingInMemory((context, cfg) =>
+            {
                 cfg.ConfigureEndpoints(context);
             });
         });

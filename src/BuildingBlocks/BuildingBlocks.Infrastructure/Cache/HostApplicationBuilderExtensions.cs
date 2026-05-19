@@ -9,7 +9,7 @@ namespace BuildingBlocks.Infrastructure.Cache;
 
 public static class HostApplicationBuilderExtensions
 {
-    public static IServiceCollection AddCustomCache(
+    public static IServiceCollection AddCustomDistributedCache(
         this IHostApplicationBuilder builder
     )
     {
@@ -21,8 +21,35 @@ public static class HostApplicationBuilderExtensions
         CachingOptions cachingOptions = configuration
             .GetRequiredSection(CachingOptions.SectionName)
             .Get<CachingOptions>()!;
-        
+
         builder.AddRedisDistributedCache(Resources.Redis);
+
+        services.AddHybridCache(options =>
+        {
+            options.MaximumPayloadBytes = cachingOptions.MaximumPayloadBytes;
+
+            options.DefaultEntryOptions = new HybridCacheEntryOptions
+            {
+                LocalCacheExpiration = TimeSpan.FromMinutes(cachingOptions.LocalExpirationInMinutes),
+                Expiration = TimeSpan.FromMinutes(cachingOptions.DistributedExpirationInMinutes)
+            };
+        });
+
+        return services;
+    }
+
+    public static IServiceCollection AddCustomInMemoryCache(
+        this IHostApplicationBuilder builder
+    )
+    {
+        IServiceCollection services = builder.Services;
+        IConfiguration configuration = builder.Configuration;
+
+        services.ConfigureWithValidation<CachingOptions>(CachingOptions.SectionName);
+
+        CachingOptions cachingOptions = configuration
+            .GetRequiredSection(CachingOptions.SectionName)
+            .Get<CachingOptions>()!;
 
         services.AddHybridCache(options =>
         {

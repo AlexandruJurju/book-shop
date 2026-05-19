@@ -361,6 +361,9 @@ dotnet_diagnostic.IDE0290.severity = none
 # S112: General or reserved exceptions should never be thrown
 dotnet_diagnostic.S112.severity = none
 
+# S125: Remove commented out code
+dotnet_diagnostic.S125.severity = suggestion
+
 # S1075: URIs should not be hardcoded
 dotnet_diagnostic.S1075.severity = none
 
