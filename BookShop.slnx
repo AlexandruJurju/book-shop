@@ -15,28 +15,35 @@
         <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
     </Folder>
     <Folder Name="/Modules/" />
-    <Folder Name="/Modules/Cart/">
+    <Folder Name="/Modules/Core/" />
+    <Folder Name="/Modules/Core/Catalog/">
+        <Project Path="src/Modules/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
+    </Folder>
+    <Folder Name="/Modules/Core/Inventory/" />
+    <Folder Name="/Modules/Core/Orders/" />
+    <Folder Name="/Modules/Core/Payment/" />
+    <Folder Name="/Modules/Core/Pricing/" />
+    <Folder Name="/Modules/Customer Facing/" />
+    <Folder Name="/Modules/Customer Facing/Cart/">
         <Project Path="src/Modules/Basket/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
         <Project Path="src/Modules/Basket/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
         <Project Path="src/Modules/Basket/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
         <Project Path="src/Modules/Basket/BookShop.Cart.Presentation/BookShop.Cart.Presentation.csproj" />
     </Folder>
-    <Folder Name="/Modules/Catalog/">
-        <Project Path="src/Modules/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
-    </Folder>
-    <Folder Name="/Modules/Notification/" />
-    <Folder Name="/Modules/Pricing/" />
-    <Folder Name="/Modules/Recommendations/" />
-    <Folder Name="/Modules/Reviews/" />
-    <Folder Name="/Modules/Users/">
+    <Folder Name="/Modules/Customer Facing/Recommendations/" />
+    <Folder Name="/Modules/Customer Facing/Reviews/" />
+    <Folder Name="/Modules/Customer Facing/Users/">
         <Project Path="src/Modules/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
         <Project Path="src/Modules/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
         <Project Path="src/Modules/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
         <Project Path="src/Modules/Users/BookShop.Users.Presentation/BookShop.Users.Presentation.csproj" />
     </Folder>
-    <Folder Name="/Modules/Users/Contracts/">
+    <Folder Name="/Modules/Customer Facing/Users/Contracts/">
         <Project Path="src/Modules/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
     </Folder>
+    <Folder Name="/Modules/Operational/" />
+    <Folder Name="/Modules/Operational/Notification/" />
+    <Folder Name="/Modules/Operational/Reporting/" />
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig" />
         <File Path="Directory.Build.props" />
