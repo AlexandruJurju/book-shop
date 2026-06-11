@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using BookShop.Shared;
 using BuildingBlocks.Application.CQRS.Behaviors;
-using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.AspNetCore.OpenApi;
 using BuildingBlocks.Infrastructure.Authentication;
 using BuildingBlocks.Infrastructure.Authorization;
@@ -66,6 +65,7 @@ internal static class DependencyInjection
             opt.AddDashboard(dashboard =>
             {
                 dashboard.SetBasePath("/management/jobs");
+                dashboard.WithNoAuth();
             });
         });
 

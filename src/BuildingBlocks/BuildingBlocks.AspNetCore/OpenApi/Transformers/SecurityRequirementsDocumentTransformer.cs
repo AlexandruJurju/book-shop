@@ -6,8 +6,7 @@ namespace BuildingBlocks.AspNetCore.OpenApi.Transformers;
 
 internal sealed class SecurityRequirementsDocumentTransformer : IOpenApiDocumentTransformer
 {
-    public Task TransformAsync(
-        OpenApiDocument document,
+    public Task TransformAsync(OpenApiDocument document,
         OpenApiDocumentTransformerContext context,
         CancellationToken cancellationToken)
     {

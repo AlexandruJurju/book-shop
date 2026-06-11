@@ -11,7 +11,7 @@
         <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
         <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" />
     </Folder>
-    <Folder Name="/Hosts/">
+    <Folder Name="/Host/">
         <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
     </Folder>
     <Folder Name="/Modules/" />

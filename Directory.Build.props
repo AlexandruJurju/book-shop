@@ -11,13 +11,13 @@
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.23.0.137933">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>
-                runtime; build; native; contentfiles; analyzers; buildtransitive
-            </IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+<!--    <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">-->
+<!--        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.23.0.137933">-->
+<!--            <PrivateAssets>all</PrivateAssets>-->
+<!--            <IncludeAssets>-->
+<!--                runtime; build; native; contentfiles; analyzers; buildtransitive-->
+<!--            </IncludeAssets>-->
+<!--        </PackageReference>-->
+<!--    </ItemGroup>-->
 
 </Project>

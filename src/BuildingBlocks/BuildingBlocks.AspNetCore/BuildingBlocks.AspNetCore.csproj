@@ -15,10 +15,6 @@
         <PackageReference Include="Scalar.AspNetCore" Version="2.16.3" />
         <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.16.3" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0"/>
-        <PackageReference Update="SonarAnalyzer.CSharp" Version="10.27.0.140913">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

@@ -13,11 +13,4 @@
         <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Update="SonarAnalyzer.CSharp" Version="10.27.0.140913">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
-
 </Project>
