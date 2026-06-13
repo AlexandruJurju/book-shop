@@ -50,7 +50,7 @@ internal static class DependencyInjection
 
         services.AddCustomAuthorization();
 
-        builder.AddCustomInMemoryCache();
+        builder.AddCustomCacheInMemory();
 
         services.AddCustomMassTransitInMemory(moduleConfigureConsumers);
 

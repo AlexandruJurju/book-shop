@@ -28,6 +28,7 @@ builder.Services.AddPresentation();
 builder.Services.AddApplication(moduleApplicationAssemblies);
 builder.AddInfrastructure(
 [
+    BookShop.Cart.Presentation.DependencyInjection.ConfigureConsumers
 ]);
 
 builder.AddUsersModule();

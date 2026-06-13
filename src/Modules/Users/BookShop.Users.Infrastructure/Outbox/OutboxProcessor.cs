@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Text.Json;
+using BookShop.Shared;
 using BookShop.Users.Domain;
 using BuildingBlocks.Application.Data;
 using BuildingBlocks.Infrastructure.Outbox;

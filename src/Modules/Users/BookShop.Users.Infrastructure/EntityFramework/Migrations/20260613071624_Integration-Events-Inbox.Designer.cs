@@ -3,6 +3,7 @@ using System;
 using BookShop.Users.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookShop.Users.Infrastructure.EntityFramework.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    partial class UsersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260613071624_Integration-Events-Inbox")]
+    partial class IntegrationEventsInbox
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,12 +161,6 @@ namespace BookShop.Users.Infrastructure.EntityFramework.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_inbox_messages");
-
-                    b.HasIndex("OccurredOnUtc", "ProcessedOnUtc")
-                        .HasDatabaseName("idx_inbox_messages_unprocessed")
-                        .HasFilter("\"processed_on_utc\" IS NULL");
-
-                    NpgsqlIndexBuilderExtensions.IncludeProperties(b.HasIndex("OccurredOnUtc", "ProcessedOnUtc"), new[] { "Id", "Type", "Content" });
 
                     b.ToTable("inbox_messages", "users");
                 });

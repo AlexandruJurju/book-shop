@@ -38,7 +38,7 @@ public static class HostApplicationBuilderExtensions
         return services;
     }
 
-    public static IServiceCollection AddCustomInMemoryCache(
+    public static IServiceCollection AddCustomCacheInMemory(
         this IHostApplicationBuilder builder
     )
     {

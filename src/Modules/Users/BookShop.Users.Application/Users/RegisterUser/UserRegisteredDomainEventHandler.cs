@@ -14,8 +14,8 @@ namespace BookShop.Users.Application.Users.RegisterUser;
 public sealed class UserRegisteredDomainEventHandler(
     ISender sender,
     IEventBus bus,
-    IIdempotencyDomainEventRepository idempotencyRepository
-) : IdempotentDomainEventHandler<UserRegisteredDomainEvent>(idempotencyRepository)
+    IDomainEventConsumerRepository consumerRepository
+) : IdempotentDomainEventHandler<UserRegisteredDomainEvent>(consumerRepository)
 {
     protected override async ValueTask HandleAsync(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
     {

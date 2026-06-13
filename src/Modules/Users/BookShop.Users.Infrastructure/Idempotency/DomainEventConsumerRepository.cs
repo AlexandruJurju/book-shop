@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Users.Infrastructure.Idempotency;
 
-internal sealed class IdempotencyDomainEventRepository(
+internal sealed class DomainEventConsumerRepository(
     UsersDbContext dbContext
-) : IIdempotencyDomainEventRepository
+) : IDomainEventConsumerRepository
 {
     public Task<bool> ExistsAsync(Guid outboxMessageid, string handlerName, CancellationToken cancellationToken)
         => dbContext.Set<OutboxMessageConsumer>()

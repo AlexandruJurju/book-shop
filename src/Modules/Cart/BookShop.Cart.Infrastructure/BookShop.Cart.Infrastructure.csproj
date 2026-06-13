@@ -13,4 +13,8 @@
         <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="EntityFramework\Migrations\" />
+    </ItemGroup>
+
 </Project>

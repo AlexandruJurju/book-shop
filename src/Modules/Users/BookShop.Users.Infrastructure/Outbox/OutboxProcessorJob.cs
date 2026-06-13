@@ -5,9 +5,9 @@ using TickerQ.Utilities.Interfaces;
 
 namespace BookShop.Users.Infrastructure.Outbox;
 
-public class OutboxJob(
+internal sealed class OutboxProcessorJob(
     OutboxProcessor outboxProcessor,
-    ILogger<OutboxJob> logger
+    ILogger<OutboxProcessorJob> logger
 ) : ITickerFunction
 {
     public async Task ExecuteAsync(TickerFunctionContext context, CancellationToken cancellationToken = default)

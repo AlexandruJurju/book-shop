@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookShop.Users.Infrastructure.Outbox;
+namespace BookShop.Cart.Infrastructure.Inbox;
 
-public sealed class OutboxJobOptions
+public sealed class InboxJobOptions
 {
-    public const string ConfigurationSection = nameof(OutboxJobOptions);
+    public const string ConfigurationSection = nameof(InboxJobOptions);
 
     [Required]
     public string Cron { get; init; }

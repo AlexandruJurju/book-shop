@@ -5,7 +5,7 @@ using BuildingBlocks.Domain;
 namespace BookShop.Users.Application;
 
 public abstract class IdempotentDomainEventHandler<TNotification>(
-    IIdempotencyDomainEventRepository idempotencyRepository
+    IDomainEventConsumerRepository consumerRepository
 ) : IDomainEventHandler<TNotification>
     where TNotification : IDomainEvent
 {
@@ -13,14 +13,14 @@ public abstract class IdempotentDomainEventHandler<TNotification>(
     {
         string handlerName = GetType().Name;
 
-        if (await idempotencyRepository.ExistsAsync(notification.Id, handlerName, cancellationToken))
+        if (await consumerRepository.ExistsAsync(notification.Id, handlerName, cancellationToken))
         {
             return;
         }
 
         await HandleAsync(notification, cancellationToken);
 
-        await idempotencyRepository.AddAsync(notification.Id, handlerName, cancellationToken);
+        await consumerRepository.AddAsync(notification.Id, handlerName, cancellationToken);
     }
 
     protected abstract ValueTask HandleAsync(TNotification notification, CancellationToken cancellationToken);

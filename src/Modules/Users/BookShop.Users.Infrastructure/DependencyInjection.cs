@@ -1,5 +1,4 @@
 ﻿using BookShop.Shared;
-using BookShop.Users.Application;
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
@@ -9,12 +8,9 @@ using BookShop.Users.Infrastructure.Idempotency;
 using BookShop.Users.Infrastructure.IdentityProvider;
 using BookShop.Users.Infrastructure.Outbox;
 using BuildingBlocks.Application.Authorization;
-using BuildingBlocks.Application.CQRS;
-using BuildingBlocks.Infrastructure;
 using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using BuildingBlocks.Infrastructure.Keycloak;
-using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,7 +28,7 @@ public static class DependencyInjection
         IServiceCollection services = builder.Services;
         IConfigurationManager configuration = builder.Configuration;
 
-        services.AddScoped<IIdempotencyDomainEventRepository, IdempotencyDomainEventRepository>();
+        services.AddScoped<IDomainEventConsumerRepository, DomainEventConsumerRepository>();
 
         builder.AddCustomPostgresDbContext<UsersDbContext>(Resources.Postgres, Services.Users);
         services.AddScoped<IUsersDbContext>(provider => provider.GetRequiredService<UsersDbContext>());
@@ -40,7 +36,9 @@ public static class DependencyInjection
 
         services.AddScoped<IPermissionService, PermissionService>();
 
-        AddOutboxProcessor(services, configuration);
+        AddOutboxJob(services, configuration);
+
+        // AddInboxJob(services, configuration);
 
         AddKeycloakIdentityProvider(services);
 
@@ -64,7 +62,7 @@ public static class DependencyInjection
         services.AddTransient<IIdentityProviderService, KeycloakIdentityProviderService>();
     }
 
-    private static void AddOutboxProcessor(IServiceCollection services, IConfiguration configuration)
+    private static void AddOutboxJob(IServiceCollection services, IConfiguration configuration)
     {
         IConfigurationSection section = configuration
             .GetRequiredSection($"Jobs:{OutboxJobOptions.ConfigurationSection}");
@@ -76,12 +74,12 @@ public static class DependencyInjection
             .ValidateOnStart();
 
         services.AddScoped<OutboxProcessor>();
-        services.AddScoped<OutboxJob>();
+        services.AddScoped<OutboxProcessorJob>();
 
         OutboxJobOptions outboxJobOptions = section.Get<OutboxJobOptions>()!;
 
         services
-            .MapTicker<OutboxJob>()
+            .MapTicker<OutboxProcessorJob>()
             .WithMaxConcurrency(1)
             .WithCron(outboxJobOptions.Cron);
     }
