@@ -16,15 +16,14 @@
     </Folder>
     <Folder Name="/Modules/" />
     <Folder Name="/Modules/Cart/">
-        <Project Path="src/Modules/Cart/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
-        <Project Path="src/Modules/Cart/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
-        <Project Path="src/Modules/Cart/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
-        <Project Path="src/Modules/Cart/BookShop.Cart.Presentation/BookShop.Cart.Presentation.csproj" />
+        <Project Path="src/Modules/Cart/BookShop.Cart/BookShop.Cart.csproj" />
     </Folder>
     <Folder Name="/Modules/Cart/Contracts/">
         <Project Path="src/Modules/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
     </Folder>
-    <Folder Name="/Modules/Cart/Tests/" />
+    <Folder Name="/Modules/Cart/Tests/">
+        <Project Path="src/Modules/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
+    </Folder>
     <Folder Name="/Modules/Catalog/">
         <Project Path="src/Modules/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
     </Folder>
