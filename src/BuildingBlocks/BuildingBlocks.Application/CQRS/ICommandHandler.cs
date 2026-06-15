@@ -1,15 +1,15 @@
 ﻿using Ardalis.Result;
-using Mediator;
 
 namespace BuildingBlocks.Application.CQRS;
 
-public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Result>
+public interface ICommandHandler<in TCommand>
     where TCommand : ICommand
 {
+    Task<Result> Handle(TCommand command, CancellationToken cancellationToken = default);
 }
 
 public interface ICommandHandler<in TCommand, TResponse>
-    : IRequestHandler<TCommand, Result<TResponse>>
     where TCommand : ICommand<TResponse>
 {
+    Task<Result<TResponse>> Handle(TCommand command, CancellationToken cancellationToken = default);
 }

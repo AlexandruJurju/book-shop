@@ -10,7 +10,7 @@ public sealed class GetUserQueryHandler(
     IUsersDbContext usersDbContext
 ) : IQueryHandler<GetUserQuery, UserResponse>
 {
-    public async ValueTask<Result<UserResponse>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<UserResponse>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
         UserResponse? user = await usersDbContext.Users
             .Where(user => user.Id == request.UserId)

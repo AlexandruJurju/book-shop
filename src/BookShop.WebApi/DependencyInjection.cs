@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using BookShop.Shared;
-using BuildingBlocks.Application.CQRS.Behaviors;
+﻿using BookShop.Shared;
 using BuildingBlocks.Presentation.OpenApi;
 using BuildingBlocks.Infrastructure.Authentication;
 using BuildingBlocks.Infrastructure.Authorization;
@@ -8,9 +6,7 @@ using BuildingBlocks.Infrastructure.Cache;
 using BuildingBlocks.Infrastructure.Data;
 using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.EventBus;
-using FluentValidation;
 using MassTransit;
-using Mediator;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TickerQ.Dashboard.DependencyInjection;
@@ -23,19 +19,6 @@ internal static class DependencyInjection
     public static void AddPresentation(this IServiceCollection services)
     {
         services.AddCustomOpenApi();
-    }
-
-    public static void AddApplication(this IServiceCollection services, Assembly[] moduleAssemblies)
-    {
-        services.AddMediator((MediatorOptions options) =>
-        {
-            options.ServiceLifetime = ServiceLifetime.Scoped;
-        });
-
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-
-        services.AddValidatorsFromAssemblies(moduleAssemblies, includeInternalTypes: true);
     }
 
     public static void AddInfrastructure(
