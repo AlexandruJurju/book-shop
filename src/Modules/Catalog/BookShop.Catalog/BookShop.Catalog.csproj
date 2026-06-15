@@ -9,7 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Aspire\BookShop.Shared\BookShop.Shared.csproj"/>
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj"/>
-        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.AspNetCore\BuildingBlocks.AspNetCore.csproj"/>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Presentation\BuildingBlocks.Presentation.csproj" />
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj"/>
     </ItemGroup>

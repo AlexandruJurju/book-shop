@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using BookShop.Shared;
 using BuildingBlocks.Application.CQRS.Behaviors;
-using BuildingBlocks.AspNetCore.OpenApi;
+using BuildingBlocks.Presentation.OpenApi;
 using BuildingBlocks.Infrastructure.Authentication;
 using BuildingBlocks.Infrastructure.Authorization;
 using BuildingBlocks.Infrastructure.Cache;

@@ -16,7 +16,7 @@
         <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
         <ProjectReference Include="..\Modules\Cart\BookShop.Cart.Presentation\BookShop.Cart.Presentation.csproj" />
         <ProjectReference Include="..\Modules\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
-        <ProjectReference Include="..\Modules\Users\BookShop.Users.Presentation\BookShop.Users.Presentation.csproj" />
+        <ProjectReference Include="..\Modules\Users\BookShop.Users\BookShop.Users.csproj" />
     </ItemGroup>
 
 </Project>

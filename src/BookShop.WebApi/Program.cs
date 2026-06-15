@@ -2,12 +2,12 @@ using System.Reflection;
 using BookShop.Cart.Presentation;
 using BookShop.Catalog;
 using BookShop.ServiceDefaults;
-using BookShop.Users.Presentation;
+using BookShop.Users;
 using BookShop.WebApi;
 using BookShop.WebApi.Extensions;
-using BuildingBlocks.AspNetCore.Endpoints;
-using BuildingBlocks.AspNetCore.ExceptionHandler;
-using BuildingBlocks.AspNetCore.Scalar;
+using BuildingBlocks.Presentation.Endpoints;
+using BuildingBlocks.Presentation.ExceptionHandler;
+using BuildingBlocks.Presentation.Scalar;
 using TickerQ.DependencyInjection;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -20,7 +20,7 @@ builder.Services.AddProblemDetails();
 
 Assembly[] moduleApplicationAssemblies =
 [
-    BookShop.Users.Application.AssemblyReference.Assembly,
+    BookShop.Users.AssemblyMarker.Assembly,
     BookShop.Cart.Application.AssemblyReference.Assembly
 ];
 

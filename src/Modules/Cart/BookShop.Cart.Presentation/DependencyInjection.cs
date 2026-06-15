@@ -2,7 +2,7 @@
 using BookShop.Cart.Infrastructure;
 using BookShop.Cart.Infrastructure.Inbox;
 using BookShop.Users.IntegrationEvents;
-using BuildingBlocks.AspNetCore.Endpoints;
+using BuildingBlocks.Presentation.Endpoints;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
