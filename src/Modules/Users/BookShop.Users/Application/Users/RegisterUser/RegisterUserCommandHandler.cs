@@ -13,7 +13,7 @@ public sealed class RegisterUserCommandHandler(
     IUsersDbContext usersDbContext,
     IUnitOfWork unitOfWork,
     IIdentityProviderService identityProviderService
-) : ICommandHandler<RegisterUserCommand, Guid>
+) : IRequestHandler<RegisterUserCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {

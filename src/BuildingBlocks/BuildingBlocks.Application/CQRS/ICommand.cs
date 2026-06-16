@@ -1,9 +1,9 @@
 ﻿namespace BuildingBlocks.Application.CQRS;
 
-public interface ICommand
+public interface ICommand : IRequest
 {
 }
 
-public interface ICommand<TResponse> : ICommand
+public interface ICommand<TResponse> : IRequest<TResponse>
 {
 }

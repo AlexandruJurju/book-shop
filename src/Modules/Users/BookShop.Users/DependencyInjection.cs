@@ -25,31 +25,28 @@ namespace BookShop.Users;
 
 public static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddUsersModule(this IHostApplicationBuilder builder)
+    public static void AddUsersModule(this IHostApplicationBuilder builder)
     {
         AddApplication(builder.Services);
 
         AddInfrastructure(builder);
 
         AddPresentation(builder);
-
-        return builder;
     }
 
     private static void AddApplication(IServiceCollection services)
     {
         services.AddDomainEventHandlers();
+
         services.Scan(scan => scan
             .FromAssemblies(AssemblyMarker.Assembly)
-            .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<,>)))
+            .AddClasses(c => c.AssignableTo(typeof(IRequestHandler<,>)))
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
+            .AddClasses(c => c.AssignableTo(typeof(IRequestHandler<>)))
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-            .AsImplementedInterfaces()
-            .WithScopedLifetime());
+        );
     }
 
     private static void AddDomainEventHandlers(this IServiceCollection services)

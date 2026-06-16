@@ -14,7 +14,10 @@ internal sealed class GetUsers : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("users", async ([FromServices] IQueryHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>> handler, CancellationToken cancellationToken) =>
+        app.MapGet("users", async (
+                [FromServices] IRequestHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>> handler,
+                CancellationToken cancellationToken
+            ) =>
             {
                 var query = new GetUsersQuery();
 

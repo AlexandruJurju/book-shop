@@ -10,7 +10,7 @@ using UserResponse = BookShop.Users.Application.Users.GetUser.UserResponse;
 namespace BookShop.Users.Application.Users.RegisterUser;
 
 public sealed class UserRegisteredDomainEventHandler(
-    IQueryHandler<GetUserQuery, UserResponse> getUserHandler,
+    IRequestHandler<GetUserQuery, UserResponse> getUserHandler,
     IEventBus bus
 ) : DomainEventHandler<UserRegisteredDomainEvent>
 {

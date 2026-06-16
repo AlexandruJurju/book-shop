@@ -7,7 +7,7 @@ namespace BookShop.Users.Application.Users.GetUsers;
 
 public sealed class GetUsersQueryHandler(
     IUsersDbContext dbContext
-) : IQueryHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>>
+) : IRequestHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>>
 {
     public async Task<Result<IReadOnlyCollection<UserResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
     {

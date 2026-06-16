@@ -16,7 +16,7 @@ internal sealed class RegisterUser : IEndpoint
     {
         app.MapPost("users/register", async (
                 RegisterUserRequest registerUserRequest,
-                [FromServices] ICommandHandler<RegisterUserCommand> handler,
+                [FromServices] IRequestHandler<RegisterUserCommand> handler,
                 CancellationToken cancellationToken
             ) =>
             {
