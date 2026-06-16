@@ -1,0 +1,25 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "cart-architecture-tests",
+      "group": "pre-push",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--project",
+        "src/Modules/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj"
+      ]
+    },
+    {
+      "name": "users-architecture-tests",
+      "group": "pre-push",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--project",
+        "src/Modules/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj"
+      ]
+    }
+  ]
+}
