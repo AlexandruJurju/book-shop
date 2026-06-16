@@ -11,6 +11,7 @@ using BuildingBlocks.Presentation.Endpoints;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using TickerQ.DependencyInjection;
 
@@ -37,17 +38,31 @@ public static class DependencyInjection
 
     private static void AddApplication(this IServiceCollection services)
     {
-        // Add all Integration Event handlers
-        services.Scan(scan => scan
-            .FromAssemblyOf<UserRegisteredIntegrationEventHandler>()
-            .AddClasses(c => c.AssignableTo(typeof(IIntegrationEventHandler<>)))
-            .AsImplementedInterfaces()
-            .WithScopedLifetime());
+        services.AddIntegrationEventHandlers();
+    }
+    
+    private static void AddIntegrationEventHandlers(this IServiceCollection services)
+    {
+        Type[] integrationEventHandlers = AssemblyMarker.Assembly
+            .GetTypes()
+            .Where(t => t.IsAssignableTo(typeof(IIntegrationEventHandler)) && !t.IsGenericTypeDefinition)
+            .ToArray();
 
-        // Decorate all integration event handlers
-        services.Decorate(
-            typeof(IIntegrationEventHandler<>),
-            typeof(IdempotentIntegrationEventHandler<>));
+        foreach (Type integrationEventHandler in integrationEventHandlers)
+        {
+            services.TryAddScoped(integrationEventHandler);
+
+            Type integrationEvent = integrationEventHandler
+                .GetInterfaces()
+                .Single(i => i.IsGenericType)
+                .GetGenericArguments()
+                .Single();
+
+            Type closedIdempotentHandler =
+                typeof(IdempotentIntegrationEventHandler<>).MakeGenericType(integrationEvent);
+
+            services.Decorate(integrationEventHandler, closedIdempotentHandler);
+        }
     }
 
     private static void AddInfrastructure(this IHostApplicationBuilder builder)

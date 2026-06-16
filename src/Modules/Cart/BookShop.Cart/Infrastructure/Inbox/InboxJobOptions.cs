@@ -2,7 +2,7 @@
 
 namespace BookShop.Cart.Infrastructure.Inbox;
 
-public sealed class InboxJobOptions
+internal sealed class InboxJobOptions
 {
     public const string ConfigurationSection = nameof(InboxJobOptions);
 

@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.Common;
 using System.Text.Json;
 using BookShop.Shared;
-using BookShop.Users.Domain;
 using BuildingBlocks.Application.Data;
 using BuildingBlocks.Infrastructure.Outbox;
 using Dapper;
@@ -21,8 +20,8 @@ public sealed class OutboxProcessor(
     ILogger<OutboxProcessor> logger
 )
 {
-    private static string SchemaName => "users";
-    private static string ServiceName => "users";
+    private static string SchemaName => Services.Users;
+    private static string ServiceName => Services.Users;
 
     public async Task<int> ProcessAsync(CancellationToken cancellationToken = default)
     {
@@ -42,9 +41,8 @@ public sealed class OutboxProcessor(
         }
 
         var updateQueue = new ConcurrentQueue<OutboxUpdate>();
-        var typeCache = new ConcurrentDictionary<string, Type>();
 
-        await PublishMessagesAsync(outboxMessages, typeCache, updateQueue, cancellationToken);
+        await PublishMessagesAsync(outboxMessages, updateQueue, cancellationToken);
 
         await UpdateOutboxMessagesAsync(connection, transaction, updateQueue);
 
@@ -60,7 +58,6 @@ public sealed class OutboxProcessor(
 
     private async Task PublishMessagesAsync(
         IReadOnlyList<OutboxMessageResponse> outboxMessages,
-        ConcurrentDictionary<string, Type> typeCache,
         ConcurrentQueue<OutboxUpdate> updateQueue,
         CancellationToken cancellationToken
     )
@@ -70,7 +67,7 @@ public sealed class OutboxProcessor(
             Exception? exception = null;
             try
             {
-                Type messageType = GetOrAddMessageType(typeCache, outboxMessage.Type);
+                Type messageType = DomainEventTypeCache.GetOrAdd(outboxMessage.Type);
                 object domainEvent = JsonSerializer.Deserialize(outboxMessage.Content, messageType)!;
                 await publisher.Publish(domainEvent, cancellationToken);
             }
@@ -135,11 +132,5 @@ public sealed class OutboxProcessor(
         IEnumerable<OutboxMessageResponse> outboxMessages = await connection.QueryAsync<OutboxMessageResponse>(sql, transaction: transaction);
 
         return outboxMessages.ToList();
-    }
-
-
-    private static Type GetOrAddMessageType(ConcurrentDictionary<string, Type> typeCache, string typeName)
-    {
-        return typeCache.GetOrAdd(typeName, name => AssemblyMarker.Assembly.GetType(name)!);
     }
 }

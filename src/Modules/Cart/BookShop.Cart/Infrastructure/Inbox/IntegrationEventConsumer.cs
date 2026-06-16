@@ -9,7 +9,7 @@ using MassTransit;
 
 namespace BookShop.Cart.Infrastructure.Inbox;
 
-public sealed class IntegrationEventConsumer<TIntegrationEvent>(
+internal sealed class IntegrationEventConsumer<TIntegrationEvent>(
     IDbConnectionFactory dbConnectionFactory
 ) : IConsumer<TIntegrationEvent>
     where TIntegrationEvent : IntegrationEvent

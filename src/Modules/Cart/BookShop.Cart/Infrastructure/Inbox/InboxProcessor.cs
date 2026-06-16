@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
 using System.Data.Common;
-using System.Reflection;
 using System.Text.Json;
 using BookShop.Shared;
 using BuildingBlocks.Application.Data;
@@ -16,7 +15,7 @@ namespace BookShop.Cart.Infrastructure.Inbox;
 
 internal sealed class InboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    IServiceProvider serviceProvider,
+    IServiceScopeFactory serviceScopeFactory,
     IOptions<InboxJobOptions> inboxOptions,
     TimeProvider timeProvider,
     ILogger<InboxProcessor> logger
@@ -43,9 +42,8 @@ internal sealed class InboxProcessor(
         }
 
         var updateQueue = new ConcurrentQueue<InboxUpdate>();
-        var typeCache = new ConcurrentDictionary<string, Type>();
 
-        await PublishMessagesAsync(inboxMessages, typeCache, updateQueue, cancellationToken);
+        await PublishMessagesAsync(inboxMessages, updateQueue, cancellationToken);
 
         await UpdateInboxMessagesAsync(connection, transaction, updateQueue);
 
@@ -84,7 +82,6 @@ internal sealed class InboxProcessor(
 
     private async Task PublishMessagesAsync(
         IReadOnlyList<InboxMessageResponse> inboxMessages,
-        ConcurrentDictionary<string, Type> typeCache,
         ConcurrentQueue<InboxUpdate> updateQueue,
         CancellationToken cancellationToken)
     {
@@ -93,23 +90,20 @@ internal sealed class InboxProcessor(
             Exception? exception = null;
             try
             {
-                Type eventType = GetOrAddMessageType(typeCache, inboxMessage.Type);
+                Type eventType = IntegrationEventTypeCache.GetOrAdd(inboxMessage.Type);
 
-                var domainEvent =
-                    (IIntegrationEvent)JsonSerializer.Deserialize(inboxMessage.Content, eventType)!;
+                var integrationEvent = (IIntegrationEvent)JsonSerializer.Deserialize(inboxMessage.Content, eventType)!;
 
-                // Resolve all handlers registered for this specific event type:
-                // IIntegrationEventHandler<TIntegrationEvent>
-                Type handlerType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
-                Type enumerableType = typeof(IEnumerable<>).MakeGenericType(handlerType);
+                using IServiceScope scope = serviceScopeFactory.CreateScope();
 
-                IEnumerable<IIntegrationEventHandler> handlers =
-                    ((IEnumerable<object>)serviceProvider.GetRequiredService(enumerableType))
-                    .Cast<IIntegrationEventHandler>();
+                IEnumerable<IIntegrationEventHandler> handlers = IntegrationEventHandlersFactory.GetHandlers(
+                    integrationEvent.GetType(),
+                    scope.ServiceProvider,
+                    AssemblyMarker.Assembly);
 
                 foreach (IIntegrationEventHandler handler in handlers)
                 {
-                    await handler.Handle(domainEvent, cancellationToken);
+                    await handler.Handle(integrationEvent, cancellationToken);
                 }
             }
             catch (Exception ex)
@@ -153,26 +147,5 @@ internal sealed class InboxProcessor(
         };
 
         await connection.ExecuteAsync(updateSql, parameters, transaction);
-    }
-
-    private static Type GetOrAddMessageType(ConcurrentDictionary<string, Type> typeCache, string typeName)
-    {
-        return typeCache.GetOrAdd(typeName, static name =>
-        {
-            // Search all loaded assemblies for a type matching the full name
-            // that implements IIntegrationEvent — avoids blind AppDomain scanning
-            Type? type = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .SelectMany(a =>
-                {
-                    try { return a.GetTypes(); }
-                    catch (ReflectionTypeLoadException ex) { return ex.Types.Where(t => t is not null)!; }
-                })
-                .FirstOrDefault(t => t != null && t.FullName == name && typeof(IIntegrationEvent).IsAssignableFrom(t));
-
-            return type ?? throw new InvalidOperationException(
-                $"Could not resolve integration event type '{name}'" +
-                $"Ensure the assembly containing this type is loaded");
-        });
     }
 }
