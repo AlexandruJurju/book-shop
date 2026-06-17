@@ -20,6 +20,7 @@
     </Folder>
     <Folder Name="/Modules/Cart/Contracts/">
         <Project Path="src/Modules/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
+        <Project Path="src/Modules/Cart/BookShop.Cart.PublicApi/BookShop.Cart.PublicApi.csproj" />
     </Folder>
     <Folder Name="/Modules/Cart/Tests/">
         <Project Path="src/Modules/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
@@ -39,6 +40,7 @@
         <Project Path="src/Modules/Users/BookShop.Users/BookShop.Users.csproj" />
     </Folder>
     <Folder Name="/Modules/Users/Contracts/">
+        <Project Path="src/Modules/Users/BookShop.Users.PublicApi/BookShop.Users.PublicApi.csproj" />
         <Project Path="src/Modules/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
     </Folder>
     <Folder Name="/Modules/Users/Tests/">
@@ -49,5 +51,4 @@
         <File Path="Directory.Build.props" />
         <File Path="Directory.Packages.props" />
     </Folder>
-    <Folder Name="/Tests/" />
 </Solution>
