@@ -1,54 +1,54 @@
 <Solution>
     <Folder Name="/Aspire/">
-        <Project Path="src/Aspire/BookShop.Shared/BookShop.Shared.csproj" />
-        <Project Path="src/Aspire/BookShop.AppHost/BookShop.AppHost.csproj" />
-        <Project Path="src/Aspire/BookShop.ServiceDefaults/BookShop.ServiceDefaults.csproj" />
+        <Project Path="src/Aspire/BookShop.Shared/BookShop.Shared.csproj"/>
+        <Project Path="src/Aspire/BookShop.AppHost/BookShop.AppHost.csproj"/>
+        <Project Path="src/Aspire/BookShop.ServiceDefaults/BookShop.ServiceDefaults.csproj"/>
     </Folder>
     <Folder Name="/BuildingBlocks/">
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Presentation/BuildingBlocks.Presentation.csproj" />
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj"/>
+        <Project Path="src/BuildingBlocks/BuildingBlocks.Presentation/BuildingBlocks.Presentation.csproj"/>
     </Folder>
     <Folder Name="/Host/">
-        <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
+        <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj"/>
     </Folder>
-    <Folder Name="/Modules/" />
-    <Folder Name="/Modules/Cart/">
-        <Project Path="src/Modules/Cart/BookShop.Cart/BookShop.Cart.csproj" />
+    <Folder Name="/Services/"/>
+    <Folder Name="/Services/Cart/">
+        <Project Path="src/Services/Cart/BookShop.Cart/BookShop.Cart.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Cart/Contracts/">
-        <Project Path="src/Modules/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
-        <Project Path="src/Modules/Cart/BookShop.Cart.PublicApi/BookShop.Cart.PublicApi.csproj" />
+    <Folder Name="/Services/Cart/Contracts/">
+        <Project Path="src/Services/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj"/>
+        <Project Path="src/Services/Cart/BookShop.Cart.PublicApi/BookShop.Cart.PublicApi.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Cart/Tests/">
-        <Project Path="src/Modules/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
+    <Folder Name="/Services/Cart/Tests/">
+        <Project Path="src/Services/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Catalog/">
-        <Project Path="src/Modules/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
+    <Folder Name="/Services/Catalog/">
+        <Project Path="src/Services/Catalog/BookShop.Catalog/BookShop.Catalog.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Inventory/" />
-    <Folder Name="/Modules/Notification/" />
-    <Folder Name="/Modules/Orders/" />
-    <Folder Name="/Modules/Payment/" />
-    <Folder Name="/Modules/Pricing/" />
-    <Folder Name="/Modules/Recommendations/" />
-    <Folder Name="/Modules/Reporting/" />
-    <Folder Name="/Modules/Reviews/" />
-    <Folder Name="/Modules/Users/">
-        <Project Path="src/Modules/Users/BookShop.Users/BookShop.Users.csproj" />
+    <Folder Name="/Services/Inventory/"/>
+    <Folder Name="/Services/Notification/"/>
+    <Folder Name="/Services/Orders/"/>
+    <Folder Name="/Services/Payment/"/>
+    <Folder Name="/Services/Pricing/"/>
+    <Folder Name="/Services/Recommendations/"/>
+    <Folder Name="/Services/Reporting/"/>
+    <Folder Name="/Services/Reviews/"/>
+    <Folder Name="/Services/Users/">
+        <Project Path="src/Services/Users/BookShop.Users/BookShop.Users.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Users/Contracts/">
-        <Project Path="src/Modules/Users/BookShop.Users.PublicApi/BookShop.Users.PublicApi.csproj" />
-        <Project Path="src/Modules/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
+    <Folder Name="/Services/Users/Contracts/">
+        <Project Path="src/Services/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj"/>
+        <Project Path="src/Services/Users/BookShop.Users.PublicApi/BookShop.Users.PublicApi.csproj"/>
     </Folder>
-    <Folder Name="/Modules/Users/Tests/">
-        <Project Path="src/Modules/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj" />
+    <Folder Name="/Services/Users/Tests/">
+        <Project Path="src/Services/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj"/>
     </Folder>
     <Folder Name="/Solution Items/">
-        <File Path=".editorconfig" />
-        <File Path="Directory.Build.props" />
-        <File Path="Directory.Packages.props" />
+        <File Path=".editorconfig"/>
+        <File Path="Directory.Build.props"/>
+        <File Path="Directory.Packages.props"/>
     </Folder>
 </Solution>

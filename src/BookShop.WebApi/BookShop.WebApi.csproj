@@ -14,9 +14,9 @@
     <ItemGroup>
         <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj" />
         <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
-        <ProjectReference Include="..\Modules\Cart\BookShop.Cart\BookShop.Cart.csproj" />
-        <ProjectReference Include="..\Modules\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
-        <ProjectReference Include="..\Modules\Users\BookShop.Users\BookShop.Users.csproj" />
+        <ProjectReference Include="..\Services\Cart\BookShop.Cart\BookShop.Cart.csproj" />
+        <ProjectReference Include="..\Services\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
+        <ProjectReference Include="..\Services\Users\BookShop.Users\BookShop.Users.csproj" />
     </ItemGroup>
 
 </Project>
