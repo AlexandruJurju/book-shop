@@ -13,7 +13,7 @@ internal sealed class LayerTests : ArchUnitBaseTest
     private const string InfrastructureNamespace = $"{nameof(BookShop)}.{nameof(Users)}.{nameof(Infrastructure)}.*";
 
     [Test]
-    public void DomainLayer_ShouldRespectCleanArchitectureDependencies()
+    public void Domain_Layer_Has_No_Dependencies_On_Other_Layers()
     {
         IArchRule rule = Types().That().ResideInNamespaceMatching(DomainNamespace)
             .Should().NotDependOnAny(
@@ -22,13 +22,13 @@ internal sealed class LayerTests : ArchUnitBaseTest
                     .Or().ResideInNamespaceMatching(PresentationNamespace)
                     .Or().ResideInNamespaceMatching(ApplicationNamespace)
             )
-            .Because("The Domain layer must not depend on outer layers");
+            .Because("Domain layer must not depend on outer layers");
 
         rule.Check(Architecture);
     }
 
     [Test]
-    public void ApplicationLayer_ShouldRespectCleanArchitectureDependencies()
+    public void Application_Layer_Depends_Only_On_Domain()
     {
         IArchRule rule = Types().That().ResideInNamespaceMatching(ApplicationNamespace)
             .Should().NotDependOnAny(
@@ -36,20 +36,20 @@ internal sealed class LayerTests : ArchUnitBaseTest
                     .That().ResideInNamespaceMatching(InfrastructureNamespace)
                     .Or().ResideInNamespaceMatching(PresentationNamespace)
             )
-            .Because("The Domain layer must not depend on outer layers");
+            .Because("Application layer must depend only on domain");
 
         rule.Check(Architecture);
     }
     
     [Test]
-    public void InfrastructureLayer_ShouldRespectCleanArchitectureDependencies()
+    public void Infrastructure_Layer_Does_Not_Depend_On_Presentation()
     {
         IArchRule rule = Types().That().ResideInNamespaceMatching(InfrastructureNamespace)
             .Should().NotDependOnAny(
                 Types()
                     .That().ResideInNamespaceMatching(PresentationNamespace)
             )
-            .Because("The Domain layer must not depend on outer layers");
+            .Because("Infrastructure must not depend on Presentation");
 
         rule.Check(Architecture);
     }

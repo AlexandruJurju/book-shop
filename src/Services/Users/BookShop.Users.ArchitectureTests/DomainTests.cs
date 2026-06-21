@@ -9,7 +9,7 @@ internal sealed class DomainTests : ArchUnitBaseTest
     private const string DomainNamespace = $"{nameof(BookShop)}.{nameof(Users)}.{nameof(Domain)}";
 
     [Test]
-    public void Domain_CheckingClasses_ShouldBeSealed()
+    public void Domain_Classes_Are_Sealed()
     {
         Classes()
             .That()
@@ -23,7 +23,7 @@ internal sealed class DomainTests : ArchUnitBaseTest
     }
 
     [Test]
-    public void Domain_CheckingClasses_ShouldBePublic()
+    public void Domain_Classes_Are_Public()
     {
         Classes()
             .That()
