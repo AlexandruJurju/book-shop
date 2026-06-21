@@ -10,12 +10,10 @@ internal sealed class CreateCategoryEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("cart", Handle)
+        app.MapPost("cart", async (CancellationToken cancellationToken) =>
+            {
+                return Results.Ok();
+            })
             .WithTags(Tags.Cart);
-    }
-
-    private static async Task<IResult> Handle()
-    {
-        return Results.Ok();
     }
 }

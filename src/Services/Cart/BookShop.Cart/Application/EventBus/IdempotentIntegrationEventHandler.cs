@@ -12,13 +12,13 @@ internal sealed class IdempotentIntegrationEventHandler<TIntegrationEvent>(
     {
         string consumerName = decorated.GetType().Name;
 
-        if (await consumerRepository.InboxConsumerExistsAsync(integrationEvent.Id, consumerName))
+        if (await consumerRepository.ExistsAsync(integrationEvent.Id, consumerName))
         {
             return;
         }
 
         await decorated.Handle(integrationEvent, cancellationToken);
 
-        await consumerRepository.InsertConsumerAsync(integrationEvent.Id, consumerName);
+        await consumerRepository.AddAsync(integrationEvent.Id, consumerName);
     }
 }

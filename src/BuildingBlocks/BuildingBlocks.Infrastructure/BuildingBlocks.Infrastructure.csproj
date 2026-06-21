@@ -17,9 +17,12 @@
         <PackageReference Include="MassTransit.RabbitMQ" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
         <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
         <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+        <PackageReference Include="Testcontainers.Keycloak" />
+        <PackageReference Include="Testcontainers.PostgreSql" />
         <PackageReference Include="TickerQ" />
         <PackageReference Include="TickerQ.Dashboard" />
     </ItemGroup>

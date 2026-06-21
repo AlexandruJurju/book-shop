@@ -1,21 +1,47 @@
-﻿using BookShop.Users.Application.Abstractions.Idempotency;
-using BookShop.Users.Infrastructure.EntityFramework;
+﻿using System.Data.Common;
+using BookShop.Shared;
+using BookShop.Users.Application.Abstractions.Idempotency;
+using BuildingBlocks.Application.Data;
 using BuildingBlocks.Infrastructure.Outbox;
-using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace BookShop.Users.Infrastructure.Idempotency;
 
 internal sealed class DomainEventConsumerRepository(
-    UsersDbContext dbContext
+    IDbConnectionFactory dbConnectionFactory
 ) : IDomainEventConsumerRepository
 {
-    public Task<bool> ExistsAsync(Guid outboxMessageId, string handlerName, CancellationToken cancellationToken)
-        => dbContext.Set<OutboxMessageConsumer>()
-            .AnyAsync(e => e.OutboxMessageId == outboxMessageId && e.Name == handlerName, cancellationToken);
-
-    public async Task AddAsync(Guid outboxMessageId, string handlerName, CancellationToken cancellationToken)
+    public async Task<bool> ExistsAsync(Guid id, string consumerName, CancellationToken cancellationToken)
     {
-        dbContext.Set<OutboxMessageConsumer>().Add(new OutboxMessageConsumer(outboxMessageId, handlerName));
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await using DbConnection dbConnection = await dbConnectionFactory.OpenConnectionAsync();
+
+        const string sql =
+            $"""
+             SELECT EXISTS(
+                 SELECT 1
+                 FROM {Services.Users}.outbox_message_consumers
+                 WHERE outbox_message_id = @OutboxMessageId AND
+                       name = @Name
+             )
+             """;
+
+        var consumer = new OutboxMessageConsumer(id, consumerName);
+
+        return await dbConnection.ExecuteScalarAsync<bool>(sql, consumer);
+    }
+
+    public async Task AddAsync(Guid id, string consumerName, CancellationToken cancellationToken)
+    {
+        await using DbConnection dbConnection = await dbConnectionFactory.OpenConnectionAsync();
+
+        const string sql =
+            $"""
+             INSERT INTO {Services.Users}.outbox_message_consumers(outbox_message_id, name)
+             VALUES (@InboxMessageId, @Name)
+             """;
+
+        var inboxMessageConsumer = new OutboxMessageConsumer(id, consumerName);
+
+        await dbConnection.ExecuteAsync(sql, inboxMessageConsumer);
     }
 }

@@ -2,6 +2,6 @@
 
 public interface IIntegrationEventConsumerRepository
 {
-    Task<bool> InboxConsumerExistsAsync(Guid id, string name);
-    Task InsertConsumerAsync(Guid id, string name);
+    Task<bool> ExistsAsync(Guid id, string consumerName);
+    Task AddAsync(Guid id, string consumerName);
 }

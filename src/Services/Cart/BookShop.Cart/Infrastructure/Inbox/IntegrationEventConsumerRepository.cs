@@ -11,7 +11,7 @@ internal sealed class IntegrationEventConsumerRepository(
     IDbConnectionFactory dbConnectionFactory
 ) : IIntegrationEventConsumerRepository
 {
-    public async Task<bool> InboxConsumerExistsAsync(Guid id, string name)
+    public async Task<bool> ExistsAsync(Guid id, string consumerName)
     {
         await using DbConnection dbConnection = await dbConnectionFactory.OpenConnectionAsync();
 
@@ -25,12 +25,12 @@ internal sealed class IntegrationEventConsumerRepository(
              )
              """;
 
-        var inboxMessageConsumer = new InboxMessageConsumer(id, name);
+        var inboxMessageConsumer = new InboxMessageConsumer(id, consumerName);
 
         return await dbConnection.ExecuteScalarAsync<bool>(sql, inboxMessageConsumer);
     }
 
-    public async Task InsertConsumerAsync(Guid id, string name)
+    public async Task AddAsync(Guid id, string consumerName)
     {
         await using DbConnection dbConnection = await dbConnectionFactory.OpenConnectionAsync();
 
@@ -40,7 +40,7 @@ internal sealed class IntegrationEventConsumerRepository(
              VALUES (@InboxMessageId, @Name)
              """;
 
-        var inboxMessageConsumer = new InboxMessageConsumer(id, name);
+        var inboxMessageConsumer = new InboxMessageConsumer(id, consumerName);
 
         await dbConnection.ExecuteAsync(sql, inboxMessageConsumer);
     }

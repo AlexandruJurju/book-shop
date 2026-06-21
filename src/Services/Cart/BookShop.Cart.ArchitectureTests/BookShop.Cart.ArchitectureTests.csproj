@@ -12,4 +12,7 @@
         <ProjectReference Include="..\BookShop.Cart\BookShop.Cart.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage"/>
+    </ItemGroup>
 </Project>

@@ -16,13 +16,10 @@
     </Folder>
     <Folder Name="/Services/" />
     <Folder Name="/Services/Cart/">
-        <Project Path="src/Services/Cart/BookShop.Cart/BookShop.Cart.csproj" />
-    </Folder>
-    <Folder Name="/Services/Cart/Contracts/">
-        <Project Path="src/Services/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
-    </Folder>
-    <Folder Name="/Services/Cart/Tests/">
         <Project Path="src/Services/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart.IntegrationTests/BookShop.Cart.IntegrationTests.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart/BookShop.Cart.csproj" />
     </Folder>
     <Folder Name="/Services/Catalog/">
         <Project Path="src/Services/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
@@ -36,13 +33,11 @@
     <Folder Name="/Services/Reporting/" />
     <Folder Name="/Services/Reviews/" />
     <Folder Name="/Services/Users/">
-        <Project Path="src/Services/Users/BookShop.Users/BookShop.Users.csproj" />
-    </Folder>
-    <Folder Name="/Services/Users/Contracts/">
-        <Project Path="src/Services/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
-    </Folder>
-    <Folder Name="/Services/Users/Tests/">
         <Project Path="src/Services/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.IntegrationTests/BookShop.Users.IntegrationTests.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.UnitTests/BookShop.Users.UnitTests.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users/BookShop.Users.csproj" />
     </Folder>
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig" />

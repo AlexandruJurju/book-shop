@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TngTech.ArchUnitNET.TUnit"/>
         <PackageReference Include="TUnit"/>
+        <PackageReference Include="TUnit.Assertions.Should"/>
+        <PackageReference Include="TUnit.Mocks"/>
+        <PackageReference Include="TUnit.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BookShop.Users\BookShop.Users.csproj"/>
+        <ProjectReference Include="..\..\..\BookShop.WebApi\BookShop.WebApi.csproj"/>
     </ItemGroup>
-
+    
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage"/>
     </ItemGroup>

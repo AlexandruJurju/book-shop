@@ -8,7 +8,7 @@
       "args": [
         "test",
         "--project",
-        "src/Modules/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj"
+        "src/Services/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj"
       ]
     },
     {
@@ -18,7 +18,7 @@
       "args": [
         "test",
         "--project",
-        "src/Modules/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj"
+        "src/Services/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj"
       ]
     }
   ]
