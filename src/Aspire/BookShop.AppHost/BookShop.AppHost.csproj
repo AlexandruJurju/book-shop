@@ -12,12 +12,9 @@
 
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" />
-        <PackageReference Include="Aspire.Hosting.Azure.Storage" />
-        <PackageReference Include="Aspire.Hosting.Elasticsearch" />
         <PackageReference Include="Aspire.Hosting.JavaScript" />
         <PackageReference Include="Aspire.Hosting.MongoDB" />
         <PackageReference Include="Aspire.Hosting.PostgreSQL" />
-        <PackageReference Include="Aspire.Hosting.Yarp" />
         <PackageReference Include="Aspire.Hosting.Keycloak" />
         <PackageReference Include="CommunityToolkit.Aspire.Hosting.MailPit" />
         <PackageReference Include="MessagePack" />
