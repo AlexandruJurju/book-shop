@@ -2,7 +2,6 @@
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
-using BookShop.Users.Domain.Users.Events;
 using BookShop.Users.Infrastructure.Authorization;
 using BookShop.Users.Infrastructure.EntityFramework;
 using BookShop.Users.Infrastructure.Idempotency;
@@ -32,9 +31,7 @@ public static class DependencyInjection
         services.AddScoped<IUsersDbContext>(provider => provider.GetRequiredService<UsersDbContext>());
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
 
-        services.Decorate(typeof(IDomainEventHandler<>), typeof(IdempotentDomainEventHandler<>));
         services.AddScoped<IDomainEventConsumerRepository, DomainEventConsumerRepository>();
-        services.AddScoped<DomainEventsDispatcher>();
         AddOutboxJob(services, configuration);
 
         services.AddScoped<IPermissionService, PermissionService>();

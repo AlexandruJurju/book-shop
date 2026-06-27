@@ -2,13 +2,11 @@
 using System.Data;
 using System.Data.Common;
 using System.Text.Json;
-using BookShop.Cart.Application;
 using BookShop.Shared;
 using BuildingBlocks.Application.Data;
 using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.Infrastructure.Inbox;
 using Dapper;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -16,7 +14,7 @@ namespace BookShop.Cart.Infrastructure.Inbox;
 
 internal sealed class InboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    IntegrationEventsDispatcher integrationEventsDispatcher,
+    IIntegrationEventsDispatcher integrationEventsDispatcher,
     IOptions<InboxJobOptions> inboxOptions,
     TimeProvider timeProvider,
     ILogger<InboxProcessor> logger

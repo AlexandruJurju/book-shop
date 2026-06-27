@@ -6,6 +6,8 @@ using BuildingBlocks.Infrastructure.Cache;
 using BuildingBlocks.Infrastructure.Data;
 using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.EventBus;
+using BuildingBlocks.Infrastructure.Inbox;
+using BuildingBlocks.Infrastructure.Outbox;
 using MassTransit;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -28,6 +30,9 @@ internal static class DependencyInjection
     {
         IServiceCollection services = builder.Services;
         IConfiguration configuration = builder.Configuration;
+        
+        builder.Services.AddTransient<IDomainEventsDispatcher, DomainEventsDispatcher>();
+        builder.Services.AddTransient<IIntegrationEventsDispatcher, IntegrationEventsDispatcher>();
 
         services.AddCustomAuthentication();
 

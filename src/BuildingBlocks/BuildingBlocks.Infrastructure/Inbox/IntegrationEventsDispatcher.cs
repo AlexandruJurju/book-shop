@@ -2,11 +2,11 @@
 using BuildingBlocks.Application.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookShop.Cart.Infrastructure.Inbox;
+namespace BuildingBlocks.Infrastructure.Inbox;
 
-internal sealed class IntegrationEventsDispatcher(
+public sealed class IntegrationEventsDispatcher(
     IServiceProvider serviceProvider
-) 
+) : IIntegrationEventsDispatcher
 {
     private static readonly ConcurrentDictionary<Type, Type> HandlerTypeDictionary = new();
     private static readonly ConcurrentDictionary<Type, Type> WrapperTypeDictionary = new();

@@ -3,11 +3,11 @@ using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookShop.Users.Infrastructure.Outbox;
+namespace BuildingBlocks.Infrastructure.Outbox;
 
-internal sealed class DomainEventsDispatcher(
+public sealed class DomainEventsDispatcher(
     IServiceProvider serviceProvider
-)
+) : IDomainEventsDispatcher
 {
     private static readonly ConcurrentDictionary<Type, Type> HandlerTypeDictionary = new();
     private static readonly ConcurrentDictionary<Type, Type> WrapperTypeDictionary = new();

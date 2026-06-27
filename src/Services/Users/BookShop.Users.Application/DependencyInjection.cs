@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Application.CQRS;
+﻿using BookShop.Users.Application.Abstractions.Idempotency;
+using BuildingBlocks.Application.CQRS;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -25,6 +26,9 @@ public static class DependencyInjection
             .AddClasses(classes => classes.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
             .AsImplementedInterfaces()
             .WithScopedLifetime());
+        
+        
+        services.Decorate(typeof(IDomainEventHandler<>), typeof(IdempotentDomainEventHandler<>));
 
         return builder;
     }

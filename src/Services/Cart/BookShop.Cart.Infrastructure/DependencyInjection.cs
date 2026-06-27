@@ -25,8 +25,6 @@ public static class DependencyInjection
         services.AddScoped<ICartDbContext>(provider => provider.GetRequiredService<CartDbContext>());
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CartDbContext>());
 
-        services.Decorate(typeof(IIntegrationEventHandler<>), typeof(IdempotentIntegrationEventHandler<>));
-        services.AddScoped<IntegrationEventsDispatcher>();
         services.AddScoped<IIntegrationEventConsumerRepository, IntegrationEventConsumerRepository>();
         AddInboxJob(services, configuration);
     }

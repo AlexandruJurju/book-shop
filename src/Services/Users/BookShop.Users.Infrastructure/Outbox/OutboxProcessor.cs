@@ -15,7 +15,7 @@ namespace BookShop.Users.Infrastructure.Outbox;
 
 internal sealed class OutboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    DomainEventsDispatcher domainEventsDispatcher,
+    IDomainEventsDispatcher domainEventsDispatcher,
     IOptions<OutboxJobOptions> outboxOptions,
     TimeProvider timeProvider,
     ILogger<OutboxProcessor> logger
