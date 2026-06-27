@@ -21,7 +21,6 @@ internal sealed class IntegrationEventsDispatcher(
 
             Type integrationEventType = integrationEvent.GetType();
 
-            // todo: BREAKS, integration handlers registered as concrete types
             Type handlerType = HandlerTypeDictionary.GetOrAdd(
                 integrationEventType,
                 et => typeof(IIntegrationEventHandler<>).MakeGenericType(et));
@@ -63,7 +62,7 @@ internal sealed class IntegrationEventsDispatcher(
             IIntegrationEvent integrationEvent,
             CancellationToken cancellationToken)
         {
-            await _handler.Handle((T)integrationEvent, cancellationToken);
+            await _handler.HandleAsync((T)integrationEvent, cancellationToken);
         }
     }
 }

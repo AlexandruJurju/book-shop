@@ -3,9 +3,9 @@ using BuildingBlocks.Application.EventBus;
 
 namespace BookShop.Cart.Application.IntegrationEvents;
 
-public sealed class UserRegisteredIntegrationEventHandler : IntegrationEventHandler<UserRegisteredIntegrationEvent>
+public sealed class UserRegisteredIntegrationEventHandler : IIntegrationEventHandler<UserRegisteredIntegrationEvent>
 {
-    public override async Task Handle(UserRegisteredIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(UserRegisteredIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
     {
         Console.WriteLine(67);
     }

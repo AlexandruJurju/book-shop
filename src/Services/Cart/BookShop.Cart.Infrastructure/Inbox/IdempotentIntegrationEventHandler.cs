@@ -6,10 +6,10 @@ namespace BookShop.Cart.Infrastructure.Inbox;
 internal sealed class IdempotentIntegrationEventHandler<TIntegrationEvent>(
     IIntegrationEventHandler<TIntegrationEvent> decorated,
     IIntegrationEventConsumerRepository consumerRepository
-) : IntegrationEventHandler<TIntegrationEvent>
+) : IIntegrationEventHandler<TIntegrationEvent>
     where TIntegrationEvent : IIntegrationEvent
 {
-    public override async Task Handle(TIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(TIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
     {
         string consumerName = decorated.GetType().Name;
 
@@ -18,7 +18,7 @@ internal sealed class IdempotentIntegrationEventHandler<TIntegrationEvent>(
             return;
         }
 
-        await decorated.Handle(integrationEvent, cancellationToken);
+        await decorated.HandleAsync(integrationEvent, cancellationToken);
 
         await consumerRepository.AddAsync(integrationEvent.Id, consumerName);
     }
