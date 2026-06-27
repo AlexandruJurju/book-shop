@@ -4,7 +4,7 @@
 
 #pragma warning disable IDE0161
 #pragma warning disable CA1861
-namespace BookShop.Cart.Infrastructure.EntityFramework.Migrations
+namespace BookShop.Cart.Presentation.Infrastructure.EntityFramework.Migrations
 {
     /// <inheritdoc />
     public partial class AddInboxMessageIndex : Migration

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Text.Json;
+using BookShop.Cart.Application;
 using BookShop.Shared;
 using BuildingBlocks.Application.Data;
 using BuildingBlocks.Application.EventBus;

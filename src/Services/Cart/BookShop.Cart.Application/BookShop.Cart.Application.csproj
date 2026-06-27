@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+      <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj" />
+      <ProjectReference Include="..\BookShop.Cart.Domain\BookShop.Cart.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Presentation\BuildingBlocks.Presentation.csproj"/>
+        <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj"/>
+        <ProjectReference Include="..\BookShop.Cart.Application\BookShop.Cart.Application.csproj"/>
+        <ProjectReference Include="..\BookShop.Cart.Infrastructure\BookShop.Cart.Infrastructure.csproj"/>
+    </ItemGroup>
+
+</Project>

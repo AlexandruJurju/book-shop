@@ -8,13 +8,13 @@ internal abstract class ArchUnitBaseTest : BaseTest
 {
     protected static readonly Architecture Architecture = new ArchLoader()
         .LoadAssembly(
-            UsersAssembly
+            Presentation
         )
         .Build();
 
     protected static readonly IObjectProvider<IType> UserServiceTypes = ArchRuleDefinition
         .Types()
         .That()
-        .ResideInAssembly(UsersAssembly)
-        .As(nameof(UsersAssembly));
+        .ResideInAssembly(Presentation)
+        .As(nameof(Presentation));
 }

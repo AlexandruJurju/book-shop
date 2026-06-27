@@ -1,4 +1,5 @@
 ﻿using BookShop.Cart.Infrastructure.EntityFramework;
+using BookShop.Cart.Presentation.Infrastructure.EntityFramework;
 using BookShop.Catalog.Infrastructure.EntityFramework;
 using BookShop.Users.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
