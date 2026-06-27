@@ -7,14 +7,11 @@ namespace BookShop.Users.ArchitectureTests.Abstractions;
 internal abstract class ArchUnitBaseTest : BaseTest
 {
     protected static readonly Architecture Architecture = new ArchLoader()
-        .LoadAssembly(
-            UsersAssembly
+        .LoadAssemblies(
+            DomainAssembly,
+            ApplicationAssembly,
+            InfrastructureAssembly,
+            PresentationAssembly
         )
         .Build();
-
-    protected static readonly IObjectProvider<IType> UserServiceTypes = ArchRuleDefinition
-        .Types()
-        .That()
-        .ResideInAssembly(UsersAssembly)
-        .As(nameof(UsersAssembly));
 }

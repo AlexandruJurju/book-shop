@@ -2,7 +2,7 @@ using System.Reflection;
 using BookShop.Cart;
 using BookShop.Catalog;
 using BookShop.ServiceDefaults;
-using BookShop.Users;
+using BookShop.Users.Presentation;
 using BookShop.WebApi;
 using BookShop.WebApi.Extensions;
 using BuildingBlocks.Presentation.Endpoints;

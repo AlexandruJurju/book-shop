@@ -35,8 +35,11 @@
     <Folder Name="/Services/Reporting/" />
     <Folder Name="/Services/Reviews/" />
     <Folder Name="/Services/Users/">
+        <Project Path="src/Services/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
         <Project Path="src/Services/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
-        <Project Path="src/Services/Users/BookShop.Users/BookShop.Users.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Presentation/BookShop.Users.Presentation.csproj" />
     </Folder>
     <Folder Name="/Services/Users/Tests/">
         <Project Path="src/Services/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj" />

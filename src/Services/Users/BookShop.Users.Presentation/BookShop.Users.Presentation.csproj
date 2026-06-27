@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Presentation\BuildingBlocks.Presentation.csproj"/>
+        <ProjectReference Include="..\BookShop.Users.Infrastructure\BookShop.Users.Infrastructure.csproj"/>
+    </ItemGroup>
+</Project>
