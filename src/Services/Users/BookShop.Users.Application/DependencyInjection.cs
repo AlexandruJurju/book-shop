@@ -1,5 +1,4 @@
-﻿using BookShop.Users.Application.Abstractions.CQRS;
-using BuildingBlocks.Application.CQRS;
+﻿using BuildingBlocks.Application.CQRS;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,13 +16,6 @@ public static class DependencyInjection
             .AsImplementedInterfaces()
             .WithScopedLifetime()
             .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
-            .AsImplementedInterfaces()
-            .WithScopedLifetime());
-
-        builder.Services.AddTransient<IDomainEventsDispatcher, DomainEventsDispatcher>();
-
-        builder.Services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
-            .AddClasses(classes => classes.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 

@@ -2,14 +2,15 @@
 using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Domain;
 
-namespace BookShop.Users.Application;
+namespace BookShop.Users.Infrastructure.Outbox;
 
-public abstract class IdempotentDomainEventHandler<TNotification>(
+public abstract class IdempotentDomainEventHandler<TDomainEvent>(
+    IDomainEventHandler<TDomainEvent> decorated,
     IDomainEventConsumerRepository consumerRepository
-) : IDomainEventHandler<TNotification>
-    where TNotification : IDomainEvent
+) : DomainEventHandler<TDomainEvent>
+    where TDomainEvent : IDomainEvent
 {
-    public async Task Handle(TNotification notification, CancellationToken cancellationToken)
+    public override async Task HandleAsync(TDomainEvent notification, CancellationToken cancellationToken = default)
     {
         string handlerName = GetType().Name;
 
@@ -18,10 +19,8 @@ public abstract class IdempotentDomainEventHandler<TNotification>(
             return;
         }
 
-        await HandleAsync(notification, cancellationToken);
+        await decorated.HandleAsync(notification, cancellationToken);
 
         await consumerRepository.AddAsync(notification.Id, handlerName, cancellationToken);
     }
-
-    protected abstract Task HandleAsync(TNotification notification, CancellationToken cancellationToken);
 }

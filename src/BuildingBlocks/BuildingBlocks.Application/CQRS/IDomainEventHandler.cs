@@ -2,7 +2,13 @@
 
 namespace BuildingBlocks.Application.CQRS;
 
-public interface IDomainEventHandler<in T> where T : IDomainEvent
+public interface IDomainEventHandler<in TDomainEvent> : IDomainEventHandler
+    where TDomainEvent : IDomainEvent
 {
-    Task Handle(T domainEvent, CancellationToken cancellationToken = default);
+    Task HandleAsync(TDomainEvent domainEvent, CancellationToken cancellationToken = default);
+}
+
+public interface IDomainEventHandler
+{
+    Task Handle(IDomainEvent domainEvent, CancellationToken cancellationToken = default);
 }

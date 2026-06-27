@@ -1,5 +1,4 @@
 ﻿using Ardalis.Result;
-using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Users.GetUser;
 using BookShop.Users.Domain.Users.Events;
 using BookShop.Users.IntegrationEvents;
@@ -12,13 +11,12 @@ namespace BookShop.Users.Application.Users.RegisterUser;
 
 public sealed class UserRegisteredDomainEventHandler(
     IEventBus bus,
-    IDomainEventConsumerRepository consumerRepository,
     IQueryHandler<GetUserQuery, GetUser_UserResponse> handler
-) : IdempotentDomainEventHandler<UserRegisteredDomainEvent>(consumerRepository)
+) : DomainEventHandler<UserRegisteredDomainEvent>()
 {
-    protected override async Task HandleAsync(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
+    public override async Task HandleAsync(UserRegisteredDomainEvent domainEvent, CancellationToken cancellationToken = default)
     {
-        Result<GetUser_UserResponse> result = await handler.HandleAsync(new GetUserQuery(notification.UserId), cancellationToken);
+        Result<GetUser_UserResponse> result = await handler.HandleAsync(new GetUserQuery(domainEvent.UserId), cancellationToken);
 
         if (result.IsFailure)
         {
@@ -27,8 +25,8 @@ public sealed class UserRegisteredDomainEventHandler(
 
         await bus.PublishAsync(
             new UserRegisteredIntegrationEvent(
-                notification.Id,
-                notification.OccurredOnUtc,
+                domainEvent.Id,
+                domainEvent.OccurredOnUtc,
                 result.Value.Id,
                 result.Value.Email
             ),

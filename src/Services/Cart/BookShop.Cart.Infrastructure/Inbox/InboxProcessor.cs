@@ -16,7 +16,7 @@ namespace BookShop.Cart.Infrastructure.Inbox;
 
 internal sealed class InboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    IServiceScopeFactory serviceScopeFactory,
+    IntegrationEventsDispatcher integrationEventsDispatcher,
     IOptions<InboxJobOptions> inboxOptions,
     TimeProvider timeProvider,
     ILogger<InboxProcessor> logger
@@ -95,17 +95,7 @@ internal sealed class InboxProcessor(
 
                 var integrationEvent = (IIntegrationEvent)JsonSerializer.Deserialize(inboxMessage.Content, eventType)!;
 
-                using IServiceScope scope = serviceScopeFactory.CreateScope();
-
-                IEnumerable<IIntegrationEventHandler> handlers = IntegrationEventHandlersFactory.GetHandlers(
-                    integrationEvent.GetType(),
-                    scope.ServiceProvider,
-                    AssemblyMarker.Assembly);
-
-                foreach (IIntegrationEventHandler handler in handlers)
-                {
-                    await handler.Handle(integrationEvent, cancellationToken);
-                }
+                await integrationEventsDispatcher.DispatchAsync([integrationEvent], cancellationToken);
             }
             catch (Exception ex)
             {

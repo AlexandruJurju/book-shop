@@ -13,9 +13,9 @@ using Microsoft.Extensions.Options;
 
 namespace BookShop.Users.Infrastructure.Outbox;
 
-public sealed class OutboxProcessor(
+internal sealed class OutboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    IDomainEventsDispatcher domainEventsDispatcher,
+    DomainEventsDispatcher domainEventsDispatcher,
     IOptions<OutboxJobOptions> outboxOptions,
     TimeProvider timeProvider,
     ILogger<OutboxProcessor> logger

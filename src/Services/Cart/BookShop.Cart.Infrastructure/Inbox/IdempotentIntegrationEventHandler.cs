@@ -1,6 +1,7 @@
-﻿using BuildingBlocks.Application.EventBus;
+﻿using BookShop.Cart.Application.EventBus;
+using BuildingBlocks.Application.EventBus;
 
-namespace BookShop.Cart.Application.EventBus;
+namespace BookShop.Cart.Infrastructure.Inbox;
 
 internal sealed class IdempotentIntegrationEventHandler<TIntegrationEvent>(
     IIntegrationEventHandler<TIntegrationEvent> decorated,
