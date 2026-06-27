@@ -18,14 +18,7 @@ builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-Assembly[] moduleApplicationAssemblies =
-[
-    BookShop.Users.AssemblyMarker.Assembly,
-    BookShop.Cart.AssemblyMarker.Assembly
-];
-
 builder.Services.AddPresentation();
-builder.Services.AddApplication(moduleApplicationAssemblies);
 builder.AddInfrastructure(
 [
     BookShop.Cart.DependencyInjection.ConfigureConsumers

@@ -9,7 +9,7 @@ public abstract class IdempotentDomainEventHandler<TNotification>(
 ) : IDomainEventHandler<TNotification>
     where TNotification : IDomainEvent
 {
-    public async ValueTask Handle(TNotification notification, CancellationToken cancellationToken)
+    public async Task Handle(TNotification notification, CancellationToken cancellationToken)
     {
         string handlerName = GetType().Name;
 
@@ -23,5 +23,5 @@ public abstract class IdempotentDomainEventHandler<TNotification>(
         await consumerRepository.AddAsync(notification.Id, handlerName, cancellationToken);
     }
 
-    protected abstract ValueTask HandleAsync(TNotification notification, CancellationToken cancellationToken);
+    protected abstract Task HandleAsync(TNotification notification, CancellationToken cancellationToken);
 }

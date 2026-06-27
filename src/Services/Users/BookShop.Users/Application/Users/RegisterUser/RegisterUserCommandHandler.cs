@@ -15,7 +15,7 @@ public sealed class RegisterUserCommandHandler(
     IIdentityProviderService identityProviderService
 ) : ICommandHandler<RegisterUserCommand, Guid>
 {
-    public async ValueTask<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> HandleAsync(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         Result<string> result = await identityProviderService.RegisterUserAsync(
             new UserModel(request.UserName, request.Email, request.Password),

@@ -37,7 +37,7 @@ internal sealed class DomainEventConsumerRepository(
         const string sql =
             $"""
              INSERT INTO {Services.Users}.outbox_message_consumers(outbox_message_id, name)
-             VALUES (@InboxMessageId, @Name)
+             VALUES (@OutboxMessageId, @Name)
              """;
 
         var inboxMessageConsumer = new OutboxMessageConsumer(id, consumerName);

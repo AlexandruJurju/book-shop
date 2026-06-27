@@ -6,22 +6,19 @@ using BookShop.Users.IntegrationEvents;
 using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.Common.Helpers;
-using Mediator;
 using UserResponse = BookShop.Users.Application.Users.GetUser.UserResponse;
 
 namespace BookShop.Users.Application.Users.RegisterUser;
 
 public sealed class UserRegisteredDomainEventHandler(
-    ISender sender,
     IEventBus bus,
-    IDomainEventConsumerRepository consumerRepository
+    IDomainEventConsumerRepository consumerRepository,
+    IQueryHandler<GetUserQuery, UserResponse> handler
 ) : IdempotentDomainEventHandler<UserRegisteredDomainEvent>(consumerRepository)
 {
-    protected override async ValueTask HandleAsync(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
+    protected override async Task HandleAsync(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
     {
-        Result<UserResponse> result = await sender.Send(
-            new GetUserQuery(notification.UserId),
-            cancellationToken);
+        Result<UserResponse> result = await handler.HandleAsync(new GetUserQuery(notification.UserId), cancellationToken);
 
         if (result.IsFailure)
         {

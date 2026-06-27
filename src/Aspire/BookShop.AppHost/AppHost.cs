@@ -11,8 +11,7 @@ IResourceBuilder<PostgresServerResource> postgres = builder
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume()
     .WithUserName(pgUser)
-    .WithPassword(pgPassword)
-    .WithEndpointProxySupport(false);
+    .WithPassword(pgPassword);
 
 IResourceBuilder<ParameterResource> keycloakAdminUsername = builder.AddParameter("keycloak-user", "admin", secret: false);
 IResourceBuilder<ParameterResource> keycloakAdminPassword = builder.AddParameter("keycloak-password", "admin", secret: true);
@@ -20,8 +19,7 @@ IResourceBuilder<KeycloakResource> keycloak = builder
     .AddKeycloak(Resources.Keycloak, 8080, keycloakAdminUsername, keycloakAdminPassword)
     .WithImageTag("26.5")
     .WithLifetime(ContainerLifetime.Persistent)
-    .WithDataVolume()
-    .WithEndpointProxySupport(false);
+    .WithDataVolume();
 
 builder.AddProject<BookShop_WebApi>("bookshop-webapi")
     .WithReference(postgres).WaitFor(postgres)

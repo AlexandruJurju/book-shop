@@ -1,4 +1,5 @@
 ﻿using BookShop.Shared;
+using BookShop.Users.Application.Abstractions.CQRS;
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
@@ -8,6 +9,7 @@ using BookShop.Users.Infrastructure.Idempotency;
 using BookShop.Users.Infrastructure.IdentityProvider;
 using BookShop.Users.Infrastructure.Outbox;
 using BuildingBlocks.Application.Authorization;
+using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Presentation.Endpoints;
 using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;
@@ -28,7 +30,30 @@ public static class DependencyInjection
 
         AddPresentation(builder);
 
+        AddApplication(builder);
+
         return builder;
+    }
+
+    private static void AddApplication(IHostApplicationBuilder builder)
+    {
+        builder.Services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
+            .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+            .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+            .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
+
+        builder.Services.AddTransient<IDomainEventsDispatcher, DomainEventsDispatcher>();
+
+        builder.Services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
+            .AddClasses(classes => classes.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
     }
 
     private static void AddPresentation(IHostApplicationBuilder builder)
@@ -36,9 +61,7 @@ public static class DependencyInjection
         builder.Services.AddEndpoints(typeof(DependencyInjection).Assembly);
     }
 
-    private static IServiceCollection AddInfrastructure(
-        this IHostApplicationBuilder builder
-    )
+    private static void AddInfrastructure(this IHostApplicationBuilder builder)
     {
         IServiceCollection services = builder.Services;
         IConfigurationManager configuration = builder.Configuration;
@@ -54,8 +77,6 @@ public static class DependencyInjection
         AddOutboxJob(services, configuration);
 
         AddKeycloakIdentityProvider(services);
-
-        return services;
     }
 
     private static void AddKeycloakIdentityProvider(IServiceCollection services)

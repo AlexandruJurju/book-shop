@@ -10,16 +10,16 @@ public sealed class GetUserQueryHandler(
     IUsersDbContext usersDbContext
 ) : IQueryHandler<GetUserQuery, UserResponse>
 {
-    public async ValueTask<Result<UserResponse>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<UserResponse>> HandleAsync(GetUserQuery query, CancellationToken cancellationToken)
     {
         UserResponse? user = await usersDbContext.Users
-            .Where(user => user.Id == request.UserId)
+            .Where(user => user.Id == query.UserId)
             .Select(user => new UserResponse(user.Id, user.Email))
             .SingleOrDefaultAsync(cancellationToken);
 
         if (user == null)
         {
-            return Result.NotFound(UserErrors.NotFound(request.UserId));
+            return Result.NotFound(UserErrors.NotFound(query.UserId));
         }
 
         return user;
