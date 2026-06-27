@@ -1,8 +1,8 @@
 ﻿using BookShop.Shared;
-using BookShop.Users.Application;
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
+using BookShop.Users.Domain.Users.Events;
 using BookShop.Users.Infrastructure.Authorization;
 using BookShop.Users.Infrastructure.EntityFramework;
 using BookShop.Users.Infrastructure.Idempotency;
@@ -15,7 +15,6 @@ using BuildingBlocks.Infrastructure.EntityFramework;
 using BuildingBlocks.Infrastructure.Keycloak;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using TickerQ.DependencyInjection;
@@ -33,38 +32,15 @@ public static class DependencyInjection
         services.AddScoped<IUsersDbContext>(provider => provider.GetRequiredService<UsersDbContext>());
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
 
+        services.Decorate(typeof(IDomainEventHandler<>), typeof(IdempotentDomainEventHandler<>));
         services.AddScoped<IDomainEventConsumerRepository, DomainEventConsumerRepository>();
         services.AddScoped<DomainEventsDispatcher>();
-        AddDomainEventHandlers(services);
         AddOutboxJob(services, configuration);
 
         services.AddScoped<IPermissionService, PermissionService>();
         AddKeycloakIdentityProvider(services);
 
         return builder;
-    }
-
-    private static void AddDomainEventHandlers(this IServiceCollection services)
-    {
-        Type[] domainEventHandlers = AssemblyMarker.Assembly
-            .GetTypes()
-            .Where(t => t.IsAssignableTo(typeof(IDomainEventHandler)))
-            .ToArray();
-
-        foreach (Type domainEventHandler in domainEventHandlers)
-        {
-            services.TryAddScoped(domainEventHandler);
-
-            Type domainEvent = domainEventHandler
-                .GetInterfaces()
-                .Single(i => i.IsGenericType)
-                .GetGenericArguments()
-                .Single();
-
-            Type closedIdempotentHandler = typeof(IdempotentDomainEventHandler<>).MakeGenericType(domainEvent);
-
-            services.Decorate(domainEventHandler, closedIdempotentHandler);
-        }
     }
 
     private static void AddKeycloakIdentityProvider(IServiceCollection services)

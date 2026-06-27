@@ -4,23 +4,23 @@ using BuildingBlocks.Domain;
 
 namespace BookShop.Users.Infrastructure.Outbox;
 
-public abstract class IdempotentDomainEventHandler<TDomainEvent>(
+public sealed class IdempotentDomainEventHandler<TDomainEvent>(
     IDomainEventHandler<TDomainEvent> decorated,
     IDomainEventConsumerRepository consumerRepository
-) : DomainEventHandler<TDomainEvent>
+) : IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent
 {
-    public override async Task HandleAsync(TDomainEvent notification, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(TDomainEvent domainEvent, CancellationToken cancellationToken = default)
     {
         string handlerName = GetType().Name;
 
-        if (await consumerRepository.ExistsAsync(notification.Id, handlerName, cancellationToken))
+        if (await consumerRepository.ExistsAsync(domainEvent.Id, handlerName, cancellationToken))
         {
             return;
         }
 
-        await decorated.HandleAsync(notification, cancellationToken);
+        await decorated.HandleAsync(domainEvent, cancellationToken);
 
-        await consumerRepository.AddAsync(notification.Id, handlerName, cancellationToken);
+        await consumerRepository.AddAsync(domainEvent.Id, handlerName, cancellationToken);
     }
 }

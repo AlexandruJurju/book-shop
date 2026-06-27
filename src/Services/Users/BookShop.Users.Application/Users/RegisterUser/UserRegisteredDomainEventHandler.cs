@@ -12,9 +12,9 @@ namespace BookShop.Users.Application.Users.RegisterUser;
 public sealed class UserRegisteredDomainEventHandler(
     IEventBus bus,
     IQueryHandler<GetUserQuery, GetUser_UserResponse> handler
-) : DomainEventHandler<UserRegisteredDomainEvent>()
+) : IDomainEventHandler<UserRegisteredDomainEvent>
 {
-    public override async Task HandleAsync(UserRegisteredDomainEvent domainEvent, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(UserRegisteredDomainEvent domainEvent, CancellationToken cancellationToken = default)
     {
         Result<GetUser_UserResponse> result = await handler.HandleAsync(new GetUserQuery(domainEvent.UserId), cancellationToken);
 
