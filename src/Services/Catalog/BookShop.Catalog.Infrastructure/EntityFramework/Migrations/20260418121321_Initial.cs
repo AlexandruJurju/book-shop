@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BookShop.Catalog.Infrastructure.EntityFramework.Migrations;
+namespace BookShop.Catalog.Presentation.Infrastructure.EntityFramework.Migrations;
 
 /// <inheritdoc />
 public partial class Initial : Migration

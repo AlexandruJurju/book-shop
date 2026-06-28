@@ -3,10 +3,11 @@
 #nullable disable
 
 using System;
+using BookShop.Catalog.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace BookShop.Catalog.Infrastructure.EntityFramework.Migrations;
+namespace BookShop.Catalog.Presentation.Infrastructure.EntityFramework.Migrations;
 
 [DbContext(typeof(CatalogDbContext))]
 internal class CatalogDbContextModelSnapshot : ModelSnapshot

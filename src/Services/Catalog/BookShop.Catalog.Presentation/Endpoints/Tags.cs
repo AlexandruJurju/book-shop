@@ -1,4 +1,4 @@
-﻿namespace BookShop.Catalog.Presentation;
+﻿namespace BookShop.Catalog.Presentation.Endpoints;
 
 public static class Tags
 {

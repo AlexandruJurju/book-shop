@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -8,11 +8,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj" />
-        <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
-        <ProjectReference Include="..\Services\Cart\BookShop.Cart.Presentation\BookShop.Cart.Presentation.csproj" />
-        <ProjectReference Include="..\Services\Catalog\BookShop.Catalog\BookShop.Catalog.csproj" />
-        <ProjectReference Include="..\Services\Users\BookShop.Users.Presentation\BookShop.Users.Presentation.csproj" />
+        <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj"/>
+        <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj"/>
+        <ProjectReference Include="..\Services\Cart\BookShop.Cart.Presentation\BookShop.Cart.Presentation.csproj"/>
+        <ProjectReference Include="..\Services\Catalog\BookShop.Catalog.Presentation\BookShop.Catalog.Presentation.csproj"/>
+        <ProjectReference Include="..\Services\Users\BookShop.Users.Presentation\BookShop.Users.Presentation.csproj"/>
     </ItemGroup>
 
 </Project>

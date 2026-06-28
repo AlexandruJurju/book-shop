@@ -27,8 +27,13 @@
         <Project Path="src/Services/Cart/BookShop.Cart.IntegrationTests/BookShop.Cart.IntegrationTests.csproj" />
     </Folder>
     <Folder Name="/Services/Catalog/">
-        <Project Path="src/Services/Catalog/BookShop.Catalog/BookShop.Catalog.csproj" />
+        <Project Path="src/Services/Catalog/BookShop.Catalog.Application/BookShop.Catalog.Application.csproj" />
+        <Project Path="src/Services/Catalog/BookShop.Catalog.Domain/BookShop.Catalog.Domain.csproj" />
+        <Project Path="src/Services/Catalog/BookShop.Catalog.Infrastructure/BookShop.Catalog.Infrastructure.csproj" />
+        <Project Path="src/Services/Catalog/BookShop.Catalog.IntegrationEvents/BookShop.Catalog.IntegrationEvents.csproj" />
+        <Project Path="src/Services/Catalog/BookShop.Catalog.Presentation/BookShop.Catalog.Presentation.csproj" />
     </Folder>
+    <Folder Name="/Services/Catalog/tests/" />
     <Folder Name="/Services/Inventory/" />
     <Folder Name="/Services/Notification/" />
     <Folder Name="/Services/Orders/" />

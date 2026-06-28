@@ -1,6 +1,6 @@
 using System.Reflection;
 using BookShop.Cart.Presentation;
-using BookShop.Catalog;
+using BookShop.Catalog.Presentation;
 using BookShop.ServiceDefaults;
 using BookShop.Users.Presentation;
 using BookShop.WebApi;

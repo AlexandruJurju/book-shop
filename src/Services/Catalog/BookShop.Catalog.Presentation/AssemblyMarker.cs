@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace BookShop.Catalog;
+namespace BookShop.Catalog.Presentation;
 
 public static class AssemblyMarker
 {
