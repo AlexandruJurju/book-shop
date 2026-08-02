@@ -1,8 +1,7 @@
-﻿
-namespace BuildingBlocks.Domain;
+﻿namespace BuildingBlocks.Domain;
 
-public abstract class AuditableEntity : Entity
+public interface IAuditableEntity
 {
-    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAtUtc { get; set; }
+    DateTime CreatedAtUtc { get; set; }
+    DateTime? UpdatedAtUtc { get; set; }
 }

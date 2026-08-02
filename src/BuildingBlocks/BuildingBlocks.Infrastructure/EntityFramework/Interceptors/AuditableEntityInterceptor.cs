@@ -5,11 +5,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 
-public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
+public sealed class AuditableEntityInterceptor(
+    TimeProvider timeProvider
+) : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
-        InterceptionResult<int> result)
+        InterceptionResult<int> result
+    )
     {
         UpdateEntities(eventData.Context);
         return base.SavingChanges(eventData, result);
@@ -18,20 +21,21 @@ public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         UpdateEntities(eventData.Context);
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
-    private static void UpdateEntities(DbContext? context)
+    private void UpdateEntities(DbContext? context)
     {
         if (context is null)
         {
             return;
         }
 
-        foreach (EntityEntry<AuditableEntity> entry in context.ChangeTracker.Entries<AuditableEntity>())
+        foreach (EntityEntry<IAuditableEntity> entry in context.ChangeTracker.Entries<IAuditableEntity>())
         {
             if (entry.State is not (EntityState.Added or EntityState.Modified) &&
                 !entry.References.Any(r =>
@@ -44,10 +48,10 @@ public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
 
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedAtUtc = DateTime.UtcNow;
+                entry.Entity.CreatedAtUtc = timeProvider.GetUtcNow().UtcDateTime;
             }
 
-            entry.Entity.UpdatedAtUtc = DateTime.UtcNow;
+            entry.Entity.UpdatedAtUtc = timeProvider.GetUtcNow().UtcDateTime;
         }
     }
 }

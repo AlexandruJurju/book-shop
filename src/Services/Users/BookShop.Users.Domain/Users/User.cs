@@ -25,7 +25,7 @@ public sealed class User : Entity, IAggregateRoot
     public string UserName { get; private set; }
     public string Email { get; private set; }
     public string IdentityId { get; private set; }
-    public IReadOnlyCollection<Role> Roles => _roles.ToList();
+    public IReadOnlyCollection<Role> Roles => [.. _roles];
 
     public static User Create(string userName, string email, string identityId)
     {
