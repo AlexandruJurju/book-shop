@@ -1,5 +1,4 @@
 using BookShop.Cart.Api;
-using BookShop.Catalog.Api;
 using BookShop.ServiceDefaults;
 using BookShop.Users.Api;
 using BookShop.WebApi;
@@ -24,7 +23,6 @@ builder.AddInfrastructure(
 ]);
 
 builder.AddUsersModule();
-builder.AddCatalogModule();
 builder.AddCartModule();
 
 WebApplication app = builder.Build();
