@@ -8,35 +8,35 @@ namespace BuildingBlocks.Infrastructure.Cache;
 
 public static class HostApplicationBuilderExtensions
 {
-    public static IServiceCollection AddCustomDistributedCache(
-        this IHostApplicationBuilder builder,
-        string redisResource
-    )
-    {
-        IServiceCollection services = builder.Services;
-        IConfiguration configuration = builder.Configuration;
-
-        services.ConfigureWithValidation<CachingOptions>(CachingOptions.SectionName);
-
-        CachingOptions cachingOptions = configuration
-            .GetRequiredSection(CachingOptions.SectionName)
-            .Get<CachingOptions>()!;
-
-        builder.AddRedisDistributedCache(redisResource);
-
-        services.AddHybridCache(options =>
-        {
-            options.MaximumPayloadBytes = cachingOptions.MaximumPayloadBytes;
-
-            options.DefaultEntryOptions = new HybridCacheEntryOptions
-            {
-                LocalCacheExpiration = TimeSpan.FromMinutes(cachingOptions.LocalExpirationInMinutes),
-                Expiration = TimeSpan.FromMinutes(cachingOptions.DistributedExpirationInMinutes)
-            };
-        });
-
-        return services;
-    }
+    // public static IServiceCollection AddCustomDistributedCache(
+    //     this IHostApplicationBuilder builder,
+    //     string redisResource
+    // )
+    // {
+    //     IServiceCollection services = builder.Services;
+    //     IConfiguration configuration = builder.Configuration;
+    //
+    //     services.ConfigureWithValidation<CachingOptions>(CachingOptions.SectionName);
+    //
+    //     CachingOptions cachingOptions = configuration
+    //         .GetRequiredSection(CachingOptions.SectionName)
+    //         .Get<CachingOptions>()!;
+    //
+    //     builder.AddRedisDistributedCache(redisResource);
+    //
+    //     services.AddHybridCache(options =>
+    //     {
+    //         options.MaximumPayloadBytes = cachingOptions.MaximumPayloadBytes;
+    //
+    //         options.DefaultEntryOptions = new HybridCacheEntryOptions
+    //         {
+    //             LocalCacheExpiration = TimeSpan.FromMinutes(cachingOptions.LocalExpirationInMinutes),
+    //             Expiration = TimeSpan.FromMinutes(cachingOptions.DistributedExpirationInMinutes)
+    //         };
+    //     });
+    //
+    //     return services;
+    // }
 
     public static IServiceCollection AddCustomCacheInMemory(
         this IHostApplicationBuilder builder

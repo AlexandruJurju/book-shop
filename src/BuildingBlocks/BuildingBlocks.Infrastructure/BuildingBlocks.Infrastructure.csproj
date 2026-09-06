@@ -7,9 +7,6 @@
     <ItemGroup>
         <PackageReference Include="Aspire.Npgsql"/>
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL"/>
-        <PackageReference Include="Aspire.StackExchange.Redis"/>
-        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching"/>
-        <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching"/>
         <PackageReference Include="Dapper"/>
         <PackageReference Include="EFCore.NamingConventions"/>
         <PackageReference Include="MassTransit"/>
@@ -18,7 +15,6 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.Extensions.Caching.Hybrid"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis"/>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
         <PackageReference Include="Testcontainers.Keycloak"/>
         <PackageReference Include="Testcontainers.PostgreSql"/>
