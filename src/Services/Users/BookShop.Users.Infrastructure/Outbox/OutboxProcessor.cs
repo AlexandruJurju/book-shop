@@ -3,11 +3,11 @@ using System.Data;
 using System.Data.Common;
 using System.Text.Json;
 using BookShop.Shared;
-using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Application.Data;
 using BuildingBlocks.Domain;
 using BuildingBlocks.Infrastructure.Outbox;
 using Dapper;
+using Mediator;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -15,7 +15,7 @@ namespace BookShop.Users.Infrastructure.Outbox;
 
 internal sealed class OutboxProcessor(
     IDbConnectionFactory dbConnectionFactory,
-    IDomainEventsDispatcher domainEventsDispatcher,
+    IMediator mediator,
     IOptions<OutboxJobOptions> outboxOptions,
     TimeProvider timeProvider,
     ILogger<OutboxProcessor> logger
@@ -70,7 +70,7 @@ internal sealed class OutboxProcessor(
             {
                 Type messageType = DomainEventTypeCache.GetOrAdd(outboxMessage.Type);
                 var domainEvent = (IDomainEvent)JsonSerializer.Deserialize(outboxMessage.Content, messageType)!;
-                await domainEventsDispatcher.DispatchAsync([domainEvent], cancellationToken);
+                await mediator.Publish(domainEvent, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,8 @@ internal sealed class OutboxProcessor(
     private async Task UpdateOutboxMessagesAsync(
         IDbConnection connection,
         IDbTransaction transaction,
-        ConcurrentQueue<OutboxUpdate> updateQueue)
+        ConcurrentQueue<OutboxUpdate> updateQueue
+    )
     {
         if (updateQueue.IsEmpty)
         {

@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Users\BookShop.Users.Contracts\BookShop.Users.Contracts.csproj" />
       <ProjectReference Include="..\BookShop.Cart.Application\BookShop.Cart.Application.csproj" />
     </ItemGroup>
 

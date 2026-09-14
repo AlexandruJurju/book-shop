@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Application.EventBus;
 
-namespace BookShop.Users.IntegrationEvents;
+namespace BookShop.Users.Contracts;
 
 public sealed record UserRegisteredIntegrationEvent(
     Guid Id,

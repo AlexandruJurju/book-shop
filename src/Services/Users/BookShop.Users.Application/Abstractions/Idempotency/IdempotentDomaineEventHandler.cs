@@ -11,18 +11,18 @@ public sealed class IdempotentDomainEventHandler<TDomainEvent>(
 ) : IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent
 {
-    public async Task HandleAsync(TDomainEvent domainEvent, CancellationToken cancellationToken = default)
+    public async ValueTask Handle(TDomainEvent notification, CancellationToken cancellationToken)
     {
         string consumerName = GetType().Name;
 
-        if (await consumerRepository.ExistsAsync(domainEvent.Id, consumerName, cancellationToken))
+        if (await consumerRepository.ExistsAsync(notification.Id, consumerName, cancellationToken))
         {
-            logger.LogInformation("Skipping domain event handler {ConsumerName} for domain event {DomainEventId}", consumerName, domainEvent.Id);
+            logger.LogInformation("Skipping domain event handler {ConsumerName} for domain event {DomainEventId}", consumerName, notification.Id);
             return;
         }
 
-        await decorated.HandleAsync(domainEvent, cancellationToken);
+        await decorated.Handle(notification, cancellationToken);
 
-        await consumerRepository.AddAsync(domainEvent.Id, consumerName, cancellationToken);
+        await consumerRepository.AddAsync(notification.Id, consumerName, cancellationToken);
     }
 }

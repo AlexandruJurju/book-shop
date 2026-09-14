@@ -1,5 +1,6 @@
 ﻿using Ardalis.Result;
 using BookShop.Users.Application.Abstractions.Data;
+using BookShop.Users.Contracts;
 using BuildingBlocks.Application.CQRS;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,7 @@ public sealed class GetUsersQueryHandler(
     IUsersDbContext dbContext
 ) : IQueryHandler<GetUsersQuery, IReadOnlyCollection<UserResponse>>
 {
-    public async Task<Result<IReadOnlyCollection<UserResponse>>> HandleAsync(GetUsersQuery request, CancellationToken cancellationToken)
+    public async ValueTask<Result<IReadOnlyCollection<UserResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
     {
         List<UserResponse> users = await dbContext.Users
             .Select(x => new UserResponse(x.Id, x.UserName, x.Email))

@@ -1,6 +1,8 @@
-﻿namespace BuildingBlocks.Domain;
+﻿using Mediator;
 
-public interface IDomainEvent
+namespace BuildingBlocks.Domain;
+
+public interface IDomainEvent : INotification
 {
     Guid Id { get; }
     DateTime OccurredAtUtc { get; }

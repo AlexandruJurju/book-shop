@@ -19,8 +19,8 @@
         <Project Path="src/Services/Cart/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
         <Project Path="src/Services/Cart/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
         <Project Path="src/Services/Cart/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
-        <Project Path="src/Services/Cart/BookShop.Cart.IntegrationEvents/BookShop.Cart.IntegrationEvents.csproj" />
         <Project Path="src\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj" />
+        <Project Path="src\Services\Cart\BookShop.Cart.Contracts\BookShop.Cart.Contracts.csproj" />
     </Folder>
     <Folder Name="/Services/Cart/tests/">
         <Project Path="src/Services/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
@@ -44,8 +44,8 @@
         <Project Path="src/Services/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
         <Project Path="src/Services/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
         <Project Path="src/Services/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
-        <Project Path="src/Services/Users/BookShop.Users.IntegrationEvents/BookShop.Users.IntegrationEvents.csproj" />
         <Project Path="src\Services\Users\BookShop.Users.Api\BookShop.Users.Api.csproj" />
+        <Project Path="src\Services\Users\BookShop.Users.Contracts\BookShop.Users.Contracts.csproj" />
     </Folder>
     <Folder Name="/Services/Users/tests/">
         <Project Path="src/Services/Users/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj" />

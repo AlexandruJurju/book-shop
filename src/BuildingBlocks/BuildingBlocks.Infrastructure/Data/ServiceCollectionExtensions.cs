@@ -9,7 +9,7 @@ namespace BuildingBlocks.Infrastructure.Data;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCustomNpgsql(
+    public static IServiceCollection AddCustomPostgres(
         this IServiceCollection services,
         IConfiguration configuration,
         string postgresResourceName

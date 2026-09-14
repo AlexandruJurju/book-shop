@@ -4,4 +4,9 @@
         <ProjectReference Include="..\BuildingBlocks.Common\BuildingBlocks.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Ardalis.SmartEnum" />
+      <PackageReference Include="Mediator.Abstractions" />
+    </ItemGroup>
+
 </Project>

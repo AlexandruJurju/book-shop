@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Application.CQRS;
+﻿using BookShop.Users.Contracts;
+using BuildingBlocks.Application.CQRS;
 
 namespace BookShop.Users.Application.Users.GetUsers;
 

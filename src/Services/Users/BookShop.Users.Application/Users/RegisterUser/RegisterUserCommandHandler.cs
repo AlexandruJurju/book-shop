@@ -13,7 +13,7 @@ public sealed class RegisterUserCommandHandler(
     IIdentityProvider identityProvider
 ) : ICommandHandler<RegisterUserCommand, Guid>
 {
-    public async Task<Result<Guid>> HandleAsync(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         Result<string> result = await identityProvider.CreateUserAsync(
             new UserModel(request.UserName, request.Email, request.Password),

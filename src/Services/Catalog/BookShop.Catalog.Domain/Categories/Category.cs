@@ -12,5 +12,7 @@ public sealed class Category : Entity, IAuditableEntity, ISoftDeletable
 
     public bool IsDeleted { get; set; }
     public DateTime CreatedAtUtc { get; set; }
+    public Guid CreatedByUserId { get; set; }
     public DateTime? UpdatedAtUtc { get; set; }
+    public Guid? UpdatedByUserId { get; set; }
 }

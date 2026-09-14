@@ -1,22 +1,22 @@
 ﻿using Ardalis.Result;
 using BookShop.Users.Application.Users.GetUser;
 using BookShop.Users.Domain.Users.Events;
-using BookShop.Users.IntegrationEvents;
+using BookShop.Users.Contracts;
 using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.Common.Extensions;
-using GetUser_UserResponse = BookShop.Users.Application.Users.GetUser.UserResponse;
+using Mediator;
 
 namespace BookShop.Users.Application.Users.RegisterUser;
 
 public sealed class UserRegisteredDomainEventHandler(
     IEventBus bus,
-    IQueryHandler<GetUserQuery, GetUser_UserResponse> handler
+    IMediator mediator
 ) : IDomainEventHandler<UserRegisteredDomainEvent>
 {
-    public async Task HandleAsync(UserRegisteredDomainEvent domainEvent, CancellationToken cancellationToken = default)
+    public async ValueTask Handle(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
     {
-        Result<GetUser_UserResponse> result = await handler.HandleAsync(new GetUserQuery(domainEvent.UserId), cancellationToken);
+        Result<UserResponse> result = await mediator.Send(new GetUserQuery(notification.UserId), cancellationToken);
 
         if (result.IsFailure)
         {
@@ -25,8 +25,8 @@ public sealed class UserRegisteredDomainEventHandler(
 
         await bus.PublishAsync(
             new UserRegisteredIntegrationEvent(
-                domainEvent.Id,
-                domainEvent.OccurredAtUtc,
+                notification.Id,
+                notification.OccurredAtUtc,
                 result.Value.Id,
                 result.Value.Email
             ),

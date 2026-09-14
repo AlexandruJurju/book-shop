@@ -2,7 +2,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
-        <ProjectReference Include="..\..\Users\BookShop.Users.IntegrationEvents\BookShop.Users.IntegrationEvents.csproj"/>
+        <ProjectReference Include="..\..\Users\BookShop.Users.Contracts\BookShop.Users.Contracts.csproj" />
         <ProjectReference Include="..\BookShop.Cart.Application\BookShop.Cart.Application.csproj"/>
         <ProjectReference Include="..\BookShop.Cart.Infrastructure\BookShop.Cart.Infrastructure.csproj"/>
     </ItemGroup>

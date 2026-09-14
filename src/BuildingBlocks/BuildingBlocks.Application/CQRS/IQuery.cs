@@ -1,3 +1,8 @@
-﻿namespace BuildingBlocks.Application.CQRS;
+﻿using Ardalis.Result;
+using Mediator;
 
-public interface IQuery<TResponse>;
+namespace BuildingBlocks.Application.CQRS;
+
+public interface IQuery<TResponse> : IRequest<Result<TResponse>>
+{
+}

@@ -3,7 +3,7 @@ using BookShop.Cart.Application.EventBus;
 using BookShop.Cart.Infrastructure.EntityFramework;
 using BookShop.Cart.Infrastructure.Inbox;
 using BookShop.Shared;
-using BookShop.Users.IntegrationEvents;
+using BookShop.Users.Contracts;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
