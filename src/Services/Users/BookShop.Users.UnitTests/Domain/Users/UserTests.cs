@@ -34,6 +34,6 @@ internal sealed class UserTests : BaseTest
         );
 
         await user.Roles.Count.Should().BeEqualTo(1);
-        await user.Roles.SingleOrDefault().Should().BeEqualTo(Role.Registered);
+        await user.Roles.SingleOrDefault().Should().BeEqualTo(Role.Member);
     }
 }

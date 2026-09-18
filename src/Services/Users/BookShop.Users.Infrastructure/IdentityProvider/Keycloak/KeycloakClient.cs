@@ -2,7 +2,9 @@
 
 namespace BookShop.Users.Infrastructure.IdentityProvider.Keycloak;
 
-internal sealed class KeyCloakClient(HttpClient httpClient)
+internal sealed class KeyCloakClient(
+    HttpClient httpClient
+)
 {
     internal async Task<string> CreateUserAsync(KeycloakUser keycloakUser, CancellationToken cancellationToken = default)
     {
@@ -17,7 +19,8 @@ internal sealed class KeyCloakClient(HttpClient httpClient)
     }
 
     private static string ExtractIdentityIdFromLocationHeader(
-        HttpResponseMessage httpResponseMessage)
+        HttpResponseMessage httpResponseMessage
+    )
     {
         const string usersSegmentName = "users/";
 

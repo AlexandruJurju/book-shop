@@ -25,7 +25,7 @@ internal static class DependencyInjection
     {
         IServiceCollection services = builder.Services;
 
-        services.AddMediator(options =>
+        builder.Services.AddMediator((MediatorOptions options) =>
         {
             options.ServiceLifetime = ServiceLifetime.Scoped;
         });

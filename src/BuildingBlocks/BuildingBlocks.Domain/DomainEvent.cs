@@ -1,6 +1,4 @@
-﻿using BuildingBlocks.Common.Helpers;
-
-namespace BuildingBlocks.Domain;
+﻿namespace BuildingBlocks.Domain;
 
 public abstract class DomainEvent : IDomainEvent
 {

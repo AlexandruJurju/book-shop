@@ -3,7 +3,7 @@ using BuildingBlocks.Domain;
 
 namespace BookShop.Users.Domain.Users;
 
-public sealed class User : AggregateRoot
+public sealed class User : Entity
 {
     // For EF Core
     private User() { }
@@ -29,7 +29,7 @@ public sealed class User : AggregateRoot
 
         user.RaiseDomainEvent(new UserRegisteredDomainEvent(user.Id));
 
-        user._roles.Add(Role.Registered);
+        user._roles.Add(Role.Member);
 
         return user;
     }

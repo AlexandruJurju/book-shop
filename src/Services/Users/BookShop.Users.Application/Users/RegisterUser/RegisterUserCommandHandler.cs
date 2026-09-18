@@ -31,7 +31,7 @@ public sealed class RegisterUserCommandHandler(
         );
 
         usersDbContext.Users.Add(user);
-        usersDbContext.Roles.Attach(Role.Registered);
+        usersDbContext.Roles.Attach(Role.Member);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
