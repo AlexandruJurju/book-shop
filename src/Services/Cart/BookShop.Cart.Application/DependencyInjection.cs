@@ -1,4 +1,5 @@
 ﻿using BookShop.Cart.Application.Abstractions;
+using BookShop.Cart.Application.EventBus;
 using BuildingBlocks.Application.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 

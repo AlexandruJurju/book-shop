@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Text.Json;
 using BookShop.Shared;
-using BuildingBlocks.Application.Data;
+using BuildingBlocks.Application.Abstractions.Data;
 using BuildingBlocks.Domain;
 using BuildingBlocks.Infrastructure.Outbox;
 using Dapper;

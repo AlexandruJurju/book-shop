@@ -1,6 +1,6 @@
 ﻿using Ardalis.Result;
 using Ardalis.Result.AspNetCore;
-using BookShop.Users.Application.Users.RegisterUser;
+using BookShop.Users.Application.Users;
 using BookShop.Users.Contracts;
 using BuildingBlocks.Api.Endpoints;
 using Mediator;

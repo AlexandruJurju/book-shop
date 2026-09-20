@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using BookShop.Shared;
 using BookShop.Users.Application.Abstractions.Idempotency;
-using BuildingBlocks.Application.Data;
+using BuildingBlocks.Application.Abstractions.Data;
 using BuildingBlocks.Infrastructure.Outbox;
 using Dapper;
 

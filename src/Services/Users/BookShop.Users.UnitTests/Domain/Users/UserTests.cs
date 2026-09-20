@@ -14,7 +14,7 @@ internal sealed class UserTests : BaseTest
     {
         var user = User.Create(
             Faker.Internet.UserName(),
-            Faker.Internet.Email(),
+            Email.Create(Faker.Internet.Email()),
             Guid.NewGuid().ToString()
         );
 
@@ -29,7 +29,7 @@ internal sealed class UserTests : BaseTest
     {
         var user = User.Create(
             Faker.Internet.UserName(),
-            Faker.Internet.Email(),
+            Email.Create(Faker.Internet.Email()),
             Guid.NewGuid().ToString()
         );
 

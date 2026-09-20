@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.Text.Json;
 using BookShop.Shared;
-using BuildingBlocks.Application.Data;
+using BuildingBlocks.Application.Abstractions.Data;
 using BuildingBlocks.Application.EventBus;
 using BuildingBlocks.Infrastructure.Inbox;
 using Dapper;

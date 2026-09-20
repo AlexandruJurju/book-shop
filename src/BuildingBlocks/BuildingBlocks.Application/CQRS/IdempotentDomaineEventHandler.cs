@@ -1,4 +1,4 @@
-﻿// using BuildingBlocks.Domain;
+﻿// using BuildingBlocks.Core;
 // using Mediator;
 // using Microsoft.Extensions.Logging;
 //

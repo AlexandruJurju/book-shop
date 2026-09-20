@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using BookShop.Cart.Application.EventBus;
 using BookShop.Shared;
-using BuildingBlocks.Application.Data;
+using BuildingBlocks.Application.Abstractions.Data;
 using BuildingBlocks.Infrastructure.Inbox;
 using Dapper;
 

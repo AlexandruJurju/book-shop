@@ -2,7 +2,14 @@
 
 public abstract class Entity
 {
-    public Guid Id { get; protected init; }
+    public Guid Id { get; init; }
+
+    protected Entity(Guid id)
+    {
+        Id = id;
+    }
+
+    protected Entity() { }
 
     private readonly List<IDomainEvent> _domainEvents = [];
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
@@ -10,10 +17,4 @@ public abstract class Entity
     public void ClearDomainEvents() => _domainEvents.Clear();
 
     protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
-}
-
-public abstract class Entity<TId> : Entity
-    where TId : IEquatable<TId>
-{
-    public new TId Id { get; init; }
 }

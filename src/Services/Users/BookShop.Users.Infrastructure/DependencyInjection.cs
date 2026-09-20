@@ -8,7 +8,7 @@ using BookShop.Users.Infrastructure.Idempotency;
 using BookShop.Users.Infrastructure.IdentityProvider;
 using BookShop.Users.Infrastructure.IdentityProvider.Keycloak;
 using BookShop.Users.Infrastructure.Outbox;
-using BuildingBlocks.Application.Authorization;
+using BuildingBlocks.Application.Abstractions.Authorization;
 using BuildingBlocks.Application.CQRS;
 using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;

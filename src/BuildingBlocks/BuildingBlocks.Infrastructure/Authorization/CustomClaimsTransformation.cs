@@ -1,8 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Ardalis.Result;
-using BuildingBlocks.Application.Authorization;
-using BuildingBlocks.Common.Extensions;
+using BuildingBlocks.Application.Abstractions.Authorization;
 using BuildingBlocks.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Caching.Hybrid;
@@ -34,10 +33,9 @@ public sealed class CustomClaimsTransformation(
                 IPermissionService permissionService = scope.ServiceProvider.GetRequiredService<IPermissionService>();
 
                 Result<PermissionsResponse> result = await permissionService.GetUserPermissionsAsync(identityId);
-
-                return result.IsFailure
-                    ? throw new ApplicationException(nameof(IPermissionService.GetUserPermissionsAsync))
-                    : result.Value;
+                return result.IsSuccess
+                    ? result.Value
+                    : throw new ApplicationException(nameof(IPermissionService.GetUserPermissionsAsync));
             },
             new HybridCacheEntryOptions
             {

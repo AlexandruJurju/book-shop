@@ -6,10 +6,9 @@
     </Folder>
     <Folder Name="/BuildingBlocks/">
         <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj" />
-        <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
         <Project Path="src/BuildingBlocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" />
         <Project Path="src\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
+        <Project Path="src\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
     </Folder>
     <Folder Name="/Host/">
         <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
@@ -20,7 +19,6 @@
         <Project Path="src/Services/Cart/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
         <Project Path="src/Services/Cart/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
         <Project Path="src\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj" />
-        <Project Path="src\Services\Cart\BookShop.Cart.Contracts\BookShop.Cart.Contracts.csproj" />
     </Folder>
     <Folder Name="/Services/Cart/tests/">
         <Project Path="src/Services/Cart/BookShop.Cart.ArchitectureTests/BookShop.Cart.ArchitectureTests.csproj" />
@@ -32,14 +30,6 @@
         <Project Path="src/Services/Catalog/BookShop.Catalog.Domain/BookShop.Catalog.Domain.csproj" />
         <Project Path="src/Services/Catalog/BookShop.Catalog.Infrastructure/BookShop.Catalog.Infrastructure.csproj" />
     </Folder>
-    <Folder Name="/Services/Inventory/" />
-    <Folder Name="/Services/Notification/" />
-    <Folder Name="/Services/Orders/" />
-    <Folder Name="/Services/Payment/" />
-    <Folder Name="/Services/Pricing/" />
-    <Folder Name="/Services/Recommendations/" />
-    <Folder Name="/Services/Reporting/" />
-    <Folder Name="/Services/Reviews/" />
     <Folder Name="/Services/Users/">
         <Project Path="src/Services/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
         <Project Path="src/Services/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />

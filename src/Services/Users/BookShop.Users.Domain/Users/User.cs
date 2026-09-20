@@ -8,7 +8,7 @@ public sealed class User : Entity
     // For EF Core
     private User() { }
 
-    private User(Guid id, string userName, string email, string identityId)
+    private User(Guid id, string userName, Email email, string identityId)
     {
         Id = id;
         UserName = userName;
@@ -17,13 +17,13 @@ public sealed class User : Entity
     }
 
     public string UserName { get; private set; }
-    public string Email { get; private set; }
+    public Email Email { get; private set; }
     public string IdentityId { get; private set; }
 
     private readonly List<Role> _roles = new();
     public IReadOnlyCollection<Role> Roles => [.. _roles];
 
-    public static User Create(string userName, string email, string identityId)
+    public static User Create(string userName, Email email, string identityId)
     {
         var user = new User(Guid.CreateVersion7(), userName, email, identityId);
 
