@@ -13,5 +13,10 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.HasKey(book => book.Id);
 
         builder.ComplexProperty(book => book.Title);
+
+        builder.HasMany(book => book.Authors)
+            .WithOne(bookAuthor => bookAuthor.Book)
+            .HasForeignKey(bookAuthor => bookAuthor.AuthorId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

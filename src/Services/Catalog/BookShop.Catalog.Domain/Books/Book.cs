@@ -1,22 +1,23 @@
 using Ardalis.Result;
+using BookShop.Catalog.Domain.Authors;
 using BookShop.Catalog.Domain.Books.Events;
+using BookShop.Catalog.Domain.Genres;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Books;
 
 public sealed class Book : Entity, IAggregateRoot
 {
-    private readonly List<Guid> _authorIds = [];
-    private readonly List<BookEdition> _editions = [];
-    private readonly List<Guid> _genreIds = [];
-
     public BookTitle Title { get; private set; }
     public string? Description { get; private set; }
     public DateOnly OriginalPublicationDate { get; private set; }
     public BookStatus Status { get; private set; }
 
-    public IReadOnlyCollection<Guid> AuthorIds => _authorIds.AsReadOnly();
-    public IReadOnlyCollection<Guid> GenreIds => _genreIds.AsReadOnly();
+    private readonly List<BookAuthor> _authors = [];
+    private readonly List<BookEdition> _editions = [];
+    private readonly List<Genre> _genres = [];
+    public IReadOnlyCollection<BookAuthor> Authors => _authors.AsReadOnly();
+    public IReadOnlyCollection<Genre> Genres => _genres.AsReadOnly();
     public IReadOnlyCollection<BookEdition> Editions => _editions.AsReadOnly();
 
     private Book() { } // EF Core
@@ -24,39 +25,42 @@ public sealed class Book : Entity, IAggregateRoot
     private Book(
         Guid id,
         BookTitle title,
-        IEnumerable<Guid> authorIds,
-        IEnumerable<Guid> genres,
+        IEnumerable<Genre> genres,
         DateOnly originalPublicationDate,
         string? description
-    )
-        : base(id)
+    ) : base(id)
     {
         Title = title;
         Description = description;
         OriginalPublicationDate = originalPublicationDate;
         Status = BookStatus.Draft;
 
-        _authorIds.AddRange(authorIds.Distinct());
-        _genreIds.AddRange(genres.Distinct());
+        _genres.AddRange(genres.DistinctBy(x => x.Id));
     }
 
     public static Result<Book> Create(
         BookTitle title,
-        IEnumerable<Guid> authorIds,
-        IEnumerable<Guid> genres,
+        IEnumerable<Author> authors,
+        IEnumerable<Genre> genres,
         DateOnly originalPublicationDate,
         string? description = null
     )
     {
-        Guid[] distinctAuthorIds = authorIds.Distinct().ToArray();
-        Guid[] distinctGenres = genres.Distinct().ToArray();
+        Author[] distinctAuthors = authors.DistinctBy(x => x.Id).ToArray();
 
-        if (distinctAuthorIds.Length == 0)
+        if (distinctAuthors.Length == 0)
         {
             return Result.Error(BookErrors.NoAuthor);
         }
 
-        var book = new Book(Guid.CreateVersion7(), title, distinctAuthorIds, distinctGenres, originalPublicationDate, description);
+        Genre[] distinctGenres = genres.DistinctBy(x => x.Id).ToArray();
+
+        var book = new Book(Guid.CreateVersion7(), title, distinctGenres, originalPublicationDate, description);
+
+        foreach (Author author in distinctAuthors)
+        {
+            book.AddAuthor(author.Id);
+        }
 
         book.RaiseDomainEvent(new BookAddedToCatalogEvent(book.Id));
 
@@ -88,45 +92,90 @@ public sealed class Book : Entity, IAggregateRoot
 
     public Result AddAuthor(Guid authorId)
     {
-        if (_authorIds.Contains(authorId))
+        if (_authors.Any(x => x.AuthorId == authorId))
         {
-            return Result.Error(BookErrors.AuthorAlreadyExists);
+            return Result.Error();
         }
 
-        _authorIds.Add(authorId);
+        _authors.Add(BookAuthor.Create(Id, authorId, _authors.Count));
 
         return Result.Success();
     }
 
     public Result RemoveAuthor(Guid authorId)
     {
-        if (!_authorIds.Remove(authorId))
+        BookAuthor? author = _authors.FirstOrDefault(x => x.AuthorId == authorId);
+
+        if (author is null)
         {
             return Result.Error(BookErrors.AuthorNotFound);
         }
 
-        if (_authorIds.Count == 0)
+        if (_authors.Count == 1)
         {
             return Result.Error(BookErrors.NoAuthor);
         }
 
+        _authors.Remove(author);
+
+        ReorderAuthors();
+
         return Result.Success();
     }
 
-    public Result AddGenre(Guid genreId)
+    public Result MoveAuthor(Guid authorId, int newOrder)
     {
-        if (_genreIds.Contains(genreId))
+        if (newOrder < 0 || newOrder >= _authors.Count)
+        {
+            return Result.Error();
+        }
+
+        BookAuthor? author = _authors.FirstOrDefault(x => x.AuthorId == authorId);
+
+        if (author is null)
+        {
+            return Result.Error(BookErrors.AuthorNotFound);
+        }
+
+        _authors.Remove(author);
+        _authors.Insert(newOrder, author);
+
+        ReorderAuthors();
+
+        return Result.Success();
+    }
+
+    public Result AddGenre(Genre genre)
+    {
+        if (_genres.Any(x => x.Id == genre.Id))
         {
             return Result.Error(BookErrors.GenreAlreadyExists);
         }
 
-        _genreIds.Add(genreId);
+        _genres.Add(genre);
 
         return Result.Success();
     }
 
     public Result RemoveGenre(Guid genreId)
     {
-        return !_genreIds.Remove(genreId) ? Result.Error(BookErrors.GenreNotFound) : Result.Success();
+        Genre? genre = _genres.FirstOrDefault(x => x.Id == genreId);
+
+        if (genre is null)
+        {
+            return Result.Error(BookErrors.GenreNotFound);
+        }
+
+        _genres.Remove(genre);
+
+        return Result.Success();
+    }
+
+    private void ReorderAuthors()
+    {
+        for (int i = 0; i < _authors.Count; i++)
+        {
+            _authors[i].SetOrder(i);
+        }
     }
 }

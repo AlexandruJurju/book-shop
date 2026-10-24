@@ -22,8 +22,7 @@ public sealed class BookEdition : Entity
         Language language,
         DateOnly publicationDate,
         int pageCount
-    )
-        : base(id)
+    ) : base(id)
     {
         Isbn = isbn;
         PublisherId = publisherId;
