@@ -14,15 +14,8 @@ public sealed class BookEdition : Entity
 
     private BookEdition() { } // EF Core
 
-    private BookEdition(
-        Guid id,
-        Isbn isbn,
-        Guid publisherId,
-        BookFormat format,
-        Language language,
-        DateOnly publicationDate,
-        int pageCount
-    ) : base(id)
+    private BookEdition(Guid id, Isbn isbn, Guid publisherId, BookFormat format, Language language, DateOnly publicationDate, int pageCount)
+        : base(id)
     {
         Isbn = isbn;
         PublisherId = publisherId;
@@ -46,13 +39,6 @@ public sealed class BookEdition : Entity
             return Result.Error(BookEditionErrors.NegativePageCount);
         }
 
-        return new BookEdition(
-            Guid.CreateVersion7(),
-            isbn,
-            publisherId,
-            format,
-            language,
-            publicationDate,
-            pageCount);
+        return new BookEdition(Guid.CreateVersion7(), isbn, publisherId, format, language, publicationDate, pageCount);
     }
 }

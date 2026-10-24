@@ -22,13 +22,8 @@ public sealed class Book : Entity, IAggregateRoot
 
     private Book() { } // EF Core
 
-    private Book(
-        Guid id,
-        BookTitle title,
-        IEnumerable<Genre> genres,
-        DateOnly originalPublicationDate,
-        string? description
-    ) : base(id)
+    private Book(Guid id, BookTitle title, IEnumerable<Genre> genres, DateOnly originalPublicationDate, string? description)
+        : base(id)
     {
         Title = title;
         Description = description;
@@ -67,115 +62,45 @@ public sealed class Book : Entity, IAggregateRoot
         return book;
     }
 
-    public Result<BookEdition> AddEdition(Isbn isbn, Guid publisherId, BookFormat format, Language language, DateOnly publicationDate, int pageCount)
-    {
-        if (_editions.Any(e => e.Isbn == isbn))
-        {
-            return Result.Error(BookErrors.EditionAlreadyExists(isbn.ToString()));
-        }
-
-        Result<BookEdition> editionResult = BookEdition.Create(isbn, publisherId, format, language, publicationDate, pageCount);
-
-        if (editionResult.IsError())
-        {
-            return editionResult;
-        }
-
-        BookEdition edition = editionResult.Value;
-
-        _editions.Add(edition);
-
-        RaiseDomainEvent(new BookEditionAddedEvent(Id, edition.Id, format));
-
-        return edition;
-    }
-
     public Result AddAuthor(Guid authorId)
     {
-        if (_authors.Any(x => x.AuthorId == authorId))
+        if (_authors.Any(a => a.AuthorId == authorId))
         {
-            return Result.Error();
+            return Result.Conflict("Author is already associated with this book.");
         }
 
-        _authors.Add(BookAuthor.Create(Id, authorId, _authors.Count));
+        _authors.Add(new BookAuthor(authorId, _authors.Count));
 
         return Result.Success();
     }
 
     public Result RemoveAuthor(Guid authorId)
     {
-        BookAuthor? author = _authors.FirstOrDefault(x => x.AuthorId == authorId);
+        BookAuthor? author = _authors.SingleOrDefault(a => a.AuthorId == authorId);
 
         if (author is null)
         {
-            return Result.Error(BookErrors.AuthorNotFound);
-        }
-
-        if (_authors.Count == 1)
-        {
-            return Result.Error(BookErrors.NoAuthor);
+            return Result.NotFound("Author association was not found.");
         }
 
         _authors.Remove(author);
 
-        ReorderAuthors();
-
-        return Result.Success();
-    }
-
-    public Result MoveAuthor(Guid authorId, int newOrder)
-    {
-        if (newOrder < 0 || newOrder >= _authors.Count)
+        for (int i = 0; i < _authors.Count; i++)
         {
-            return Result.Error();
+            _authors[i].SetOrder(i);
         }
-
-        BookAuthor? author = _authors.FirstOrDefault(x => x.AuthorId == authorId);
-
-        if (author is null)
-        {
-            return Result.Error(BookErrors.AuthorNotFound);
-        }
-
-        _authors.Remove(author);
-        _authors.Insert(newOrder, author);
-
-        ReorderAuthors();
 
         return Result.Success();
     }
 
     public Result AddGenre(Genre genre)
     {
-        if (_genres.Any(x => x.Id == genre.Id))
+        if (_genres.Any(g => g.Id == genre.Id))
         {
-            return Result.Error(BookErrors.GenreAlreadyExists);
+            return Result.Conflict("Genre already assigned.");
         }
 
         _genres.Add(genre);
-
         return Result.Success();
-    }
-
-    public Result RemoveGenre(Guid genreId)
-    {
-        Genre? genre = _genres.FirstOrDefault(x => x.Id == genreId);
-
-        if (genre is null)
-        {
-            return Result.Error(BookErrors.GenreNotFound);
-        }
-
-        _genres.Remove(genre);
-
-        return Result.Success();
-    }
-
-    private void ReorderAuthors()
-    {
-        for (int i = 0; i < _authors.Count; i++)
-        {
-            _authors[i].SetOrder(i);
-        }
     }
 }
