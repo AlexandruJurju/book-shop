@@ -1,21 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-    <ItemGroup>
-        <PackageReference Include="Mediator.SourceGenerator">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);MSG0005</NoWarn>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj"/>
-        <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj"/>
-        <ProjectReference Include="..\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj"/>
-        <ProjectReference Include="..\Services\Users\BookShop.Users.Api\BookShop.Users.Api.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mediator.SourceGenerator">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Aspire\BookShop.ServiceDefaults\BookShop.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="..\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj" />
+    <ProjectReference Include="..\Services\Catalog\BookShop.Catalog.Api\BookShop.Catalog.Api.csproj" />
+    <ProjectReference Include="..\Services\Users\BookShop.Users.Api\BookShop.Users.Api.csproj" />
+  </ItemGroup>
 </Project>

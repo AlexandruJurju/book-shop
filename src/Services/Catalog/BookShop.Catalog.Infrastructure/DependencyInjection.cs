@@ -1,5 +1,5 @@
 ﻿using BookShop.Catalog.Application.Abstractions;
-using BookShop.Catalog.Infrastructure.Persistence;
+using BookShop.Catalog.Infrastructure.EntityFramework;
 using BookShop.Shared;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;

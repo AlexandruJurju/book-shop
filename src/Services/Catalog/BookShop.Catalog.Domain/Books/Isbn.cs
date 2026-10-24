@@ -18,10 +18,7 @@ public sealed record Isbn
             return Result.Invalid(new ValidationError("ISBN cannot be empty."));
         }
 
-        string normalized = raw
-            .Replace("-", "")
-            .Replace(" ", "")
-            .ToUpperInvariant();
+        string normalized = raw.Replace("-", "").Replace(" ", "").ToUpperInvariant();
 
         if (normalized.Length is not (10 or 13))
         {
@@ -36,10 +33,7 @@ public sealed record Isbn
         return Result.Success(new Isbn(normalized));
     }
 
-    private static bool IsValidChecksum(string isbn) =>
-        isbn.Length == 10
-            ? IsValidIsbn10(isbn)
-            : IsValidIsbn13(isbn);
+    private static bool IsValidChecksum(string isbn) => isbn.Length == 10 ? IsValidIsbn10(isbn) : IsValidIsbn13(isbn);
 
     private static bool IsValidIsbn10(string isbn)
     {
@@ -49,11 +43,10 @@ public sealed record Isbn
         {
             char character = isbn[i];
 
-            int digit = character == 'X' && i == 9
-                ? 10
-                : char.IsDigit(character)
-                    ? character - '0'
-                    : -1;
+            int digit =
+                character == 'X' && i == 9 ? 10
+                : char.IsDigit(character) ? character - '0'
+                : -1;
 
             if (digit < 0)
             {
@@ -79,9 +72,7 @@ public sealed record Isbn
         {
             int digit = isbn[i] - '0';
 
-            sum += i % 2 == 0
-                ? digit
-                : digit * 3;
+            sum += i % 2 == 0 ? digit : digit * 3;
         }
 
         return sum % 10 == 0;

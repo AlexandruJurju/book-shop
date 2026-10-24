@@ -4,5 +4,5 @@ public enum BookStatus
 {
     Draft,
     Published,
-    Discontinued
+    Discontinued,
 }

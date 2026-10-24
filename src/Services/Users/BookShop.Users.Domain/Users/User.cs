@@ -1,5 +1,4 @@
-﻿using BookShop.Users.Domain.Users.Events;
-using BuildingBlocks.Domain;
+﻿using BuildingBlocks.Domain;
 
 namespace BookShop.Users.Domain.Users;
 
@@ -27,7 +26,7 @@ public sealed class User : Entity
     {
         var user = new User(Guid.CreateVersion7(), userName, email, identityId);
 
-        user.RaiseDomainEvent(new UserRegisteredDomainEvent(user.Id));
+        // user.RaiseDomainEvent(new UserRegisteredDomainEvent(user.Id));
 
         user._roles.Add(Role.Member);
 

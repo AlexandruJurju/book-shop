@@ -4,7 +4,7 @@ using BookShop.Catalog.Domain.Books;
 using BookShop.Shared;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookShop.Catalog.Infrastructure.Persistence;
+namespace BookShop.Catalog.Infrastructure.EntityFramework;
 
 public sealed class CatalogDbContext(
     DbContextOptions<CatalogDbContext> options

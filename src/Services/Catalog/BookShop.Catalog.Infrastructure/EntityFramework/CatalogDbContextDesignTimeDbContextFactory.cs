@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace BookShop.Catalog.Infrastructure.Persistence;
+namespace BookShop.Catalog.Infrastructure.EntityFramework;
 
 public class CatalogDbContextDesignTimeDbContextFactory : IDesignTimeDbContextFactory<CatalogDbContext>
 {

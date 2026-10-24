@@ -36,7 +36,7 @@ public sealed class BookEdition : Entity
     {
         if (pageCount < 0)
         {
-            return Result.Error(BookEditionErrors.NegativePageCount);
+            return Result.Error("Editions has negative page count.");
         }
 
         return new BookEdition(Guid.CreateVersion7(), isbn, publisherId, format, language, publicationDate, pageCount);

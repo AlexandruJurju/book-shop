@@ -1,4 +1,5 @@
 using Ardalis.Result;
+using BookShop.Catalog.Domain.Books;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Authors;
@@ -6,6 +7,9 @@ namespace BookShop.Catalog.Domain.Authors;
 public sealed class Author : Entity, IAggregateRoot
 {
     public PersonName Name { get; private set; }
+
+    public IReadOnlyCollection<BookAuthor> BookAuthors => _bookAuthors.AsReadOnly();
+    private readonly List<BookAuthor> _bookAuthors = [];
 
     private Author() { } // EF Core
 
