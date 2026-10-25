@@ -1,9 +1,10 @@
 using Ardalis.Result;
+using BookShop.Catalog.Domain.Books.ValueObjects;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Books;
 
-public sealed class BookEdition : Entity
+public sealed class BookEdition : Entity<Guid>
 {
     public Isbn Isbn { get; private set; }
     public Guid PublisherId { get; private set; }

@@ -17,6 +17,7 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
         {
             title.Property(bookTitle => bookTitle.Value)
                 .HasMaxLength(200)
+                .HasColumnName("title")
                 .IsRequired();
         });
 

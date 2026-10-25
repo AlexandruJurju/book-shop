@@ -7,7 +7,7 @@ internal abstract class BaseTest
 {
     protected static readonly Faker Faker = new();
 
-    public static T AssertDomainEventWasPublished<T>(Entity entity)
+    public static T AssertDomainEventWasPublished<T>(HasDomainEventsBase entity)
         where T : IDomainEvent
     {
         T? domainEvent = entity.DomainEvents.OfType<T>().SingleOrDefault();

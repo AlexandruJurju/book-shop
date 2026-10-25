@@ -1,10 +1,11 @@
 using Ardalis.Result;
+using BookShop.Catalog.Domain.Authors.ValueObjects;
 using BookShop.Catalog.Domain.Books;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Authors;
 
-public sealed class Author : Entity, IAggregateRoot
+public sealed class Author : Entity<Guid>, IAggregateRoot
 {
     public PersonName Name { get; private set; }
 

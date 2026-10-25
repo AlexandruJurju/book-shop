@@ -1,10 +1,10 @@
 using Ardalis.Result;
 
-namespace BookShop.Catalog.Domain.Books;
+namespace BookShop.Catalog.Domain.Books.ValueObjects;
 
 public sealed record BookTitle
 {
-    public string Value { get; init; }
+    public string Value { get; }
 
     private BookTitle(string value)
     {
@@ -13,18 +13,18 @@ public sealed record BookTitle
 
     private const int MaxLength = 300;
 
-    public static Result<BookTitle> Create(string title)
+    public static Result<BookTitle> From(string title)
     {
         if (string.IsNullOrWhiteSpace(title))
         {
-            return Result.Invalid(new ValidationError("Title cannot be empty."));
+            return Result.Error("Title cannot be empty.");
         }
 
         title = title.Trim();
 
         if (title.Length > MaxLength)
         {
-            return Result.Invalid(new ValidationError("Title cannot exceed 300 characters."));
+            return Result.Error("Title cannot exceed 300 characters.");
         }
 
         return new BookTitle(title);

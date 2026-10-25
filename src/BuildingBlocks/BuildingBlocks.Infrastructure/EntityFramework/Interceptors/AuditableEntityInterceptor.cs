@@ -35,7 +35,7 @@ public sealed class AuditableEntityInterceptor(
             return;
         }
 
-        foreach (EntityEntry<IAuditableEntity> entry in context.ChangeTracker.Entries<IAuditableEntity>())
+        foreach (EntityEntry<IAuditable> entry in context.ChangeTracker.Entries<IAuditable>())
         {
             if (entry.State is not (EntityState.Added or EntityState.Modified) &&
                 !entry.References.Any(r =>

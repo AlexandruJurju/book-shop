@@ -17,6 +17,7 @@ public sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
         {
             name.Property(personName => personName.Value)
                 .HasMaxLength(200)
+                .HasColumnName("name")
                 .IsRequired();
         });
     }

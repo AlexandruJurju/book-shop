@@ -19,6 +19,7 @@ public sealed class BookEditionConfiguration : IEntityTypeConfiguration<BookEdit
             {
                 isbn.Property(value => value.Value)
                     .HasMaxLength(17)
+                    .HasColumnName("isbn")
                     .IsRequired();
             }
         );
@@ -35,6 +36,7 @@ public sealed class BookEditionConfiguration : IEntityTypeConfiguration<BookEdit
             {
                 language.Property(value => value.Code)
                     .HasMaxLength(2)
+                    .HasColumnName("language")
                     .IsRequired();
             }
         );

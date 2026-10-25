@@ -1,6 +1,6 @@
 using Ardalis.Result;
 
-namespace BookShop.Catalog.Domain.Books;
+namespace BookShop.Catalog.Domain.Books.ValueObjects;
 
 public sealed record Language
 {
@@ -11,7 +11,7 @@ public sealed record Language
         Code = code;
     }
 
-    public static Result<Language> Create(string code)
+    public static Result<Language> From(string code)
     {
         if (string.IsNullOrWhiteSpace(code) || code.Length != 2)
         {

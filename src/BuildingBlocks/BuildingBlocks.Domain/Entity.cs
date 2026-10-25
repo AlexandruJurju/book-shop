@@ -1,20 +1,15 @@
 ﻿namespace BuildingBlocks.Domain;
 
-public abstract class Entity
+public abstract class Entity<TId> : HasDomainEventsBase
+    where TId : notnull
 {
-    public Guid Id { get; init; }
+    public TId Id { get; protected init; } = default!;
 
-    protected Entity(Guid id)
+    // for EF Core
+    protected Entity() { }
+
+    protected Entity(TId id)
     {
         Id = id;
     }
-
-    protected Entity() { }
-
-    private readonly List<IDomainEvent> _domainEvents = [];
-    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-
-    public void ClearDomainEvents() => _domainEvents.Clear();
-
-    protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
 }

@@ -1,12 +1,13 @@
 using Ardalis.Result;
 using BookShop.Catalog.Domain.Authors;
 using BookShop.Catalog.Domain.Books.Events;
+using BookShop.Catalog.Domain.Books.ValueObjects;
 using BookShop.Catalog.Domain.Genres;
 using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Books;
 
-public sealed class Book : Entity, IAggregateRoot
+public sealed class Book : Entity<Guid>, IAggregateRoot
 {
     private readonly List<BookAuthor> _authors = [];
     private readonly List<Genre> _genres = [];

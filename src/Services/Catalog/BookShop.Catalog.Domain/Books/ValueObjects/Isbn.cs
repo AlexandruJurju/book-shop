@@ -1,33 +1,33 @@
 using Ardalis.Result;
 
-namespace BookShop.Catalog.Domain.Books;
+namespace BookShop.Catalog.Domain.Books.ValueObjects;
 
 public sealed record Isbn
 {
-    public string Value { get; init; }
+    public string Value { get; }
 
     private Isbn(string value)
     {
         Value = value;
     }
 
-    public static Result<Isbn> Create(string? raw)
+    public static Result<Isbn> From(string raw)
     {
         if (string.IsNullOrWhiteSpace(raw))
         {
-            return Result.Invalid(new ValidationError("ISBN cannot be empty."));
+            return Result.Error("ISBN cannot be empty.");
         }
 
         string normalized = raw.Replace("-", "").Replace(" ", "").ToUpperInvariant();
 
         if (normalized.Length is not (10 or 13))
         {
-            return Result.Invalid(new ValidationError("ISBN must be 10 or 13 characters."));
+            return Result.Error("ISBN must be 10 or 13 characters.");
         }
 
         if (!IsValidChecksum(normalized))
         {
-            return Result.Invalid(new ValidationError($"'{raw}' is not a valid ISBN."));
+            return Result.Error($"'{raw}' is not a valid ISBN.");
         }
 
         return Result.Success(new Isbn(normalized));

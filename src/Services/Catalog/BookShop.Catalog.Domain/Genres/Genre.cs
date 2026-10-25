@@ -3,7 +3,7 @@ using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Genres;
 
-public sealed class Genre : Entity, IAggregateRoot
+public sealed class Genre : Entity<Guid>, IAggregateRoot
 {
     public string Name { get; private set; }
     public Guid? ParentGenreId { get; private set; }

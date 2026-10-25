@@ -1,6 +1,6 @@
 ﻿namespace BuildingBlocks.Domain;
 
-public interface IAuditableEntity
+public interface IAuditable
 {
     DateTime CreatedAtUtc { get; set; }
     Guid CreatedByUserId { get; set; }

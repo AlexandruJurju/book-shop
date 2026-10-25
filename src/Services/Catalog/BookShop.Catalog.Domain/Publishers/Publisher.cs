@@ -3,7 +3,7 @@ using BuildingBlocks.Domain;
 
 namespace BookShop.Catalog.Domain.Publishers;
 
-public sealed class Publisher : Entity, IAggregateRoot
+public sealed class Publisher : Entity<Guid>, IAggregateRoot
 {
     public string Name { get; private set; }
 
