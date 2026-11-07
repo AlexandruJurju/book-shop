@@ -1,7 +1,6 @@
 using System.Reflection;
-using BookShop.Cart.Api;
+using BookShop.Catalog.Api;
 using BookShop.ServiceDefaults;
-using BookShop.Users.Api;
 using BookShop.WebApi;
 using BookShop.WebApi.Extensions;
 using BuildingBlocks.Api.Endpoints;
@@ -17,22 +16,15 @@ builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-Assembly[] moduleApplicationAssemblies =
-[
-    BookShop.Users.Application.AssemblyMarker.Assembly,
-    BookShop.Cart.Application.AssemblyMarker.Assembly
-];
-
+Assembly[] moduleApplicationAssemblies = [BookShop.Catalog.Application.AssemblyMarker.Assembly];
 
 builder.AddApplication(moduleApplicationAssemblies);
 builder.AddPresentation();
-builder.AddInfrastructure(
-[
-    BookShop.Cart.Infrastructure.DependencyInjection.ConfigureConsumers
-]);
+builder.AddInfrastructure([]);
 
-builder.AddUsersModule();
-builder.AddCartModule();
+builder.AddCatalogModule();
+// builder.AddUsersModule();
+// builder.AddCartModule();
 
 WebApplication app = builder.Build();
 

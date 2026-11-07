@@ -1,4 +1,4 @@
-﻿namespace BookShop.Catalog.Application.Abstractions.Data;
+﻿namespace BookShop.Catalog.Application.Abstractions;
 
 public interface IUnitOfWork
 {

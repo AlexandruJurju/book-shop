@@ -10,7 +10,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddAuthorization();
 
-        services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
+        // todo: readd after users refactor
+        // services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
 
         services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

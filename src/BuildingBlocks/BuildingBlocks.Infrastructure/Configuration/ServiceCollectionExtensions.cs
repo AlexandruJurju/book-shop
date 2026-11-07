@@ -10,16 +10,13 @@ public static class ServiceCollectionExtensions
         return configuration.GetConnectionString(name) ??
             throw new InvalidOperationException($"The connection string {name} was not found");
     }
-    
-    extension(IServiceCollection services)
+
+    public static void ConfigureWithValidation<TOptions>(this IServiceCollection services, string section) where TOptions : class
     {
-        public void ConfigureWithValidation<TOptions>(string section) where TOptions : class
-        {
-            services
-                .AddOptionsWithValidateOnStart<TOptions>()
-                .BindConfiguration(section)
-                .ValidateDataAnnotations()
-                .ValidateOnStart();
-        }
+        services
+            .AddOptionsWithValidateOnStart<TOptions>()
+            .BindConfiguration(section)
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
     }
 }

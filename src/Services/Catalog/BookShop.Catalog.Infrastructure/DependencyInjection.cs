@@ -1,4 +1,4 @@
-﻿using BookShop.Catalog.Application.Abstractions.Data;
+﻿using BookShop.Catalog.Application.Abstractions;
 using BookShop.Catalog.Infrastructure.EntityFramework;
 using BookShop.Shared;
 using BuildingBlocks.Infrastructure.EntityFramework;

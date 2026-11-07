@@ -23,7 +23,7 @@ public sealed class InsertOutboxMessagesInterceptor : SaveChangesInterceptor
     private static void InsertOutboxMessages(DbContext context)
     {
         var outboxMessages = context.ChangeTracker
-            .Entries<Entity>()
+            .Entries<HasDomainEventsBase>()
             .Select(entry => entry.Entity)
             .SelectMany(entity =>
             {
@@ -38,7 +38,7 @@ public sealed class InsertOutboxMessagesInterceptor : SaveChangesInterceptor
                 Id = domainEvent.Id,
                 Type = domainEvent.GetType().FullName!,
                 Content = JsonSerializer.Serialize(domainEvent, domainEvent.GetType()),
-                OccurredOnUtc = domainEvent.OccurredAtUtc
+                OccurredOnUtc = domainEvent.OccurredOnUtc
             })
             .ToList();
 

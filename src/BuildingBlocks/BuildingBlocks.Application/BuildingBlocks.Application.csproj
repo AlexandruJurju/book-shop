@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -13,5 +13,9 @@
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.AspNetCore"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Abstractions\" />
     </ItemGroup>
 </Project>

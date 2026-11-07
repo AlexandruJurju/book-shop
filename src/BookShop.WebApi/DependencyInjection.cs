@@ -6,6 +6,7 @@ using BuildingBlocks.Infrastructure.Authentication;
 using BuildingBlocks.Infrastructure.Authorization;
 using BuildingBlocks.Infrastructure.Cache;
 using BuildingBlocks.Infrastructure.Data;
+using BuildingBlocks.Infrastructure.Data.Postgres;
 using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.EventBus;
 using BuildingBlocks.Infrastructure.Inbox;
