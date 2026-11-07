@@ -6,7 +6,7 @@ using BookShop.WebApi.Extensions;
 using BuildingBlocks.Api.Endpoints;
 using BuildingBlocks.Api.ExceptionHandler;
 using BuildingBlocks.Api.Scalar;
-using TickerQ.DependencyInjection;
+using Quartz;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -23,18 +23,15 @@ builder.AddPresentation();
 builder.AddInfrastructure([]);
 
 builder.AddCatalogModule();
-// builder.AddUsersModule();
-// builder.AddCartModule();
 
 WebApplication app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-app.MapCustomScalar(builder.Configuration);
-
 if (app.Environment.IsDevelopment())
 {
     app.ApplyMigrations();
+    app.MapCustomScalar(builder.Configuration);
 }
 
 app.UseHttpsRedirection();
@@ -42,10 +39,12 @@ app.UseHttpsRedirection();
 app.UseExceptionHandler();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
+app.UseAntiforgery();
 
-app.UseTickerQ();
+app.MapStaticAssets();
+app.MapQuartzHttpApi().AllowAnonymous();
+app.MapQuartzDashboard().AllowAnonymous();
 
 app.MapEndpoints();
 

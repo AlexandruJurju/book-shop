@@ -5,7 +5,6 @@ using BuildingBlocks.Application.CQRS.Behaviors;
 using BuildingBlocks.Infrastructure.Authentication;
 using BuildingBlocks.Infrastructure.Authorization;
 using BuildingBlocks.Infrastructure.Cache;
-using BuildingBlocks.Infrastructure.Data;
 using BuildingBlocks.Infrastructure.Data.Postgres;
 using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.EventBus;
@@ -15,8 +14,7 @@ using MassTransit;
 using Mediator;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using TickerQ.Dashboard.DependencyInjection;
-using TickerQ.DependencyInjection;
+using Quartz;
 
 namespace BookShop.WebApi;
 
@@ -55,7 +53,6 @@ internal static class DependencyInjection
         builder.Services.AddTransient<IIntegrationEventsDispatcher, IntegrationEventsDispatcher>();
 
         services.AddCustomAuthentication();
-
         services.AddCustomAuthorization();
 
         builder.AddCustomCacheInMemory();
@@ -68,13 +65,16 @@ internal static class DependencyInjection
         services.AddScoped<IInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<IInterceptor, SlowQueryInterceptor>();
 
-        services.AddTickerQ(opt =>
+        builder.AddQuartz();
+        builder.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        builder.Services.AddQuartzHttpApi(options =>
         {
-            opt.AddDashboard(dashboard =>
-            {
-                dashboard.SetBasePath("/management/jobs");
-                dashboard.WithNoAuth();
-            });
+            options.ApiPath = "/quartz-api";
+        });
+        builder.Services.AddQuartzDashboard(options =>
+        {
+            options.DashboardPath = "/jobs";
         });
 
         services.TryAddSingleton(TimeProvider.System);

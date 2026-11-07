@@ -16,10 +16,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.Extensions.Caching.Hybrid"/>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+        <PackageReference Include="Quartz" />
+        <PackageReference Include="Quartz.Dashboard" />
         <PackageReference Include="Testcontainers.Keycloak"/>
         <PackageReference Include="Testcontainers.PostgreSql"/>
-        <PackageReference Include="TickerQ"/>
-        <PackageReference Include="TickerQ.Dashboard"/>
     </ItemGroup>
 
 </Project>
