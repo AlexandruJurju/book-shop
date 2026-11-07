@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Users\Events\" />
-  </ItemGroup>
-</Project>

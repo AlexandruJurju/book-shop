@@ -4,25 +4,34 @@ namespace BookShop.Catalog.Domain.Authors.ValueObjects;
 
 public sealed record PersonName
 {
+    public const int MaxLength = 200;
+
     public string Value { get; }
 
-    private PersonName(string value)
-    {
-        Value = value;
-    }
+    private PersonName(string value) => Value = value;
 
-    public static Result<PersonName> From(string name)
+    public static Result<PersonName> From(string? name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            return Result.Error("Name cannot be empty.");
+            return Result.Invalid(new ValidationError
+            {
+                Identifier = nameof(name),
+                ErrorMessage = "Name cannot be empty."
+            });
         }
 
-        if (name.Length > 200)
+        name = name.Trim().Normalize();
+
+        if (name.Length > MaxLength)
         {
-            return Result.Error("Name is too long.");
+            return Result.Invalid(new ValidationError
+            {
+                Identifier = nameof(name),
+                ErrorMessage = $"Name cannot exceed {MaxLength} characters."
+            });
         }
 
-        return Result.Success(new PersonName(name));
+        return new PersonName(name);
     }
 }

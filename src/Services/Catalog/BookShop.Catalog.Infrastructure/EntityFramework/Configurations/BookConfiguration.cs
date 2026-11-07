@@ -1,4 +1,5 @@
 using BookShop.Catalog.Domain.Books;
+using BookShop.Catalog.Domain.Books.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,13 +14,9 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(book => book.Id)
             .ValueGeneratedNever();
 
-        builder.ComplexProperty(book => book.Title, title =>
-        {
-            title.Property(bookTitle => bookTitle.Value)
-                .HasMaxLength(200)
-                .HasColumnName("title")
-                .IsRequired();
-        });
+        builder.Property(b => b.Title)
+            .HasConversion(t => t.Value, value => BookTitle.From(value))
+            .HasMaxLength(BookTitle.MaxLength);
 
         builder.Property(book => book.Status);
 

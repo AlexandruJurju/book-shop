@@ -1,4 +1,5 @@
 using BookShop.Catalog.Domain.Authors;
+using BookShop.Catalog.Domain.Authors.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,12 +14,8 @@ public sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
         builder.Property(author => author.Id)
             .ValueGeneratedNever();
 
-        builder.ComplexProperty(author => author.Name, name =>
-        {
-            name.Property(personName => personName.Value)
-                .HasMaxLength(200)
-                .HasColumnName("name")
-                .IsRequired();
-        });
+        builder.Property(author => author.Name)
+            .HasConversion(name => name.Value, value => PersonName.From(value))
+            .HasMaxLength(PersonName.MaxLength);
     }
 }

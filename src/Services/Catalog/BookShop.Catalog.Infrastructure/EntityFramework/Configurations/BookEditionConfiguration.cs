@@ -1,4 +1,5 @@
 using BookShop.Catalog.Domain.Books;
+using BookShop.Catalog.Domain.Books.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,16 +14,9 @@ public sealed class BookEditionConfiguration : IEntityTypeConfiguration<BookEdit
         builder.Property(edition => edition.Id)
             .ValueGeneratedNever();
 
-        builder.ComplexProperty(
-            edition => edition.Isbn,
-            isbn =>
-            {
-                isbn.Property(value => value.Value)
-                    .HasMaxLength(17)
-                    .HasColumnName("isbn")
-                    .IsRequired();
-            }
-        );
+        builder.Property(edition => edition.Isbn)
+            .HasConversion(isbn => isbn.Value, value => Isbn.From(value))
+            .HasMaxLength(17);
 
         builder.Property(edition => edition.PublisherId)
             .IsRequired();
@@ -30,16 +24,9 @@ public sealed class BookEditionConfiguration : IEntityTypeConfiguration<BookEdit
         builder.Property(edition => edition.Format)
             .IsRequired();
 
-        builder.ComplexProperty(
-            edition => edition.Language,
-            language =>
-            {
-                language.Property(value => value.Code)
-                    .HasMaxLength(2)
-                    .HasColumnName("language")
-                    .IsRequired();
-            }
-        );
+        builder.Property(edition => edition.Language)
+            .HasConversion(language => language.Code, value => Language.From(value))
+            .HasMaxLength(2);
 
         builder.Property(edition => edition.PublicationDate)
             .IsRequired();
