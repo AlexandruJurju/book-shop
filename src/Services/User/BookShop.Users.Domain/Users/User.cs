@@ -3,7 +3,7 @@ using BuildingBlocks.Domain;
 
 namespace BookShop.Users.Domain.Users;
 
-public sealed class User : Entity
+public sealed class User : Entity<Guid>, IAggregateRoot
 {
     // For EF Core
     private User() { }

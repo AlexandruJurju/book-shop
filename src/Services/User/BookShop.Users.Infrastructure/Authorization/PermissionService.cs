@@ -1,6 +1,6 @@
 ﻿using Ardalis.Result;
-using BookShop.Users.Infrastructure.EntityFramework;
-using BuildingBlocks.Application.Authorization;
+using BookShop.Users.Infrastructure.Persistence;
+using BuildingBlocks.Application.Abstractions.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Users.Infrastructure.Authorization;

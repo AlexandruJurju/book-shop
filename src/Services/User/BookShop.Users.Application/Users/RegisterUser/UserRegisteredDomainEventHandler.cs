@@ -4,7 +4,6 @@ using BookShop.Users.Application.Users.GetUser;
 using BookShop.Users.Domain.Users.Events;
 using BookShop.Users.Contracts;
 using BuildingBlocks.Application.EventBus;
-using BuildingBlocks.Common.Extensions;
 using Mediator;
 using Microsoft.Extensions.Logging;
 
@@ -21,7 +20,7 @@ public sealed class UserRegisteredDomainEventHandler(
     {
         Result<UserResponse> result = await mediator.Send(new GetUserQuery(notification.UserId), cancellationToken);
 
-        if (result.IsFailure)
+        if (!result.IsSuccess)
         {
             throw new ApplicationException();
         }

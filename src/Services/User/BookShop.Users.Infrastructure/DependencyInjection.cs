@@ -3,13 +3,11 @@ using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Abstractions.Identity;
 using BookShop.Users.Infrastructure.Authorization;
-using BookShop.Users.Infrastructure.EntityFramework;
-using BookShop.Users.Infrastructure.Idempotency;
-using BookShop.Users.Infrastructure.IdentityProvider;
+using BookShop.Users.Infrastructure.BackgroundJobs.Outbox;
 using BookShop.Users.Infrastructure.IdentityProvider.Keycloak;
-using BookShop.Users.Infrastructure.Outbox;
-using BuildingBlocks.Application.Authorization;
-using BuildingBlocks.Application.CQRS;
+using BookShop.Users.Infrastructure.Persistence;
+using BookShop.Users.Infrastructure.Persistence.Idempotency;
+using BuildingBlocks.Application.Abstractions.Authorization;
 using BuildingBlocks.Infrastructure.Configuration;
 using BuildingBlocks.Infrastructure.EntityFramework;
 using BuildingBlocks.Infrastructure.Keycloak;
@@ -17,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using TickerQ.DependencyInjection;
+using Quartz;
 
 namespace BookShop.Users.Infrastructure;
 
@@ -74,9 +72,15 @@ public static class DependencyInjection
 
         OutboxJobOptions outboxJobOptions = section.Get<OutboxJobOptions>()!;
 
-        services
-            .MapTicker<OutboxProcessorJob>()
-            .WithMaxConcurrency(1)
-            .WithCron(outboxJobOptions.Cron);
+        services.AddQuartz(options =>
+        {
+            options.AddJob<OutboxProcessorJob>(job =>
+                job.WithIdentity(nameof(OutboxProcessorJob)));
+
+            options.AddTrigger(trigger => trigger
+                .ForJob(nameof(OutboxProcessorJob))
+                .WithIdentity($"{nameof(OutboxProcessorJob)}-trigger")
+                .WithCronSchedule(outboxJobOptions.Cron));
+        });
     }
 }

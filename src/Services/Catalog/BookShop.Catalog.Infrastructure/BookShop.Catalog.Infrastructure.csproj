@@ -7,9 +7,5 @@
       <ProjectReference Include="..\BookShop.Catalog.Domain\BookShop.Catalog.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="EntityFramework\Migrations\" />
-    </ItemGroup>
-
 
 </Project>

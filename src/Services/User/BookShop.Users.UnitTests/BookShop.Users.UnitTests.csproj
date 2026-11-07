@@ -19,8 +19,4 @@
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage"/>
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Application\" />
-    </ItemGroup>
 </Project>

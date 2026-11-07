@@ -6,4 +6,8 @@
       <ProjectReference Include="..\BookShop.Users.Application\BookShop.Users.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="BackgroundJobs\" />
+    </ItemGroup>
+
 </Project>

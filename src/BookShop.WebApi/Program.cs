@@ -1,6 +1,7 @@
 using System.Reflection;
 using BookShop.Catalog.Api;
 using BookShop.ServiceDefaults;
+using BookShop.Users.Api;
 using BookShop.WebApi;
 using BookShop.WebApi.Extensions;
 using BuildingBlocks.Api.Endpoints;
@@ -16,13 +17,18 @@ builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-Assembly[] moduleApplicationAssemblies = [BookShop.Catalog.Application.AssemblyMarker.Assembly];
+Assembly[] moduleApplicationAssemblies =
+[
+    BookShop.Catalog.Application.AssemblyMarker.Assembly,
+    BookShop.Users.Application.AssemblyMarker.Assembly
+];
 
 builder.AddApplication(moduleApplicationAssemblies);
 builder.AddPresentation();
 builder.AddInfrastructure([]);
 
 builder.AddCatalogModule();
+builder.AddUsersModule();
 
 WebApplication app = builder.Build();
 

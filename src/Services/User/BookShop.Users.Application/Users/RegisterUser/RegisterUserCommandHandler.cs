@@ -3,7 +3,6 @@ using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Application.Abstractions.Identity;
 using BookShop.Users.Domain.Users;
 using BuildingBlocks.Application.CQRS;
-using BuildingBlocks.Common.Extensions;
 
 namespace BookShop.Users.Application.Users.RegisterUser;
 
@@ -19,7 +18,7 @@ public sealed class RegisterUserCommandHandler(
             new UserModel(request.UserName, request.Email, request.Password),
             cancellationToken);
 
-        if (result.IsFailure)
+        if (!result.IsSuccess)
         {
             return Result.Error();
         }
