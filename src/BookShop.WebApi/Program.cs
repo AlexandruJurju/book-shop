@@ -1,4 +1,5 @@
 using System.Reflection;
+using BookShop.Cart;
 using BookShop.Catalog.Api;
 using BookShop.ServiceDefaults;
 using BookShop.Users.Api;
@@ -20,7 +21,8 @@ builder.Services.AddProblemDetails();
 Assembly[] moduleApplicationAssemblies =
 [
     BookShop.Catalog.Application.AssemblyMarker.Assembly,
-    BookShop.Users.Application.AssemblyMarker.Assembly
+    BookShop.Users.Application.AssemblyMarker.Assembly,
+    BookShop.Cart.AssemblyMarker.Assembly
 ];
 
 builder.AddApplication(moduleApplicationAssemblies);
@@ -29,6 +31,7 @@ builder.AddInfrastructure([]);
 
 builder.AddCatalogModule();
 builder.AddUsersModule();
+builder.AddCartModule();
 
 WebApplication app = builder.Build();
 

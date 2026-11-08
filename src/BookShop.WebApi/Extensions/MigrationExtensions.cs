@@ -1,4 +1,4 @@
-﻿using BookShop.Catalog.Infrastructure.EntityFramework;
+﻿using BookShop.Cart.Infrastructure.Persistence;
 using BookShop.Catalog.Infrastructure.Persistence;
 using BookShop.Users.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ internal static class MigrationExtensions
 
         ApplyMigration<CatalogDbContext>(scope);
         ApplyMigration<UsersDbContext>(scope);
-        // ApplyMigration<CartDbContext>(scope);
+        ApplyMigration<CartDbContext>(scope);
     }
 
     private static void ApplyMigration<TDbContext>(IServiceScope scope)

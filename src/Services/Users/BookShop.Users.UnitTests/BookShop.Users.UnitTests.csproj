@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bogus"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+        <PackageReference Include="TUnit"/>
+        <PackageReference Include="TUnit.Assertions.Should"/>
+        <PackageReference Include="TUnit.Mocks"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookShop.Users.Api\BookShop.Users.Api.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage"/>
+    </ItemGroup>
+</Project>
