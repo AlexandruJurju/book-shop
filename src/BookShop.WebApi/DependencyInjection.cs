@@ -57,7 +57,7 @@ internal static class DependencyInjection
 
         builder.AddCustomCacheInMemory();
 
-        services.AddCustomMassTransitInMemory(moduleConfigureConsumers);
+        services.AddCustomMassTransitRabbitMq(moduleConfigureConsumers, Resources.RabbitMq);
 
         services.AddCustomPostgres(configuration, Resources.Postgres);
         services.AddScoped<IInterceptor, InsertOutboxMessagesInterceptor>();

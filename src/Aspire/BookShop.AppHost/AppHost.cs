@@ -22,6 +22,7 @@ IResourceBuilder<KeycloakResource> keycloak = builder
 IResourceBuilder<ParameterResource> rabbitMqUsername = builder.AddParameter("rabbitmq-user", "admin", secret: false);
 IResourceBuilder<ParameterResource> rabbitMqPassword = builder.AddParameter("rabbitmq-password", "admin", secret: true);
 IResourceBuilder<RabbitMQServerResource> rabbitmq = builder.AddRabbitMQ(Resources.RabbitMq, rabbitMqUsername, rabbitMqPassword)
+    .WithManagementPlugin()
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume();
 
