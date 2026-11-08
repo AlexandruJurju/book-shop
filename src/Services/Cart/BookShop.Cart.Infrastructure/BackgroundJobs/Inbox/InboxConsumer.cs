@@ -9,7 +9,7 @@ using MassTransit;
 
 namespace BookShop.Cart.Infrastructure.BackgroundJobs.Inbox;
 
-internal sealed class IntegrationEventConsumer<TIntegrationEvent>(
+internal sealed class InboxConsumer<TIntegrationEvent>(
     IDbConnectionFactory dbConnectionFactory
 ) : IConsumer<TIntegrationEvent>
     where TIntegrationEvent : IntegrationEvent
@@ -25,7 +25,7 @@ internal sealed class IntegrationEventConsumer<TIntegrationEvent>(
             Id = integrationEvent.Id,
             Type = integrationEvent.GetType().FullName!,
             Content = JsonSerializer.Serialize(integrationEvent, integrationEvent.GetType()),
-            OccurredOnUtc = integrationEvent.OccurredOnUtc
+            OccurredOnUtc = integrationEvent.OccurredAtUtc
         };
 
         const string sql =

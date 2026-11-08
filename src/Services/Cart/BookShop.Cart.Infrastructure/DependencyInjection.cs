@@ -3,7 +3,9 @@ using BookShop.Cart.Application.EventBus;
 using BookShop.Cart.Infrastructure.BackgroundJobs.Inbox;
 using BookShop.Cart.Infrastructure.Persistence;
 using BookShop.Shared;
+using BookShop.Users.Contracts.IntegrationEvents;
 using BuildingBlocks.Infrastructure.EntityFramework;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,5 +54,11 @@ public static class DependencyInjection
                 .WithIdentity($"{nameof(InboxProcessorJob)}-trigger")
                 .WithCronSchedule(inboxJobOptions.Cron));
         });
+    }
+
+    public static void ConfigureConsumers(IRegistrationConfigurator registrationConfigurator, string instanceId)
+    {
+        registrationConfigurator.AddConsumer<InboxConsumer<UserRegisteredIntegrationEvent>>()
+            .Endpoint(c => c.InstanceId = instanceId);
     }
 }

@@ -3,8 +3,7 @@
         <ProjectReference Include="..\..\..\Aspire\BookShop.Shared\BookShop.Shared.csproj" />
         <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj"/>
         <ProjectReference Include="..\..\Users\BookShop.Users.Contracts\BookShop.Users.Contracts.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Domain\"/>
+        <ProjectReference Include="..\BookShop.Cart.Application\BookShop.Cart.Application.csproj" />
+        <ProjectReference Include="..\BookShop.Cart.Infrastructure\BookShop.Cart.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

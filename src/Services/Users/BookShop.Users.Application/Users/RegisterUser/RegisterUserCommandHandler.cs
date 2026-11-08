@@ -16,18 +16,15 @@ public sealed class RegisterUserCommandHandler(
     {
         Result<string> result = await identityProvider.CreateUserAsync(
             new UserModel(request.UserName, request.Email, request.Password),
-            cancellationToken);
+            cancellationToken
+        );
 
         if (!result.IsSuccess)
         {
             return Result.Error();
         }
 
-        var user = User.Create(
-            request.UserName,
-            request.Email,
-            result.Value
-        );
+        var user = User.Create(request.UserName, request.Email, result.Value);
 
         usersDbContext.Users.Add(user);
         usersDbContext.Roles.Attach(Role.Member);

@@ -1,5 +1,5 @@
 using System.Reflection;
-using BookShop.Cart;
+using BookShop.Cart.Api;
 using BookShop.Catalog.Api;
 using BookShop.ServiceDefaults;
 using BookShop.Users.Api;
@@ -22,12 +22,15 @@ Assembly[] moduleApplicationAssemblies =
 [
     BookShop.Catalog.Application.AssemblyMarker.Assembly,
     BookShop.Users.Application.AssemblyMarker.Assembly,
-    BookShop.Cart.AssemblyMarker.Assembly
+    BookShop.Cart.Application.AssemblyMarker.Assembly
 ];
 
 builder.AddApplication(moduleApplicationAssemblies);
 builder.AddPresentation();
-builder.AddInfrastructure([]);
+builder.AddInfrastructure(
+[
+    BookShop.Cart.Infrastructure.DependencyInjection.ConfigureConsumers
+]);
 
 builder.AddCatalogModule();
 builder.AddUsersModule();

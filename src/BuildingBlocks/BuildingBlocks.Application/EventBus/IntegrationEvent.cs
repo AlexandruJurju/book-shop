@@ -2,5 +2,5 @@
 
 public abstract record IntegrationEvent(
     Guid Id,
-    DateTime OccurredOnUtc
+    DateTime OccurredAtUtc
 ) : IIntegrationEvent;

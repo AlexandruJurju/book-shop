@@ -20,7 +20,7 @@
         <ProjectReference Include="..\Aspire\BookShop.Shared\BookShop.Shared.csproj"/>
         <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj"/>
         <ProjectReference Include="..\Services\Catalog\BookShop.Catalog.Api\BookShop.Catalog.Api.csproj"/>
-        <ProjectReference Include="..\Services\Cart\BookShop.Cart\BookShop.Cart.csproj"/>
+        <ProjectReference Include="..\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj" />
         <ProjectReference Include="..\Services\Users\BookShop.Users.Api\BookShop.Users.Api.csproj" />
     </ItemGroup>
 </Project>

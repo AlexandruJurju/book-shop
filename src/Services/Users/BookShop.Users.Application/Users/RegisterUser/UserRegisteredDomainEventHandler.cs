@@ -1,9 +1,9 @@
 ﻿using Ardalis.Result;
 using BookShop.Users.Application.Abstractions.Idempotency;
 using BookShop.Users.Application.Users.GetUser;
-using BookShop.Users.Domain.Users.Events;
 using BookShop.Users.Contracts;
 using BookShop.Users.Contracts.IntegrationEvents;
+using BookShop.Users.Domain.Users.Events;
 using BuildingBlocks.Application.EventBus;
 using Mediator;
 using Microsoft.Extensions.Logging;
@@ -27,11 +27,8 @@ public sealed class UserRegisteredDomainEventHandler(
         }
 
         await bus.PublishAsync(
-            new UserRegisteredIntegrationEvent(
-                notification.OccurredAtUtc,
-                result.Value.Id,
-                result.Value.Email
-            ),
-            cancellationToken);
+            new UserRegisteredIntegrationEvent(notification.OccurredAtUtc, result.Value.Id, result.Value.Email),
+            cancellationToken
+        );
     }
 }

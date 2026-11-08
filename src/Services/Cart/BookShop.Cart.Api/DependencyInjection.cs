@@ -4,7 +4,7 @@ using BuildingBlocks.Api.Endpoints;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BookShop.Cart;
+namespace BookShop.Cart.Api;
 
 public static class DependencyInjection
 {

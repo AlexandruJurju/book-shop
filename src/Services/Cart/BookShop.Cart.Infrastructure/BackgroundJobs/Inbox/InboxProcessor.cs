@@ -23,7 +23,7 @@ internal sealed class InboxProcessor(
     private static string SchemaName => Services.Cart;
     private static string ServiceName => Services.Cart;
 
-    public async Task<int> ProcessAsync(CancellationToken cancellationToken)
+    public async Task ProcessAsync(CancellationToken cancellationToken)
     {
         if (logger.IsEnabled(LogLevel.Information))
         {
@@ -37,7 +37,7 @@ internal sealed class InboxProcessor(
 
         if (inboxMessages.Count == 0)
         {
-            return 0;
+            return;
         }
 
         var updateQueue = new ConcurrentQueue<InboxUpdate>();
@@ -52,8 +52,6 @@ internal sealed class InboxProcessor(
         {
             logger.LogInformation("{Service} - Completed processing inbox messages", SchemaName);
         }
-
-        return inboxMessages.Count;
     }
 
     private async Task<IReadOnlyList<InboxMessageResponse>> GetInboxMessagesAsync(

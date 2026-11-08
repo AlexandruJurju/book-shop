@@ -15,7 +15,10 @@
     </Folder>
     <Folder Name="/Services/" />
     <Folder Name="/Services/Cart/">
-        <Project Path="src\Services\Cart\BookShop.Cart\BookShop.Cart.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />
+        <Project Path="src/Services/Cart/BookShop.Cart.Infrastructure/BookShop.Cart.Infrastructure.csproj" />
+        <Project Path="src\Services\Cart\BookShop.Cart.Api\BookShop.Cart.Api.csproj" />
     </Folder>
     <Folder Name="/Services/Catalog/">
         <Project Path="src/Services/Catalog/BookShop.Catalog.Api/BookShop.Catalog.Api.csproj" />
