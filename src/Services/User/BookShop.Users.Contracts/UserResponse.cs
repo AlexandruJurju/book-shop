@@ -1,7 +1,0 @@
-namespace BookShop.Users.Contracts;
-
-public record UserResponse(
-    Guid Id,
-    string Username,
-    string Email
-);

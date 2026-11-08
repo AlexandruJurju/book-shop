@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
-        <ProjectReference Include="..\BookShop.Users.Contracts\BookShop.Users.Contracts.csproj" />
-        <ProjectReference Include="..\BookShop.Users.Infrastructure\BookShop.Users.Infrastructure.csproj"/>
-    </ItemGroup>
-</Project>

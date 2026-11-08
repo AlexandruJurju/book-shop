@@ -1,4 +1,4 @@
-﻿using BookShop.Users.Contracts;
+﻿using BookShop.Users.Contracts.IntegrationEvents;
 using BuildingBlocks.Application.EventBus;
 
 namespace BookShop.Cart.Application.IntegrationEventsHandlers;

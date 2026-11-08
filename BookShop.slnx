@@ -24,16 +24,11 @@
         <Project Path="src/Services/Catalog/BookShop.Catalog.Infrastructure/BookShop.Catalog.Infrastructure.csproj" />
     </Folder>
     <Folder Name="/Services/Users/">
-        <Project Path="src/Services/User/BookShop.Users.Api/BookShop.Users.Api.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.Application/BookShop.Users.Application.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.Contracts/BookShop.Users.Contracts.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
-    </Folder>
-    <Folder Name="/Services/Users/tests/">
-        <Project Path="src/Services/User/BookShop.Users.ArchitectureTests/BookShop.Users.ArchitectureTests.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.IntegrationTests/BookShop.Users.IntegrationTests.csproj" />
-        <Project Path="src/Services/User/BookShop.Users.UnitTests/BookShop.Users.UnitTests.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Api/BookShop.Users.Api.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Application/BookShop.Users.Application.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Contracts/BookShop.Users.Contracts.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Domain/BookShop.Users.Domain.csproj" />
+        <Project Path="src/Services/Users/BookShop.Users.Infrastructure/BookShop.Users.Infrastructure.csproj" />
     </Folder>
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig" />
