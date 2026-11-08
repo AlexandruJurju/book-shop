@@ -1,5 +1,5 @@
 ﻿using BookShop.Cart.Application.Abstractions.Data;
-using BookShop.Cart.Application.EventBus;
+using BookShop.Cart.Application.Abstractions.EventBus;
 using BookShop.Cart.Infrastructure.BackgroundJobs.Inbox;
 using BookShop.Cart.Infrastructure.Persistence;
 using BookShop.Shared;
@@ -38,9 +38,6 @@ public static class DependencyInjection
             .Bind(section)
             .ValidateDataAnnotations()
             .ValidateOnStart();
-
-        services.AddScoped<InboxProcessor>();
-        services.AddScoped<InboxProcessorJob>();
 
         InboxJobOptions inboxJobOptions = section.Get<InboxJobOptions>()!;
 

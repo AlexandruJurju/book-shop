@@ -21,7 +21,7 @@ namespace BookShop.Users.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddInfrastructure(this IHostApplicationBuilder builder)
+    public static void AddInfrastructure(this IHostApplicationBuilder builder)
     {
         IServiceCollection services = builder.Services;
         IConfigurationManager configuration = builder.Configuration;
@@ -35,8 +35,6 @@ public static class DependencyInjection
 
         services.AddScoped<IPermissionService, PermissionService>();
         AddKeycloakIdentityProvider(services);
-
-        return builder;
     }
 
     private static void AddKeycloakIdentityProvider(IServiceCollection services)
@@ -66,9 +64,6 @@ public static class DependencyInjection
             .Bind(section)
             .ValidateDataAnnotations()
             .ValidateOnStart();
-
-        services.AddScoped<OutboxProcessor>();
-        services.AddScoped<OutboxProcessorJob>();
 
         OutboxJobOptions outboxJobOptions = section.Get<OutboxJobOptions>()!;
 

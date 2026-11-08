@@ -2,9 +2,8 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-#pragma warning disable CA1861
 
-namespace BookShop.Cart.Presentation.Infrastructure.EntityFramework.Migrations;
+namespace BookShop.Cart.Infrastructure.EntityFramework.Migrations;
 
 /// <inheritdoc />
 public partial class Initial : Migration
@@ -76,12 +75,20 @@ public partial class Initial : Migration
             });
 
         migrationBuilder.CreateIndex(
-            name: "idx_outbox_messages_unprocessed",
-            schema: "cart",
-            table: "outbox_messages",
-            columns: [ "occurred_on_utc", "processed_on_utc" ],
-            filter: "\"processed_on_utc\" IS NULL")
-            .Annotation("Npgsql:IndexInclude", new[] { "id", "type", "content" });
+                name: "idx_inbox_messages_unprocessed",
+                schema: "cart",
+                table: "inbox_messages",
+                columns: ["occurred_on_utc", "processed_on_utc"],
+                filter: "\"processed_on_utc\" IS NULL")
+            .Annotation("Npgsql:IndexInclude", (string[])["id", "type", "content"]);
+
+        migrationBuilder.CreateIndex(
+                name: "idx_outbox_messages_unprocessed",
+                schema: "cart",
+                table: "outbox_messages",
+                columns: ["occurred_on_utc", "processed_on_utc"],
+                filter: "\"processed_on_utc\" IS NULL")
+            .Annotation("Npgsql:IndexInclude", (string[])["id", "type", "content"]);
     }
 
     /// <inheritdoc />
@@ -104,4 +111,3 @@ public partial class Initial : Migration
             schema: "cart");
     }
 }
-#pragma warning restore CA1861

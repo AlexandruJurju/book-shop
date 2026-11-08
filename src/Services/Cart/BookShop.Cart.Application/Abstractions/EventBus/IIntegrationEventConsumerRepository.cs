@@ -1,4 +1,4 @@
-﻿namespace BookShop.Cart.Application.EventBus;
+﻿namespace BookShop.Cart.Application.Abstractions.EventBus;
 
 public interface IIntegrationEventConsumerRepository
 {
