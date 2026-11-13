@@ -6,5 +6,6 @@ public static class Resources
     public const string Redis = "redis";
     public const string Keycloak = "keycloak";
     public const string RabbitMq = "rabbit-mq";
-    public const string MilPit = "mail-pit";
+    public const string MailPit = "mail-pit";
+    public const string Mongo = "mongo";
 }
