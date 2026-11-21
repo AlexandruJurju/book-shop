@@ -1,21 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
+        <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Ardalis.GuardClauses"/>
-        <PackageReference Include="Ardalis.Result.FluentValidation" />
+        <PackageReference Include="Ardalis.Result.FluentValidation"/>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
-        <PackageReference Include="Mediator.Abstractions" />
+        <PackageReference Include="Mediator.Abstractions"/>
         <PackageReference Include="Scrutor"/>
-        <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.AspNetCore"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Abstractions\" />
+        <Folder Include="Abstractions\"/>
     </ItemGroup>
 </Project>

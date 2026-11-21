@@ -7,7 +7,6 @@
         <PackageReference Include="FluentValidation"/>
         <PackageReference Include="Scalar.AspNetCore"/>
         <PackageReference Include="Scalar.AspNetCore.Microsoft"/>
-        <PackageReference Include="Serilog.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>

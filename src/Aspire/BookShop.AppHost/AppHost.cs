@@ -1,5 +1,6 @@
+using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
 using BookShop.Shared;
-using Projects;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
@@ -31,13 +32,13 @@ IResourceBuilder<RedisResource> redis = builder.AddRedis(Resources.Redis, port: 
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume();
 
-IResourceBuilder<ParameterResource> mongoUsername = builder.AddParameter("postgres-user", "app_user", secret: false);
-IResourceBuilder<ParameterResource> mongoPassword = builder.AddParameter("postgres-password", "super-secret-password", secret: true);
+IResourceBuilder<ParameterResource> mongoUsername = builder.AddParameter("mongo-user", "app_user", secret: false);
+IResourceBuilder<ParameterResource> mongoPassword = builder.AddParameter("mongo-password", "super-secret-password", secret: true);
 IResourceBuilder<MongoDBServerResource> mongo = builder.AddMongoDB(Resources.Mongo, userName: mongoUsername, password: mongoPassword)
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume();
 
-builder.AddProject<BookShop_WebApi>("bookshop-webapi")
+builder.AddDotnetProject("bookshop-webapi", "../../BookShop.WebApi/BookShop.WebApi.csproj")
     .WithReference(postgres).WaitFor(postgres)
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(rabbitmq).WaitFor(rabbitmq)

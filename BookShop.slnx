@@ -10,10 +10,9 @@
         <Project Path="src\BuildingBlocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
         <Project Path="src\BuildingBlocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
     </Folder>
-    <Folder Name="/Host/">
+    <Folder Name="/Services/">
         <Project Path="src/BookShop.WebApi/BookShop.WebApi.csproj" />
     </Folder>
-    <Folder Name="/Services/" />
     <Folder Name="/Services/Cart/">
         <Project Path="src/Services/Cart/BookShop.Cart.Application/BookShop.Cart.Application.csproj" />
         <Project Path="src/Services/Cart/BookShop.Cart.Domain/BookShop.Cart.Domain.csproj" />

@@ -1,6 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-echo "Running Husky pre-push tasks..."
-
-dotnet husky run --group pre-push

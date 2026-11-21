@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -9,10 +9,10 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <Features>runtime-async=on</Features>
 
         <NuGetAudit>false</NuGetAudit>
     </PropertyGroup>
-  
 
     <!--    <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">-->
     <!--        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.23.0.137933">-->
