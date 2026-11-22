@@ -1,6 +1,5 @@
 ﻿using BookShop.Cart.Application.Abstractions.Data;
 using BookShop.Shared;
-using BuildingBlocks.Infrastructure.Inbox;
 using BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +17,5 @@ public sealed class CartDbContext(
 
         modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
         modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
-
-        modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
-        modelBuilder.ApplyConfiguration(new InboxMessageConsumerConfiguration());
     }
 }

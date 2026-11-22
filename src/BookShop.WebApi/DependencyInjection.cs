@@ -8,9 +8,7 @@ using BuildingBlocks.Infrastructure.Cache;
 using BuildingBlocks.Infrastructure.Data.Postgres;
 using BuildingBlocks.Infrastructure.EntityFramework.Interceptors;
 using BuildingBlocks.Infrastructure.EventBus;
-using BuildingBlocks.Infrastructure.Inbox;
 using FluentValidation;
-using MassTransit;
 using Mediator;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -42,22 +40,17 @@ internal static class DependencyInjection
         services.AddCustomOpenApi();
     }
 
-    public static void AddInfrastructure(
-        this IHostApplicationBuilder builder,
-        Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers
-    )
+    public static void AddInfrastructure(this IHostApplicationBuilder builder, Assembly[] moduleAssemblies)
     {
         IServiceCollection services = builder.Services;
         IConfiguration configuration = builder.Configuration;
-
-        builder.Services.AddTransient<IIntegrationEventsDispatcher, IntegrationEventsDispatcher>();
 
         services.AddCustomAuthentication();
         services.AddCustomAuthorization();
 
         builder.AddCustomCacheInMemory();
 
-        services.AddCustomMassTransitRabbitMq(moduleConfigureConsumers, Resources.RabbitMq);
+        services.AddCustomWolverineRabbitMq(configuration, moduleAssemblies, Resources.RabbitMq);
 
         services.AddCustomPostgres(configuration, Resources.Postgres);
         services.AddScoped<IInterceptor, InsertOutboxMessagesInterceptor>();

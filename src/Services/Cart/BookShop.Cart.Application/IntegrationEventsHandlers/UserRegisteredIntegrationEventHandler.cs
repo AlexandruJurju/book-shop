@@ -3,11 +3,12 @@ using BuildingBlocks.Application.EventBus;
 
 namespace BookShop.Cart.Application.IntegrationEventsHandlers;
 
-public sealed class UserRegisteredIntegrationEventHandler : IIntegrationEventHandler<UserRegisteredIntegrationEvent>
+public sealed class UserRegisteredIntegrationEventHandler
 {
-    public Task HandleAsync(UserRegisteredIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(UserRegisteredIntegrationEvent message, CancellationToken cancellationToken)
     {
-        Console.WriteLine(42);
-        return Task.CompletedTask;
+        Console.WriteLine(message.Email);
+
+        await Task.Delay(1000, cancellationToken);
     }
 }

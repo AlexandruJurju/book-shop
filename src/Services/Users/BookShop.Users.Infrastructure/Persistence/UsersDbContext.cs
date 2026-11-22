@@ -1,7 +1,6 @@
 ﻿using BookShop.Shared;
 using BookShop.Users.Application.Abstractions.Data;
 using BookShop.Users.Domain.Users;
-using BuildingBlocks.Infrastructure.Inbox;
 using BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +19,5 @@ public sealed class UsersDbContext(
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsersDbContext).Assembly);
         modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
         modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
-        modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
-        modelBuilder.ApplyConfiguration(new InboxMessageConsumerConfiguration());
     }
 }

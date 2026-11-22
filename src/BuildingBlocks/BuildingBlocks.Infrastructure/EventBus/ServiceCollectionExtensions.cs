@@ -1,69 +1,40 @@
 ﻿using System.Reflection;
 using BuildingBlocks.Application.EventBus;
-using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Wolverine;
+using Wolverine.RabbitMQ;
 
 namespace BuildingBlocks.Infrastructure.EventBus;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCustomMassTransitRabbitMq(
+    public static IServiceCollection AddCustomWolverineRabbitMq(
         this IServiceCollection services,
-        Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers,
+        IConfiguration configuration,
+        Assembly[] moduleAssemblies,
         string rabbitMqResource
     )
     {
-        services.TryAddSingleton<IEventBus, EventBus>();
+        services.TryAddScoped<IEventBus, EventBus>();
 
-        services.AddMassTransit(configure =>
+        string connectionString = configuration.GetConnectionString(rabbitMqResource)
+                                  ?? throw new InvalidOperationException(
+                                      $"RabbitMQ connection string '{rabbitMqResource}' was not found."
+                                  );
+
+        services.AddWolverine(options =>
         {
-            string serviceName = "BookShop.Api";
-            string instanceId = serviceName.ToLowerInvariant().Replace('.', '-');
-            foreach (Action<IRegistrationConfigurator, string> configureConsumers in moduleConfigureConsumers)
+            options.UseRuntimeCompilation();
+
+            options.UseRabbitMq(new Uri(connectionString))
+                .AutoProvision();
+
+            foreach (Assembly assembly in moduleAssemblies)
             {
-                configureConsumers(configure, instanceId);
+                options.Discovery.IncludeAssembly(assembly);
             }
-
-            configure.SetKebabCaseEndpointNameFormatter();
-
-            configure.UsingRabbitMq((context, cfg) =>
-            {
-                string connectionString = context
-                    .GetRequiredService<IConfiguration>()
-                    .GetConnectionString(rabbitMqResource)!;
-
-                cfg.Host(new Uri(connectionString!));
-                cfg.ConfigureEndpoints(context);
-            });
-        });
-
-        return services;
-    }
-
-    public static IServiceCollection AddCustomMassTransitInMemory(
-        this IServiceCollection services,
-        Action<IRegistrationConfigurator, string>[] moduleConfigureConsumers
-    )
-    {
-        services.TryAddSingleton<IEventBus, EventBus>();
-
-        services.AddMassTransit(configure =>
-        {
-            string serviceName = "BookShop.Api";
-            string instanceId = serviceName.ToLowerInvariant().Replace('.', '-');
-            foreach (Action<IRegistrationConfigurator, string> configureConsumers in moduleConfigureConsumers)
-            {
-                configureConsumers(configure, instanceId);
-            }
-
-            configure.SetKebabCaseEndpointNameFormatter();
-
-            configure.UsingInMemory((context, cfg) =>
-            {
-                cfg.ConfigureEndpoints(context);
-            });
         });
 
         return services;

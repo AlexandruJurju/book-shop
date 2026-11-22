@@ -27,10 +27,7 @@ Assembly[] moduleApplicationAssemblies =
 
 builder.AddApplication(moduleApplicationAssemblies);
 builder.AddPresentation();
-builder.AddInfrastructure(
-[
-    BookShop.Cart.Infrastructure.DependencyInjection.ConfigureConsumers
-]);
+builder.AddInfrastructure(moduleApplicationAssemblies);
 
 builder.AddCatalogModule();
 builder.AddUsersModule();

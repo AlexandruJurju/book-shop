@@ -9,8 +9,6 @@
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL"/>
         <PackageReference Include="Dapper"/>
         <PackageReference Include="EFCore.NamingConventions" />
-        <PackageReference Include="MassTransit"/>
-        <PackageReference Include="MassTransit.RabbitMQ"/>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
@@ -20,6 +18,10 @@
         <PackageReference Include="Quartz.Dashboard" />
         <PackageReference Include="Testcontainers.Keycloak"/>
         <PackageReference Include="Testcontainers.PostgreSql"/>
+        <PackageReference Include="WolverineFx" />
+        <PackageReference Include="WolverineFx.Postgresql" />
+        <PackageReference Include="WolverineFx.RabbitMQ" />
+        <PackageReference Include="WolverineFx.RuntimeCompilation" />
     </ItemGroup>
 
 </Project>

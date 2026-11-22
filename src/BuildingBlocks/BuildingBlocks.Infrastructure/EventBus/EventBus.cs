@@ -1,14 +1,14 @@
 ﻿using BuildingBlocks.Application.EventBus;
 using MassTransit;
+using Wolverine;
 
 namespace BuildingBlocks.Infrastructure.EventBus;
 
-public sealed class EventBus(
-    IBus bus
-) : IEventBus
+public sealed class EventBus(IMessageBus messageBus) : IEventBus
 {
-    public async Task PublishAsync<T>(T integrationEvent, CancellationToken cancellationToken = default) where T : IIntegrationEvent
+    public ValueTask PublishAsync<T>(T integrationEvent, CancellationToken cancellationToken = default)
+        where T : IIntegrationEvent
     {
-        await bus.Publish(integrationEvent, cancellationToken);
+        return messageBus.PublishAsync(integrationEvent);
     }
 }
